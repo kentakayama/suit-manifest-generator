@@ -18,7 +18,9 @@ MANIFESTS_FOR_TEEP := \
 	suit_unlink.diag.signed.untagged
 
 MANIFESTS_FOR_IETF116 := \
-	suit-enclave-hello.suit.signed
+	suit-enclave-hello.diag.signed.untagged
+
+MANIFESTS_FOR_TEEP += $(MANIFESTS_FOR_IETF116)
 
 MANIFEST_CBORS_FOR_TEEP := $(MANIFESTS_FOR_TEEP:.diag.signed.untagged=.suit.signed.untagged)
 MANIFESTS += $(MANIFESTS_FOR_TEEP)
