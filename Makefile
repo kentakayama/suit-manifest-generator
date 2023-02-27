@@ -43,7 +43,7 @@ all: $(MANIFESTS) $(MANIFEST_CBORS_FOR_TEEP)
 	sed -e "s?/ SUIT_Envelope_Tagged / 107(?/ SUIT_Envelope / ?" -e "s/})$$/}/" $< > $@
 
 %.suit.signed.untagged: %.diag.signed.untagged
-	$(DIAG2CBOR) --to-bytes < $< > $@
+	$(DIAG2CBOR) --to bytes < $< > $@
 
 install-teep: $(MANIFESTS_FOR_TEEP)
 	$(foreach mfst,$^,cp $(mfst) $(TEEP_PROTOCOL_CBOR_DIR)/$(mfst:.diag.signed.untagged=.diag.txt);)
