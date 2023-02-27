@@ -1,0 +1,23 @@
+/ SUIT_Envelope_Tagged / 107({
+  / suit-manifest / 3: << {
+    / suit-manifest-version / 1: 1,
+    / suit-manifest-sequence-number / 2: 0,
+    / suit-common / 3: << {
+      / suit-components / 2: [
+        [h'00'] / decrypted firmware /
+      ]
+    } >>,
+    / suit-install / 17: << [
+      / check decrypted firmware is same as raw firmware /
+      / suit-directive-set-component-identifier / 12, 0 / [h'00'] /,
+      / suit-directive-override-parameters / 20, {
+        / suit-parameter-image-digest / 3: << [
+          / suit-digest-algorithm-id: / -16 / SHA-256 /,
+          / suit-digest-bytes: / h'36921488FE6680712F734E11F58D87EEB66D4B21A8A1AD3441060814DA16D50F'
+        ] >>,
+        / suit-parameter-image-size / 14: 30
+      },
+      / suit-condition-image-match / 3, 15
+    ] >>
+  } >>
+})

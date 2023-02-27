@@ -1,0 +1,53 @@
+/ SUIT_Envelope_Tagged / 107({
+  / authentication-wrapper /
+  / manifest / 3: << {
+    / manifest-version / 1: 1,
+    / manifest-sequence-number / 2: 1,
+    / common / 3: << {
+      / components / 2: [
+        [
+          h'68656C6C6F776F726C645F686F7374' / "helloworld_host" /
+        ],
+        [
+          h'656E636C6176652E7369676E6564'   / "enclave.signed" /
+        ]
+      ]
+    } >>,
+    / manifest-component-id / 5: [
+      h'737569742D656E636C6176652D68656C6C6F2E73756974' / "suit-enclave-hello.suit" /
+    ],
+    / invoke / 9: << [
+      / directive-override-parameters / 20, {
+        / invoke-args / 23: h'68656C6C6F776F726C645F686F737420656E636C6176652E7369676E6564' / "helloworld_host enclave.signed" /
+      },
+      / directive-invoke / 23, 15
+    ] >>,
+    / install / 17: << [
+      / directive-set-component-index / 12, 0,
+      / directive-override-parameters / 20, {
+        / uri / 21: "#host",
+        / image-digest / 3: << [
+          / algorithm-id: / -16 / SHA-256 /,
+          / digest-bytes: / h'{{FILE-SHA-256 ~/openenclave/samples/helloworld/host/helloworld_host}}'
+        ] >>,
+        / image-size / 14: h'{{FILE-SIZE ~/openenclave/samples/helloworld/host/helloworld_host}}'
+      },
+      / directive-fetch / 21, 15,
+      / condition-image-match / 3, 15,
+
+      / directive-set-component-index / 12, 1,
+      / directive-override-parameters / 20, {
+        / uri / 21: "#enclave",
+        / image-digest / 3: << [
+          / algorithm-id: / -16 / SHA-256 /,
+          / digest-bytes: / h'{{FILE-SHA-256 ~/openenclave/samples/helloworld/enclave/enclave.signed}}'
+        ] >>,
+        / image-size / 14: h'{{FILE-SIZE ~/openenclave/samples/helloworld/enclave/enclave.signed}}'
+      },
+      / directive-fetch / 21, 15,
+      / condition-image-match / 3, 15
+    ] >>
+  } >>,
+  "#host" : h'{{FILE-HEX ~/openenclave/samples/helloworld/host/helloworld_host}}',
+  "#enclave" : h'{{FILE-HEX ~/openenclave/samples/helloworld/enclave/enclave.signed}}'
+})

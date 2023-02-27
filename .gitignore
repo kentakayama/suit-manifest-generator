@@ -1,0 +1,9 @@
+*.signed
+*.untagged
+*.suit
+*.txt
+
+suit-enclave-hello.diag
+
+
+*.log

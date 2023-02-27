@@ -1,0 +1,39 @@
+/ SUIT_Envelope_Tagged / 107({
+  / suit-authentication-wrapper /
+  / suit-manifest / 3: << {
+    / suit-manifest-version / 1: 1,
+    / suit-manifest-sequence-number / 2: 1,
+    / suit-common / 3: << {
+      / suit-dependencies / 1: {
+        1: / SUIT_Dependency_Metadata / {
+          / suit-dependency-prefix / 1: [h'F0'] / SUIT_Component_Identifier of dependency manifest /
+        }
+      },
+      / suit-components / 2: [
+        [h'01'] / dependent component e.g. App /
+      ]
+    } >>,
+    / suit-install / 17: << [
+      / fetch and install dependency manifest /
+      / suit-set-component-identifier / 12, 1 / dependency manifest /,
+      / suit-override-parameters / 20, {
+        / suit-parameter-uri / 21: "https://example.com/dependency-manifest.suit",
+        / suit-parameter-image-digest / 3: << [
+          / suit-digest-algorithm-id: / -16 / SHA256 /,
+          / suit-digest-bytes: / h'ef14b7091e8adae8aa3bb6fca1d64fb37e19dcf8b35714cfdddc5968c80ff50e' / digest of Example 1 manifest in draft-ietf-suit-manifest#appendix-B.2 /
+        ] >>
+      },
+      / suit-directive-fetch / 21, 15,
+      / suit-condition-image-match / 3, 15,
+      / suit-directive-process-dependency / 8, 15,
+
+      / install [h'00'] in this manifest /
+      / suit-set-component-identifier / 12, 0 / [h'01'] /,
+      / suit-override-parameters / 20, {
+        / suit-parameter-uri / 21: "https://example.com/dependent-component.bin"
+      },
+      / suit-directive-fetch / 21, 15,
+      / suit-condition-image-match / 3, 15
+    ] >>
+  } >>
+})
