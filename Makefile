@@ -1,4 +1,4 @@
-DIAG2CBOR := diag2cbor.rb
+DIAG2CBOR := cbor-diag # https://github.com/Nullus157/cbor-diag-rs
 TEEP_PROTOCOL_CBOR_DIR := ~/github.com/ietf-teep/teep-protocol/cbor
 SUIT_TOOL_DIR := ~/gitlab.arm.com/research/ietf-suit/suit-tool
 SUIT_TOOL := $(SUIT_TOOL_DIR)/bin/suit-tool
@@ -31,7 +31,7 @@ all: $(MANIFESTS) $(MANIFEST_CBORS_FOR_TEEP)
 	python3 pre.py $< > $@
 
 %.suit: %.diag
-	$(DIAG2CBOR) $< > $@
+	$(DIAG2CBOR) --to bytes < $< > $@
 
 %.suit.signed: %.suit
 	$(SUIT_TOOL) sign -m $< -k $(PRIVATE_KEY) -o $@
@@ -43,7 +43,7 @@ all: $(MANIFESTS) $(MANIFEST_CBORS_FOR_TEEP)
 	sed -e "s?/ SUIT_Envelope_Tagged / 107(?/ SUIT_Envelope / ?" -e "s/})$$/}/" $< > $@
 
 %.suit.signed.untagged: %.diag.signed.untagged
-	$(DIAG2CBOR) $< > $@
+	$(DIAG2CBOR) --to-bytes < $< > $@
 
 install-teep: $(MANIFESTS_FOR_TEEP)
 	$(foreach mfst,$^,cp $(mfst) $(TEEP_PROTOCOL_CBOR_DIR)/$(mfst:.diag.signed.untagged=.diag.txt);)
