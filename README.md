@@ -20,44 +20,42 @@ $ ls -la teep/ suit/ # signed cbor binaries
 ``` mermaid
 graph TD
 
-TM[TEEP Message Update]
+TM[TEEP Message Update w/ Authentication]
+TM0[TEEP Message Update w/o Authentication]
 SUM[SUIT Untagged Manifest]
 
 SM[SUIT Manifest w/ Authentication]
-S0[SUIT Manifest w/o Authentication]
+SM0[SUIT Manifest w/o Authentication]
 DSM[CBOR Diagnostic SUIT Manifest]
 DTM[CBOR Diagnostic TEEP Message]
 EDSM[Extended CBOR Diagnostic SUIT Manifest]
 EDTM[Extended CBOR Diagnostic TEEP Message]
 
-subgraph suit-manifest-generator
-    subgraph Generating SUIT Manifest
-        subgraph Extended CBOR Diagnostic Processor
-            EDSM --> DSM
-        end
+subgraph Extended CBOR Diagnostic Processor
+    EDSM --> DSM
+end
 
-        subgraph cbor-diag-cli
-            DSM --> S0
-        end
+subgraph cbor-diag-cli
+    DSM --> SM0
+end
 
-        subgraph suit-tool
-            S0 --> SM
-        end
-    end
+subgraph suit-tool
+    SM0 --> SM
+end
 
-    subgraph Generating TEEP Message
-        subgraph Extended CBOR Diagnostic Processor
-            EDTM --> DSM
-        end
+SM --> SUM
 
-        subgraph cbor-diag-cli
-            SM --> SUM
-        end
+subgraph Extended CBOR Diagnostic Processor
+    EDTM --> DTM
+    SUM --> DTM
+end
 
-        subgraph libteep TAM sign
-            SUM --> TM
-        end
-    end
+subgraph cbor-diag-cli
+    DTM --> TM0
+end
+
+subgraph libteep TAM sign
+    TM0 --> TM
 end
 ```
 
