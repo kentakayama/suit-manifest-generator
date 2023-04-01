@@ -59,6 +59,13 @@ subgraph libteep TAM sign
 end
 ```
 
+## Directly Depending Libraries&Tools
+- [QCBOR](https://github.com/laurencelundblade/QCBOR)
+- [t_cose](https://github.com/laurencelundblase/t_cose)
+- [libteep](https://github.com/kentakayama/libteep)
+- [cbor-diag-cli](https://crates.io/crates/cbor-diag-cli)
+- [suit-tool](https://gitlab.arm.com/research/ietf-suit/suit-tool)
+
 ## License and Copyright
 BSD 2-Clause License
 
