@@ -7,7 +7,7 @@ import binascii
 import hashlib
 
 def replace_from_pattern(f):
-    pat = re.compile(r"(.*)\{\{FILE-(HEX|SIZE|SHA-256) ([~_\./0-9a-zA-Z]+)\}\}(.*)")
+    pat = re.compile(r"(.*)\{\{FILE-(HEX|SIZE|SHA-256) ([~_\-\./0-9a-zA-Z]+)\}\}(.*)")
     for line in f:
         m = pat.match(line)
         if m:
