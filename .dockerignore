@@ -1,0 +1,13 @@
+*.cbor
+*.suit
+*.teep
+
+diag/suit_helloworld.diag
+diag/teep_update_example1.diag
+diag/teep_update_example3.diag
+diag/teep_update_uri.diag
+diag/teep_update_integrated.diag
+diag/teep_update_personalization.diag
+diag/teep_update_unlink.diag
+diag/teep_update_helloworld.diag
+

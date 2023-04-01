@@ -1,9 +1,19 @@
+#
+# Copyright (c) 2023 SECOM CO., LTD. All Rights reserved.
+#
+# SPDX-License-Identifier: BSD-2-Clause
+#
+
 UNTAGGED_DIAGS := \
 	suit_uri.diag \
 	suit_integrated.diag \
 	suit_personalization.diag \
-	suit_unlink.diag \
+	suit_unlink.diag
+
+ifeq ($(suit-ietf116),1)
+UNTAGGED_DIAGS += \
 	suit_helloworld.diag
+endif
 
 .PHONY: all
 all: $(UNTAGGED_DIAGS)

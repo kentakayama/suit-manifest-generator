@@ -1,3 +1,9 @@
+#
+# Copyright (c) 2023 SECOM CO., LTD. All Rights reserved.
+#
+# SPDX-License-Identifier: BSD-2-Clause
+#
+
 FIXED_DIAGS := \
 	suit_uri.diag \
 	suit_integrated.diag \
@@ -8,20 +14,24 @@ FIXED_DIAGS := \
 	suit_manifest_aes_kw.diag \
 	suit_manifest_aes_kw_dependent.diag
 
-ifeq ($(suit),1)
-	GENERATED_DIAGS += \
-		suit_helloworld.diag
+ifeq ($(suit-ietf116),1)
+GENERATED_DIAGS += \
+	suit_helloworld.diag
 endif
 
 ifeq ($(teep),1)
-	GENERATED_DIAGS += \
-		teep_update_example1.diag \
-		teep_update_example3.diag \
-		teep_update_uri.diag \
-		teep_update_integrated.diag \
-		teep_update_personalization.diag \
-		teep_update_unlink.diag \
-		teep_update_helloworld.diag
+GENERATED_DIAGS += \
+	teep_update_example1.diag \
+	teep_update_example3.diag \
+	teep_update_uri.diag \
+	teep_update_integrated.diag \
+	teep_update_personalization.diag \
+	teep_update_unlink.diag
+endif
+
+ifeq ($(teep-ietf116),1)
+GENERATED_FILES += \
+	teep_update_helloworld.diag
 endif
 
 .PHONY: all

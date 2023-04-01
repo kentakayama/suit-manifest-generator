@@ -1,0 +1,33 @@
+diff --git a/suit_tool/sign.py b/suit_tool/sign.py
+index cb0e9d3..bfe1b15 100644
+--- a/suit_tool/sign.py
++++ b/suit_tool/sign.py
+@@ -87,6 +87,28 @@ def main(options):
+             LOG.critical('Non-library key type not implemented')
+             return 1
+ 
++    if SUITEnvelope.fields['auth'].suit_key not in wrapper.value:
++        # create and insert digest of suit-manifest
++        # NOTE: copied from create.py:L33-50
++        tmp_digest = {
++            'sha256' : hashes.Hash(hashes.SHA256(), backend=default_backend()),
++            'sha384' : hashes.Hash(hashes.SHA384(), backend=default_backend()),
++            'sha512' : hashes.Hash(hashes.SHA512(), backend=default_backend()),
++            'shake128' : hashes.Hash(hashes.SHAKE128(16), backend=default_backend()),
++            'shake256' : hashes.Hash(hashes.SHAKE256(32), backend=default_backend()),
++        }.get('sha256')
++
++        tmp_digest.update(cbor.dumps(wrapper.value[SUITEnvelope.fields['manifest'].suit_key]))
++
++        payload_digest = cbor.dumps([
++            cbor.dumps(SUITDigest().from_json({
++                'algorithm-id' : 'sha256',
++                'digest-bytes' : binascii.b2a_hex(tmp_digest.finalize()).decode('utf-8')
++            }).to_suit(), canonical = True)
++        ])
++        wrapper.value[SUITEnvelope.fields['auth'].suit_key] = payload_digest
++
++    # load digest in suit-authentication-wrapper
+     auth = SUITBWrapField(COSEList)().from_suit(wrapper.value[SUITEnvelope.fields['auth'].suit_key])
+     payload_digest = auth.v.digest
+     digest.update(cbor.dumps(wrapper.value[SUITEnvelope.fields['manifest'].suit_key]))

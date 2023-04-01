@@ -1,11 +1,21 @@
+#
+# Copyright (c) 2023 SECOM CO., LTD. All Rights reserved.
+#
+# SPDX-License-Identifier: BSD-2-Clause
+#
+
 DIAG2CBOR := cbor-diag # https://github.com/Nullus157/cbor-diag-rs
 
 UNTAGGED_SUIT_MANIFESTS := \
 	suit_uri.suit \
 	suit_integrated.suit \
 	suit_personalization.suit \
-	suit_unlink.suit \
+	suit_unlink.suit
+
+ifeq ($(suit-ietf116),1)
+UNTAGGED_SUIT_MANIFESTS += \
 	suit_helloworld.suit
+endif
 
 .PHONY: all
 all: $(UNTAGGED_SUIT_MANIFESTS)
