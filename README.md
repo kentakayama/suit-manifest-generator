@@ -2,7 +2,7 @@
 suit-manifest-generator creates SUIT Manifests and TEEP Messages respectively.  
 They can be used as test vector to your implementation.  
 
-## Install with docker
+## Install into a Docker Container
 ```
 $ cd /path/to/your/temporary/dir/
 $ git clone https://github.com/kentakayama/suit-manifest-generator.git
@@ -10,7 +10,7 @@ $ cd suit-manifest-generator/
 $ sudo docker build -t suit-gen .
 ```
 
-## Run in docker
+## Run in the Docker Container
 ```
 $ sudo docker run -v $PWD:/root/suit-manifest-generator -t suit-gen
 $ ls -la teep/ suit/ # signed cbor binaries
