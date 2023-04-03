@@ -23,6 +23,9 @@ all: $(UNTAGGED_SUIT_MANIFESTS)
 %.suit: ../untagged_diag/%.untagged.diag
 	$(DIAG2CBOR) --to bytes --from diag < $< > $@
 
+../untagged_diag/%.untagged.diag:
+	$(MAKE) -C ../untagged_diag $(notdir $@)
+
 .PHONY: clean
 clean:
 	$(RM) $(UNTAGGED_SUIT_MANIFESTS)

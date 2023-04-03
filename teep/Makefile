@@ -27,6 +27,9 @@ teep_update_personalization.teep: ../untagged_suit/suit_personalization.suit
 teep_update_unlink.teep: ../untagged_suit/suit_unlink.suit
 teep_update_helloworld.teep: ../untagged_suit/suit_helloworld.suit
 
+../untagged_suit/%.suit:
+	$(MAKE) -C ../untagged_suit $(notdir $@)
+
 %.teep:
 	$(eval FILENAME := $(shell echo $@ | sed -r 's/teep_update_([a-z]+)\.teep/suit_\1.suit/'))
 	$(TEEP_COSE) ../untagged_suit/$(FILENAME) $@

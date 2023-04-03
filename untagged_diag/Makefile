@@ -18,6 +18,9 @@ endif
 .PHONY: all
 all: $(UNTAGGED_DIAGS)
 
+../signed_diag/%.diag:
+	$(MAKE) -C ../signed_diag $(notdir $@)
+
 %.untagged.diag: ../signed_diag/%.diag
 	sed -e "s?/ SUIT_Envelope_Tagged / 107(?/ SUIT_Envelope / ?" -e "s/})$$/}/" $< > $@
 

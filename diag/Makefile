@@ -11,6 +11,8 @@ FIXED_DIAGS := \
 	suit_personalization.diag \
 	suit_manifest_raw.diag \
 	suit_manifest_dependency.diag \
+	suit_manifest_expD01.diag \
+	suit_manifest_expD00.diag \
 	suit_manifest_aes_kw.diag \
 	suit_manifest_aes_kw_dependent.diag
 
@@ -42,9 +44,17 @@ teep_update_integrated.diag: ../untagged_suit/suit_integrated.suit
 teep_update_personalization.diag: ../untagged_suit/suit_personalization.suit
 teep_update_unlink.diag: ../untagged_suit/suit_unlink.suit
 teep_update_helloworld.diag: ../untagged_suit/suit_helloworld.suit
+suit_manifest_expD01.diag: ../suit/suit_manifest_expD00.suit
+
+../untagged_suit/*.suit:
+	$(MAKE) -C ../untagged_suit $(notdir $@)
+
+../suit/*.suit:
+	$(MAKE) -C ../suit $(notdir $@)
 
 %.diag: ../ediag/%.ediag
 	$(PYTHON3) ./ediag-to-diag.py $< > $@
+
 
 .PHONY: clean
 clean:

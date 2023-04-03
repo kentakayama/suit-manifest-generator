@@ -6,15 +6,8 @@
 
 .PHONY: all
 all:
-	$(MAKE) -C diag suit=1
-	$(MAKE) -C cbor suit=1
-	$(MAKE) -C suit
-	$(MAKE) -C signed_diag
-	$(MAKE) -C untagged_diag
-	$(MAKE) -C untagged_suit
-	$(MAKE) -C diag teep=1
-	$(MAKE) -C cbor teep=1
 	$(MAKE) -C teep
+	$(MAKE) -C suit
 
 .PHONY:
 clean:

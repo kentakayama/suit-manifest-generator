@@ -26,6 +26,9 @@ endif
 .PHONY: all
 all: $(SUIT_MANIFESTS)
 
+../cbor/%.cbor:
+	$(MAKE) -C ../cbor $(notdir $@)
+
 %.suit: ../cbor/%.cbor
 	$(SUIT_TOOL) sign -m $< -k $(PRIVATE_KEY) -o $@
 
