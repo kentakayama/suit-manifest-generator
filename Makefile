@@ -8,6 +8,8 @@
 all:
 	$(MAKE) -C teep
 	$(MAKE) -C suit
+	$(MAKE) -C signed_diag
+	$(MAKE) -C untagged_diag
 
 .PHONY:
 clean:

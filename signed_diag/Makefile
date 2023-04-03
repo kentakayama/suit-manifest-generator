@@ -10,7 +10,7 @@ UNTAGGED_DIAGS := \
 	suit_personalization.diag \
 	suit_unlink.diag
 
-ifeq ($(suit-ietf116),1)
+ifeq ($(suit-ietf116), 1)
 UNTAGGED_DIAGS += \
 	suit_helloworld.diag
 endif

@@ -2,14 +2,14 @@
   / authentication-wrapper /
   / manifest / 3: << {
     / manifest-version / 1: 1,
-    / manifest-sequence-number / 2: 18446744073709551615 / UINT64_MAX /,
+    / manifest-sequence-number / 2: 0xFFFFFFFFFFFFFFFF,
     / common / 3: << {
       / components / 2: [
         [
-          h'544545502D446576696365',            / "TEEP-Device" /
-          h'5365637572654653',                  / "SecureFS" /
+          'TEEP-Device',
+          'SecureFS',
           h'8D82573A926D4754935332DC29997F74',  / tc-uuid /
-          h'7461'                               / "ta" /
+          'ta'
         ]
       ],
       / common-sequence / 4: << [
@@ -22,10 +22,10 @@
       ] >>
     } >>,
     / manifest-component-id / 5: [
-      h'544545502D446576696365',              / "TEEP-Device" /
-      h'5365637572654653',                    / "SecureFS" /
-      h'8D82573A926D4754935332DC29997F74',    / tc-uuid /
-      h'73756974'                             / "suit" /
+      'TEEP-Device',
+      'SecureFS',
+      h'8D82573A926D4754935332DC29997F74',  / tc-uuid /
+      'suit'
     ],
     / install / 17: << [
       / directive-set-component-index / 12, 0,

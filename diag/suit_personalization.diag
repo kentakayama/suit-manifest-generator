@@ -7,18 +7,18 @@
       / dependencies / 1: {
         / component-index / 1: {
           / dependency-prefix / 1: [
-            h'544545502D446576696365',           / "TEEP-Device" /
-            h'5365637572654653',                 / "SecureFS" /
+            'TEEP-Device',
+            'SecureFS',
             h'8D82573A926D4754935332DC29997F74', / tc-uuid /
-            h'73756974'                          / "suit" /
+            'suit'
           ]
         }
       },
       / components / 2: [
         [
-          h'544545502D446576696365',  / "TEEP-Device" /
-          h'5365637572654653',        / "SecureFS" /
-          h'636F6E6669672E6A736F6E'   / "config.json" /
+          'TEEP-Device',
+          'SecureFS',
+          'config.json'
         ]
       ],
       / shared-sequence / 4: << [
@@ -37,9 +37,9 @@
       ] >>
     } >>,
     / manifest-component-id / 5: [
-      h'544545502D446576696365',  / "TEEP-Device" /
-      h'5365637572654653',        / "SecureFS" /
-      h'636F6E6669672E73756974'   / "config.suit" /
+      'TEEP-Device',
+      'SecureFS',
+      'config.suit'
     ],
     / validate / 7: << [
       / directive-set-component-index / 12, 0,
