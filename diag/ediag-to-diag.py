@@ -7,17 +7,24 @@ import binascii
 import hashlib
 
 def replace_from_pattern(f):
-    pat = re.compile(r"(.*)\{\{FILE-(HEX|SIZE|SHA-256) ([~_\-\./0-9a-zA-Z]+)\}\}(.*)")
+    pat = re.compile(r"(.*)\{\{FILE-(HEX|SIZE|SHA)(-256|-\d+\+\d+|) ([~_\-\./0-9a-zA-Z]+)\}\}(.*)")
     for line in f:
         m = pat.match(line)
         if m:
-            pre, op, filename, post = m.groups()
+            pre, op, param, filename, post = m.groups()
             if "HEX" == op:
                 with open(os.path.expanduser(filename), 'rb') as rf:
-                    print(pre + rf.read().hex() + post)
+                    if param:
+                        m = re.match(r"-(\d+)\+(\d+)", param)
+                        if m:
+                            skip, length = m.groups()
+                            rf.read(int(skip))
+                            print(pre + rf.read(int(length)).hex() + post)
+                    else:
+                        print(pre + rf.read().hex() + post)
             elif "SIZE" == op:
                 print(pre + str(os.stat(os.path.expanduser(filename)).st_size) + post)
-            elif "SHA-256" == op:
+            elif "SHA-256" == op + param:
                 with open(os.path.expanduser(filename), 'rb') as rf:
                     print(pre + hashlib.sha256(rf.read()).hexdigest() + post)
         else:
