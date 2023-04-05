@@ -18,6 +18,7 @@ GENERATED_CBORS += \
 	suit_manifest_raw.cbor \
 	suit_manifest_dependency.cbor \
 	suit_manifest_aes_kw.cbor \
+	suit_manifest_aes_kw_content.cbor \
 	suit_manifest_aes_kw_dependent.cbor \
 	suit_manifest_expD00.cbor \
 	suit_manifest_expD01.cbor \
@@ -27,12 +28,14 @@ GENERATED_CBORS += \
 	suit_helloworld.cbor \
 	teep_update_helloworld.cbor
 
+
 .PHONY: all
 all: $(GENERATED_CBORS)
 
 ../diag/%.diag:
 	$(MAKE) -C ../diag $(notdir $@)
 
+.PRECIOUS: ../diag/%.diag
 %.cbor: ../diag/%.diag
 	$(DIAG2CBOR) --to bytes --from diag < $< > $@
 

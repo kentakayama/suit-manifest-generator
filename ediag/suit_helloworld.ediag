@@ -6,19 +6,19 @@
     / common / 3: << {
       / components / 2: [
         [
-          h'68656C6C6F776F726C645F686F7374' / "helloworld_host" /
+          'helloworld_host'
         ],
         [
-          h'656E636C6176652E7369676E6564'   / "enclave.signed" /
+          'enclave.signed'
         ]
       ]
     } >>,
     / manifest-component-id / 5: [
-      h'737569742D656E636C6176652D68656C6C6F2E73756974' / "suit-enclave-hello.suit" /
+      'suit-enclave-hello.suit'
     ],
     / invoke / 9: << [
       / directive-override-parameters / 20, {
-        / invoke-args / 23: h'68656C6C6F776F726C645F686F737420656E636C6176652E7369676E6564' / "helloworld_host enclave.signed" /
+        / invoke-args / 23: './helloworld_host enclave.signed'
       },
       / directive-invoke / 23, 15
     ] >>,

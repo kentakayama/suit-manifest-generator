@@ -6,10 +6,10 @@
     / common / 3: << {
       / components / 2: [
         [
-          'TEEP-Device',
-          'SecureFS',
+           'TEEP-Device',
+           'SecureFS',
           h'8D82573A926D4754935332DC29997F74', / tc-uuid /
-          'ta'
+           'ta'
         ]
       ],
       / shared-sequence / 4: << [
@@ -17,7 +17,7 @@
           / parameter-vendor-identifier / 1: h'C0DDD5F15243566087DB4F5B0AA26C2F',
           / parameter-class-identifier / 2: h'DB42F7093D8C55BAA8C5265FC5820F4E',
           / parameter-image-digest / 3: << [
-            / digest-algorithm-id: / -16 / cose-alg-sha256 /,
+            / digest-algorithm-id: / -16 / SHA256 /,
             / digest-bytes: / h'8CF71AC86AF31BE184EC7A05A411A8C3A14FD9B77A30D046397481469468ECE8'
           ] >>,
           / parameter-image-size / 14: 20
@@ -27,10 +27,10 @@
       ] >>
     } >>,
     / manifest-component-id / 5: [
-      'TEEP-Device',
-      'SecureFS',
+       'TEEP-Device',
+       'SecureFS',
       h'8D82573A926D4754935332DC29997F74',  / tc-uuid /
-      'suit'
+       'suit'
     ],
     / install / 17: << [
       / directive-override-parameters / 20, {
@@ -38,6 +38,9 @@
       },
       / directive-fetch / 21, 15,
       / condition-image-match / 3, 15
+    ] >>,
+    / uninstall / 24: << [
+      / directive-unlink / 33, 15
     ] >>
   } >>
 })

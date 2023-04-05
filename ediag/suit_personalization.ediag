@@ -7,10 +7,10 @@
       / dependencies / 1: {
         / component-index / 1: {
           / dependency-prefix / 1: [
-            'TEEP-Device',
-            'SecureFS',
+             'TEEP-Device',
+             'SecureFS',
             h'8D82573A926D4754935332DC29997F74', / tc-uuid /
-            'suit'
+             'suit'
           ]
         }
       },
@@ -24,13 +24,13 @@
       / shared-sequence / 4: << [
         / directive-set-component-index / 12, 0,
         / directive-override-parameters / 20, {
-          / vendor-id / 1: h'C0DDD5F15243566087DB4F5B0AA26C2F' / c0ddd5f1-5243-5660-87db-4f5b0aa26c2f /,
-          / class-id / 2: h'DB42F7093D8C55BAA8C5265FC5820F4E' / db42f709-3d8c-55ba-a8c5-265fc5820f4e /,
-          / image-digest / 3: << [
-            / algorithm-id: / -16 / SHA-256 /,
-            / digest-bytes: / h'AAABCCCDEEEF00012223444566678889ABBBCDDDEFFF01112333455567778999'
+          / parameter-vendor-identifier / 1: h'C0DDD5F15243566087DB4F5B0AA26C2F',
+          / parameter-class-identifier / 2: h'DB42F7093D8C55BAA8C5265FC5820F4E',
+          / parameter-image-digest / 3: << [
+            / digest-algorithm-id: / -16 / SHA256 /,
+            / digest-bytes: / h'{{FILE-SHA-256 ../../libcsuit/testfiles/config.json}}'
           ] >>,
-          / image-size / 14: 64
+          / image-size / 14: {{FILE-SIZE ../../libcsuit/testfiles/config.json}}
         },
         / condition-vendor-identifier / 1, 15,
         / condition-class-identifier / 2, 15
@@ -50,8 +50,7 @@
       / directive-override-parameters / 20, {
         / uri / 21: "https://example.org/8d82573a-926d-4754-9353-32dc29997f74.suit"
       },
-      / directive-fetch / 21, 2,
-      / condition-image-match / 3, 15
+      / directive-fetch / 21, 2
     ] >>,
     / install / 17: << [
       / directive-set-component-index / 12, 1,
@@ -62,6 +61,12 @@
       },
       / directive-fetch / 21, 2,
       / condition-image-match / 3, 15
+    ] >>,
+    / uninstall / 24: << [
+      / directive-set-component-index / 12, 1,
+      / directive-process-dependency / 11, 0,
+      / directive-set-component-index / 12, 0,
+      / directive-unlink / 33, 15
     ] >>
   } >>
 })

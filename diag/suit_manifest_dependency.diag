@@ -25,7 +25,7 @@
       },
       / suit-directive-fetch / 21, 15,
       / suit-condition-image-match / 3, 15,
-      / suit-directive-process-dependency / 8, 15,
+      / suit-directive-process-dependency / 11, 15,
 
       / install [h'00'] in this manifest /
       / suit-set-component-identifier / 12, 0 / [h'01'] /,

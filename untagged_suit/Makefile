@@ -10,20 +10,17 @@ UNTAGGED_SUIT_MANIFESTS := \
 	suit_uri.suit \
 	suit_integrated.suit \
 	suit_personalization.suit \
-	suit_unlink.suit
-
-ifeq ($(suit-ietf116),1)
-UNTAGGED_SUIT_MANIFESTS += \
+	suit_unlink.suit \
 	suit_helloworld.suit
-endif
 
 .PHONY: all
 all: $(UNTAGGED_SUIT_MANIFESTS)
 
-%.suit: ../untagged_diag/%.untagged.diag
+%.suit: ../untagged_diag/%.diag
 	$(DIAG2CBOR) --to bytes --from diag < $< > $@
 
-../untagged_diag/%.untagged.diag:
+.PRECIOUS: ../untagged_diag/%.diag
+../untagged_diag/%.diag:
 	$(MAKE) -C ../untagged_diag $(notdir $@)
 
 .PHONY: clean

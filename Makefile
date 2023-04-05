@@ -11,12 +11,21 @@ all:
 	$(MAKE) -C signed_diag
 	$(MAKE) -C untagged_diag
 
-.PHONY:
+.PHONY: install
+install:
+	$(MAKE) -C signed_diag install
+	$(MAKE) -C untagged_diag install
+
+.PHONY: clean
 clean:
-	$(MAKE) clean -C diag clean suit=1 teep=1 teep-ietf116=1 suit-ietf116=1
-	$(MAKE) clean -C cbor clean suit=1 teep=1 teep-ietf116=1 suit-ietf116=1
+	$(MAKE) clean -C diag
+	$(MAKE) clean -C cbor
 	$(MAKE) clean -C suit
 	$(MAKE) clean -C signed_diag
 	$(MAKE) clean -C untagged_diag
 	$(MAKE) clean -C untagged_suit
 	$(MAKE) clean -C teep
+
+.PHONY: test
+test:
+	$(MAKE) -C suit test
