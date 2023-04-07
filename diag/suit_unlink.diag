@@ -6,10 +6,10 @@
     / common / 3: << {
       / components / 2: [
         [
-          'TEEP-Device',
-          'SecureFS',
+           'TEEP-Device',
+           'SecureFS',
           h'8D82573A926D4754935332DC29997F74',  / tc-uuid /
-          'ta'
+           'ta'
         ]
       ],
       / common-sequence / 4: << [
@@ -22,10 +22,10 @@
       ] >>
     } >>,
     / manifest-component-id / 5: [
-      'TEEP-Device',
-      'SecureFS',
+       'TEEP-Device',
+       'SecureFS',
       h'8D82573A926D4754935332DC29997F74',  / tc-uuid /
-      'suit'
+       'suit'
     ],
     / install / 17: << [
       / directive-set-component-index / 12, 0,

@@ -12,7 +12,7 @@ all:
 	$(MAKE) -C untagged_diag
 
 .PHONY: install
-install:
+install: all
 	$(MAKE) -C signed_diag install
 	$(MAKE) -C untagged_diag install
 

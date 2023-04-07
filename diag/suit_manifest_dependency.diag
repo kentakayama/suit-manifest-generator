@@ -17,11 +17,11 @@
       / fetch and install dependency manifest /
       / suit-set-component-identifier / 12, 1 / dependency manifest /,
       / suit-override-parameters / 20, {
-        / suit-parameter-uri / 21: "https://example.com/dependency-manifest.suit",
         / suit-parameter-image-digest / 3: << [
           / suit-digest-algorithm-id: / -16 / SHA256 /,
           / suit-digest-bytes: / h'ef14b7091e8adae8aa3bb6fca1d64fb37e19dcf8b35714cfdddc5968c80ff50e' / digest of Example 1 manifest in draft-ietf-suit-manifest#appendix-B.2 /
-        ] >>
+        ] >>,
+        / suit-parameter-uri / 21: "https://example.com/dependency-manifest.suit"
       },
       / suit-directive-fetch / 21, 15,
       / suit-condition-image-match / 3, 15,

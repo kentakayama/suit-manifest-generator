@@ -36,26 +36,62 @@ all: $(UNTAGGED_DIAGS)
 
 .PHONY: install
 install:
+	@echo Simple Example
+	$(eval SOURCE := suit_manifest_expD00)
+	$(eval TARGET := suit_manifest_expS0)
+	$(eval MD := ../../libcsuit/testfiles/$(TARGET).md)
+	echo "<!--\n Copyright (c) 2020-2023 SECOM CO., LTD. All Rights reserved.\n\n SPDX-License-Identifier: BSD-2-Clause\n-->\n\n## Example 0: Basic Content+Write Example\n{: numbered='no'}\n\n### CBOR Diagnostic Notation of SUIT Manifest\n{: numbered='no'}\n\n~~~~" > $(MD)
+	cat $(SOURCE).diag >> $(MD)
+	echo "~~~~\n\n\n### CBOR Binary in Hex\n{: numbered='no'}\n\n~~~~" >> $(MD)
+	xxd -u -p ../suit/$(SOURCE).suit >> $(MD)
+	echo "~~~~" >> $(MD)
+	cp ../suit/$(SOURCE).suit ../../libcsuit/testfiles/$(TARGET).cbor
+	@echo Simple Dependency Example
+	$(eval SOURCE := suit_manifest_expD01)
+	$(eval TARGET := suit_manifest_expS1)
+	$(eval MD := ../../libcsuit/testfiles/$(TARGET).md)
+	echo "<!--\n Copyright (c) 2020-2023 SECOM CO., LTD. All Rights reserved.\n\n SPDX-License-Identifier: BSD-2-Clause\n-->\n\n## Example 1: Basic Dependency Example\n{: numbered='no'}\n\n### CBOR Diagnostic Notation of SUIT Manifest\n{: numbered='no'}\n\n~~~~" > $(MD)
+	cat $(SOURCE).diag >> $(MD)
+	echo "~~~~\n\n\n### CBOR Binary in Hex\n{: numbered='no'}\n\n~~~~" >> $(MD)
+	xxd -u -p ../suit/$(SOURCE).suit >> $(MD)
+	echo "~~~~" >> $(MD)
+	cp ../suit/$(SOURCE).suit ../../libcsuit/testfiles/$(TARGET).cbor
+	@echo Integrated Dependency Example
+	$(eval SOURCE := suit_manifest_expID01)
+	$(eval TARGET := suit_manifest_expS2)
+	$(eval MD := ../../libcsuit/testfiles/$(TARGET).md)
+	echo "<!--\n Copyright (c) 2020-2023 SECOM CO., LTD. All Rights reserved.\n\n SPDX-License-Identifier: BSD-2-Clause\n-->\n\n## Example 2: Basic Integrated Dependency Example\n{: numbered='no'}\n\n### CBOR Diagnostic Notation of SUIT Manifest\n{: numbered='no'}\n\n~~~~" > $(MD)
+	cat $(SOURCE).diag >> $(MD)
+	echo "~~~~\n\n\n### CBOR Binary in Hex\n{: numbered='no'}\n\n~~~~" >> $(MD)
+	xxd -u -p ../suit/$(SOURCE).suit >> $(MD)
+	echo "~~~~" >> $(MD)
+	cp ../suit/$(SOURCE).suit ../../libcsuit/testfiles/$(TARGET).cbor
 	@echo AES-KW content Example
-	$(eval FILENAME := ../../libcsuit/testfiles/suit_manifest_expEW.md)
-	echo "<!--\n Copyright (c) 2020-2023 SECOM CO., LTD. All Rights reserved.\n\n SPDX-License-Identifier: BSD-2-Clause\n-->\n\n## Example 0: Write and Decrypt Encrypted Payload\n{: numbered='no'}\n\n### CBOR Diagnostic Notation of SUIT Manifest\n{: numbered='no'}\n\n~~~~" > $(FILENAME)
-	cat suit_manifest_aes_kw_content.diag >> $(FILENAME)
-	echo "~~~~\n\n\n### CBOR Binary in Hex\n{: numbered='no'}\n\n~~~~" >> $(FILENAME)
-	xxd -u -p ../suit/suit_manifest_aes_kw_content.suit >> $(FILENAME)
-	echo "~~~~" >> $(FILENAME)
-	cp suit_manifest_aes_kw_content.diag ../../../suit-wg/suit-firmware-encryption/examples/suit-manifest-aes-kw-content.diag.signed
-	cp ../suit/suit_manifest_aes_kw_content.suit ../../libcsuit/testfiles/suit_manifest_expEW.cbor
-	xxd -p -u ../suit/suit_manifest_aes_kw_content.suit ../../../suit-wg/suit-firmware-encryption/examples/suit-manifest-aes-kw-content.hex.signed
+	$(eval SOURCE := suit_manifest_aes_kw_content)
+	$(eval TARGET := suit-manifest-aes-kw-content)
+	$(eval CSUITNAME := suit_manifest_expEW)
+	$(eval MD := ../../libcsuit/testfiles/$(CSUITNAME).md)
+	echo "<!--\n Copyright (c) 2020-2023 SECOM CO., LTD. All Rights reserved.\n\n SPDX-License-Identifier: BSD-2-Clause\n-->\n\n## Example 0: Write and Decrypt Encrypted Payload\n{: numbered='no'}\n\n### CBOR Diagnostic Notation of SUIT Manifest\n{: numbered='no'}\n\n~~~~" > $(MD)
+	cat $(SOURCE).diag >> $(MD)
+	echo "~~~~\n\n\n### CBOR Binary in Hex\n{: numbered='no'}\n\n~~~~" >> $(MD)
+	xxd -u -p ../suit/$(SOURCE).suit >> $(MD)
+	echo "~~~~" >> $(MD)
+	cp $(SOURCE).diag ../../../suit-wg/suit-firmware-encryption/examples/$(TARGET).diag.signed
+	cp ../suit/$(SOURCE).suit ../../libcsuit/testfiles/$(CSUITNAME).cbor
+	xxd -p -u ../suit/$(SOURCE).suit ../../../suit-wg/suit-firmware-encryption/examples/$(TARGET).hex.signed
 	@echo AES-KW fetch Example
-	$(eval FILENAME := ../../libcsuit/testfiles/suit_manifest_expEF.md)
-	echo "<!--\n Copyright (c) 2020-2023 SECOM CO., LTD. All Rights reserved.\n\n SPDX-License-Identifier: BSD-2-Clause\n-->\n\n## Example 1: Fetch and Decrypt Encrypted Payload\n{: numbered='no'}\n\n### CBOR Diagnostic Notation of SUIT Manifest\n{: numbered='no'}\n\n~~~~" > $(FILENAME)
-	cat suit_manifest_aes_kw.diag >> $(FILENAME)
-	echo "~~~~\n\n\n### CBOR Binary in Hex\n{: numbered='no'}\n\n~~~~" >> $(FILENAME)
-	xxd -u -p ../suit/suit_manifest_aes_kw.suit >> $(FILENAME)
-	echo "~~~~" >> $(FILENAME)
-	cp suit_manifest_aes_kw.diag ../../../suit-wg/suit-firmware-encryption/examples/suit-manifest-aes-kw.diag.signed
-	cp ../suit/suit_manifest_aes_kw.suit ../../libcsuit/testfiles/suit_manifest_expEF.cbor
-	xxd -p -u ../suit/suit_manifest_aes_kw.suit ../../../suit-wg/suit-firmware-encryption/examples/suit-manifest-aes-kw.hex.signed
+	$(eval SOURCE := suit_manifest_aes_kw)
+	$(eval TARGET := suit-manifest-aes-kw)
+	$(eval CSUITNAME := suit_manifest_expEF)
+	$(eval MD := ../../libcsuit/testfiles/$(CSUITNAME).md)
+	echo "<!--\n Copyright (c) 2020-2023 SECOM CO., LTD. All Rights reserved.\n\n SPDX-License-Identifier: BSD-2-Clause\n-->\n\n## Example 1: Fetch and Decrypt Encrypted Payload\n{: numbered='no'}\n\n### CBOR Diagnostic Notation of SUIT Manifest\n{: numbered='no'}\n\n~~~~" > $(MD)
+	cat $(SOURCE).diag >> $(MD)
+	echo "~~~~\n\n\n### CBOR Binary in Hex\n{: numbered='no'}\n\n~~~~" >> $(MD)
+	xxd -u -p ../suit/$(SOURCE).suit >> $(MD)
+	echo "~~~~" >> $(MD)
+	cp $(SOURCE).diag ../../../suit-wg/suit-firmware-encryption/examples/$(TARGET).diag.signed
+	cp ../suit/$(SOURCE).suit ../../libcsuit/testfiles/$(CSUITNAME).cbor
+	xxd -p -u ../suit/$(SOURCE).suit ../../../suit-wg/suit-firmware-encryption/examples/$(TARGET).hex.signed
 
 .PHONY: clean
 clean:
