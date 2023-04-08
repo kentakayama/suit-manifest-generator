@@ -4,32 +4,6 @@
 # SPDX-License-Identifier: BSD-2-Clause
 #
 
-FIXED_DIAGS := \
-	suit_uri.diag \
-	suit_integrated.diag \
-	suit_unlink.diag \
-	suit_manifest_expS0.diag \
-	suit_manifest_raw.diag \
-	suit_manifest_dependency.diag \
-	suit_manifest_aes_kw_dependent.diag
-
-GENERATED_DIAGS := \
-	suit_personalization.diag \
-	suit_helloworld.diag \
-	suit_manifest_expS1.diag \
-	suit_manifest_expS2.diag \
-	suit_manifest_expS3.diag \
-	suit_manifest_aes_kw.diag \
-	suit_manifest_aes_kw_content.diag \
-	teep_update_example1.diag \
-	teep_update_example3.diag \
-	teep_update_uri.diag \
-	teep_update_integrated.diag \
-	teep_update_personalization.diag \
-	teep_update_unlink.diag \
-	teep_update_helloworld.diag
-
-
 .PHONY: all
 all: $(GENERATED_DIAGS)
 
@@ -53,7 +27,15 @@ suit_personalization.diag: ../untagged_suit/suit_uri.suit
 %.diag: ../ediag/%.ediag
 	$(PYTHON3) ../ediag-to-diag.py $< > $@
 
+FIXED_DIAGS := \
+	suit_uri.diag \
+	suit_integrated.diag \
+	suit_unlink.diag \
+	suit_manifest_expS0.diag \
+	suit_manifest_raw.diag \
+	suit_manifest_dependency.diag \
+	suit_manifest_aes_kw_dependent.diag
 
 .PHONY: clean
 clean:
-	$(RM) $(GENERATED_DIAGS)
+	ls | grep -v -e Makefile -e suit_uri.diag -e suit_integrated.diag -e suit_unlink.diag -e suit_manifest_expS0.diag -e suit_manifest_raw.diag -e suit_manifest_dependency.diag -e suit_manifest_aes_kw_dependent.diag | xargs $(RM)

@@ -19,9 +19,10 @@ UNTAGGED_DIAGS := \
 	suit_manifest_expS2.diag \
 	suit_manifest_expS3.diag
 
-ifeq ($(suit-ietf116), 1)
-UNTAGGED_DIAGS += \
+UNTAGGED_DIAGS_IETF116_HACKATHON := \
 	suit_helloworld.diag
+ifeq ($(suit-ietf116), 1)
+UNTAGGED_DIAGS += $(UNTAGGED_DIAGS_IETF116_HACKATHON)
 endif
 
 
@@ -106,4 +107,4 @@ install:
 
 .PHONY: clean
 clean:
-	$(RM) $(UNTAGGED_DIAGS)
+	$(RM) $(UNTAGGED_DIAGS) $(UNTAGGED_DIAGS_IETF116_HACKATHON)

@@ -10,9 +10,11 @@ UNTAGGED_DIAGS := \
 	suit_personalization.diag \
 	suit_unlink.diag
 
-ifeq ($(suit-ietf116),1)
-UNTAGGED_DIAGS += \
+UNTAGGED_DIAGS_IETF116_HACKATHON := \
 	suit_helloworld.diag
+
+ifeq ($(suit-ietf116),1)
+UNTAGGED_DIAGS += $(UNTAGGED_DIAGS_IETF116_HACKATHON)
 endif
 
 .PRECIOUS: $(UNTAGGED_DIAGS)
@@ -78,4 +80,5 @@ install: $(UNTAGGED_DIAGS)
 
 .PHONY: clean
 clean:
-	$(RM) $(UNTAGGED_DIAGS)
+	$(RM) $(UNTAGGED_DIAGS) $(UNTAGGED_DIAGS_IETF116_HACKATHON)
+

@@ -16,9 +16,6 @@ all: $(GENERATED_CBORS)
 %.cbor: ../diag/%.diag
 	$(DIAG2CBOR) --to bytes --from diag < $< > $@
 
-FIXED_CBORS := \
-	suit_manifest_exp1.cbor \
-	suit_manifest_exp3.cbor
 .PHONY: clean
 clean:
-	ls | grep -v -e "suit_manifest_exp(1|3).cbor" -e Makefile | xargs $(RM)
+	ls | grep -v -e "suit_manifest_exp1.cbor" -e "suit_manifest_exp3.cbor" -e Makefile | xargs $(RM)

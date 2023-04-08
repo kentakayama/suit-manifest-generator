@@ -13,9 +13,11 @@ TEEP_UPDATE_MESSAGES := \
 	teep_update_personalization.teep \
 	teep_update_unlink.teep
 
-ifeq ($(teep-ietf116),1)
-TEEP_UPDATE_MESSAGES += \
+TEEP_IETF116_HACKATHON := \
 	teep_update_helloworld.teep
+
+ifeq ($(teep-ietf116),1)
+TEEP_UPDATE_MESSAGES += $(TEEP_IETF116_HACKATHON)
 endif
 
 .PHONY: all
@@ -37,4 +39,4 @@ teep_update_helloworld.teep: ../untagged_suit/suit_helloworld.suit
 
 .PHONY: clean
 clean:
-	$(RM) $(TEEP_UPDATE_MESSAGES)
+	$(RM) $(TEEP_UPDATE_MESSAGES) $(TEEP_IETF116_HACKATHON)
