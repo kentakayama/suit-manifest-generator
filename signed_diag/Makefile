@@ -14,9 +14,10 @@ UNTAGGED_DIAGS := \
 	suit_manifest_aes_kw.diag \
 	suit_manifest_aes_kw_content.diag \
 	suit_manifest_aes_kw_dependent.diag \
-	suit_manifest_expD00.diag \
-	suit_manifest_expD01.diag \
-	suit_manifest_expID01.diag
+	suit_manifest_expS0.diag \
+	suit_manifest_expS1.diag \
+	suit_manifest_expS2.diag \
+	suit_manifest_expS3.diag
 
 ifeq ($(suit-ietf116), 1)
 UNTAGGED_DIAGS += \
@@ -37,7 +38,7 @@ all: $(UNTAGGED_DIAGS)
 .PHONY: install
 install:
 	@echo Simple Example
-	$(eval SOURCE := suit_manifest_expD00)
+	$(eval SOURCE := suit_manifest_expS0)
 	$(eval TARGET := suit_manifest_expS0)
 	$(eval MD := ../../libcsuit/testfiles/$(TARGET).md)
 	echo "<!--\n Copyright (c) 2020-2023 SECOM CO., LTD. All Rights reserved.\n\n SPDX-License-Identifier: BSD-2-Clause\n-->\n\n## Example 0: Basic Content+Write Example\n{: numbered='no'}\n\n### CBOR Diagnostic Notation of SUIT Manifest\n{: numbered='no'}\n\n~~~~" > $(MD)
@@ -47,7 +48,7 @@ install:
 	echo "~~~~" >> $(MD)
 	cp ../suit/$(SOURCE).suit ../../libcsuit/testfiles/$(TARGET).cbor
 	@echo Simple Dependency Example
-	$(eval SOURCE := suit_manifest_expD01)
+	$(eval SOURCE := suit_manifest_expS1)
 	$(eval TARGET := suit_manifest_expS1)
 	$(eval MD := ../../libcsuit/testfiles/$(TARGET).md)
 	echo "<!--\n Copyright (c) 2020-2023 SECOM CO., LTD. All Rights reserved.\n\n SPDX-License-Identifier: BSD-2-Clause\n-->\n\n## Example 1: Basic Dependency Example\n{: numbered='no'}\n\n### CBOR Diagnostic Notation of SUIT Manifest\n{: numbered='no'}\n\n~~~~" > $(MD)
@@ -57,10 +58,20 @@ install:
 	echo "~~~~" >> $(MD)
 	cp ../suit/$(SOURCE).suit ../../libcsuit/testfiles/$(TARGET).cbor
 	@echo Integrated Dependency Example
-	$(eval SOURCE := suit_manifest_expID01)
+	$(eval SOURCE := suit_manifest_expS2)
 	$(eval TARGET := suit_manifest_expS2)
 	$(eval MD := ../../libcsuit/testfiles/$(TARGET).md)
-	echo "<!--\n Copyright (c) 2020-2023 SECOM CO., LTD. All Rights reserved.\n\n SPDX-License-Identifier: BSD-2-Clause\n-->\n\n## Example 2: Basic Integrated Dependency Example\n{: numbered='no'}\n\n### CBOR Diagnostic Notation of SUIT Manifest\n{: numbered='no'}\n\n~~~~" > $(MD)
+	echo "<!--\n Copyright (c) 2020-2023 SECOM CO., LTD. All Rights reserved.\n\n SPDX-License-Identifier: BSD-2-Clause\n-->\n\n## Example 2: Integrated Dependency Example\n{: numbered='no'}\n\n### CBOR Diagnostic Notation of SUIT Manifest\n{: numbered='no'}\n\n~~~~" > $(MD)
+	cat $(SOURCE).diag >> $(MD)
+	echo "~~~~\n\n\n### CBOR Binary in Hex\n{: numbered='no'}\n\n~~~~" >> $(MD)
+	xxd -u -p ../suit/$(SOURCE).suit >> $(MD)
+	echo "~~~~" >> $(MD)
+	cp ../suit/$(SOURCE).suit ../../libcsuit/testfiles/$(TARGET).cbor
+	@echo Integrated Dependency Example
+	$(eval SOURCE := suit_manifest_expS3)
+	$(eval TARGET := suit_manifest_expS3)
+	$(eval MD := ../../libcsuit/testfiles/$(TARGET).md)
+	echo "<!--\n Copyright (c) 2020-2023 SECOM CO., LTD. All Rights reserved.\n\n SPDX-License-Identifier: BSD-2-Clause\n-->\n\n## Example 3: Is Dependency Example\n{: numbered='no'}\n\n### CBOR Diagnostic Notation of SUIT Manifest\n{: numbered='no'}\n\n~~~~" > $(MD)
 	cat $(SOURCE).diag >> $(MD)
 	echo "~~~~\n\n\n### CBOR Binary in Hex\n{: numbered='no'}\n\n~~~~" >> $(MD)
 	xxd -u -p ../suit/$(SOURCE).suit >> $(MD)

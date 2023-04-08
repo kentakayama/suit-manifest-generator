@@ -8,7 +8,7 @@ FIXED_DIAGS := \
 	suit_uri.diag \
 	suit_integrated.diag \
 	suit_unlink.diag \
-	suit_manifest_expD00.diag \
+	suit_manifest_expS0.diag \
 	suit_manifest_raw.diag \
 	suit_manifest_dependency.diag \
 	suit_manifest_aes_kw_dependent.diag
@@ -16,8 +16,9 @@ FIXED_DIAGS := \
 GENERATED_DIAGS := \
 	suit_personalization.diag \
 	suit_helloworld.diag \
-	suit_manifest_expD01.diag \
-	suit_manifest_expID01.diag \
+	suit_manifest_expS1.diag \
+	suit_manifest_expS2.diag \
+	suit_manifest_expS3.diag \
 	suit_manifest_aes_kw.diag \
 	suit_manifest_aes_kw_content.diag \
 	teep_update_example1.diag \
@@ -37,8 +38,9 @@ teep_update_integrated.diag: ../untagged_suit/suit_integrated.suit
 teep_update_personalization.diag: ../untagged_suit/suit_personalization.suit
 teep_update_unlink.diag: ../untagged_suit/suit_unlink.suit
 teep_update_helloworld.diag: ../untagged_suit/suit_helloworld.suit
-suit_manifest_expD01.diag: ../suit/suit_manifest_expD00.suit
-suit_manifest_expID01.diag: ../suit/suit_manifest_expD00.suit
+suit_manifest_expS1.diag: ../suit/suit_manifest_expS0.suit
+suit_manifest_expS2.diag: ../suit/suit_manifest_expS0.suit
+suit_manifest_expS3.diag: ../suit/suit_manifest_expS0.suit
 suit_personalization.diag: ../untagged_suit/suit_uri.suit
 
 .PRECIOUS: ../untagged_suit/*.suit ../suit/*.suit

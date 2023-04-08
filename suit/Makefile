@@ -21,9 +21,10 @@ SUIT_MANIFESTS := \
 	suit_manifest_aes_kw.suit \
 	suit_manifest_aes_kw_content.suit \
 	suit_manifest_aes_kw_dependent.suit \
-	suit_manifest_expD00.suit \
-	suit_manifest_expD01.suit \
-	suit_manifest_expID01.suit \
+	suit_manifest_expS0.suit \
+	suit_manifest_expS1.suit \
+	suit_manifest_expS2.suit \
+	suit_manifest_expS3.suit \
 	suit_helloworld.suit
 
 .PHONY: all

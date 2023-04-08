@@ -6,29 +6,6 @@
 
 DIAG2CBOR := cbor-diag # https://github.com/Nullus157/cbor-diag-rs
 
-FIXED_CBORS := \
-	suit_manifest_exp1.cbor \
-	suit_manifest_exp3.cbor
-
-GENERATED_CBORS += \
-	suit_uri.cbor \
-	suit_integrated.cbor \
-	suit_personalization.cbor \
-	suit_unlink.cbor \
-	suit_manifest_raw.cbor \
-	suit_manifest_dependency.cbor \
-	suit_manifest_aes_kw.cbor \
-	suit_manifest_aes_kw_content.cbor \
-	suit_manifest_aes_kw_dependent.cbor \
-	suit_manifest_expD00.cbor \
-	suit_manifest_expD01.cbor \
-	suit_manifest_expID01.cbor \
-	teep_update_example1.cbor \
-	teep_update_example3.cbor \
-	suit_helloworld.cbor \
-	teep_update_helloworld.cbor
-
-
 .PHONY: all
 all: $(GENERATED_CBORS)
 
@@ -39,6 +16,9 @@ all: $(GENERATED_CBORS)
 %.cbor: ../diag/%.diag
 	$(DIAG2CBOR) --to bytes --from diag < $< > $@
 
+FIXED_CBORS := \
+	suit_manifest_exp1.cbor \
+	suit_manifest_exp3.cbor
 .PHONY: clean
 clean:
-	$(RM) $(GENERATED_CBORS)
+	ls | grep -v -e "suit_manifest_exp(1|3).cbor" -e Makefile | xargs $(RM)
