@@ -5,28 +5,26 @@ FROM rust:latest
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update
-RUN apt-get -y install git gcc make python3 python3-pip libssl-dev
-
-WORKDIR /root/github.com/laurencelundblade
-RUN git clone --depth 1 https://github.com/laurencelundblade/QCBOR.git
-RUN make -C QCBOR libqcbor.a install
-
-RUN git clone --depth 1 https://github.com/laurencelundblade/t_cose.git
-RUN make -C t_cose -f Makefile.ossl libt_cose.a install
-
+RUN apt-get -y install git gcc make python3 python3-pip
 RUN cargo install cbor-diag-cli
 
+WORKDIR /root/github.com/
+RUN git clone --branch v3.3.0 https://github.com/Mbed-TLS/mbedtls.git Mbed-TLS/mbedtls
+RUN git clone --depth 1 https://github.com/laurencelundblade/QCBOR.git laurencelundblade/QCBOR
+RUN git clone --branch dev https://github.com/laurencelundblade/t_cose.git laurencelundblade/t_cose
+RUN git clone --branch deterministic-ecdsa https://github.com/kentakayama/libteep.git kentakayama/libteep
+RUN git clone --depth 1 https://github.com/kentakayama/libcsuit.git kentakayama/libcsuit
+
+WORKDIR /root/github.com/laurencelundblade/t_cose
+RUN git apply < /root/github.com/kentakayama/libcsuit/deterministic_ecdsa.patch
+
+WORKDIR /root/github.com/
+RUN make -j $(nproc) -C Mbed-TLS/mbedtls install
+RUN make -j $(nproc) -C laurencelundblade/QCBOR libqcbor.a install
+RUN make -j $(nproc) -C laurencelundblade/t_cose -f Makefile.psa libt_cose.a install
+RUN make -j $(nproc) -C kentakayama/libteep -f Makefile.cose MBEDTLS=1
+RUN make -j $(nproc) -C kentakayama/libcsuit -f Makefile.sign MBEDTLS=1
+
 WORKDIR /root/github.com/kentakayama
-RUN git clone --depth 1 https://github.com/kentakayama/libteep.git
-RUN make -C libteep -f Makefile.cose
-
-WORKDIR /root/gitlab.arm.com/research/ietf-suit/
-RUN git clone --depth 1 https://gitlab.arm.com/research/ietf-suit/suit-tool.git
-WORKDIR ./suit-tool
-RUN python3 -m pip install --user --upgrade .
-COPY ./misc/sign.diff .
-RUN git apply < sign.diff
-
-WORKDIR /root
 
 CMD make -C suit-manifest-generator
