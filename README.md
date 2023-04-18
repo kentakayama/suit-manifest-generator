@@ -39,7 +39,7 @@ subgraph cbor-diag-cli
     DSM --> SM0
 end
 
-subgraph suit-tool
+subgraph libcsuit Trust Anchor sign
     SM0 --> SM
 end
 
@@ -63,8 +63,8 @@ end
 - [QCBOR](https://github.com/laurencelundblade/QCBOR)
 - [t_cose](https://github.com/laurencelundblase/t_cose)
 - [libteep](https://github.com/kentakayama/libteep)
+- [libcsuit](https://github.com/kentakayama/libcsuit)
 - [cbor-diag-cli](https://crates.io/crates/cbor-diag-cli)
-- [suit-tool](https://gitlab.arm.com/research/ietf-suit/suit-tool)
 
 ## License and Copyright
 BSD 2-Clause License
