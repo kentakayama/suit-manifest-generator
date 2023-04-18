@@ -19,9 +19,9 @@ def replace_from_pattern(f):
                         if m:
                             skip, length = m.groups()
                             rf.read(int(skip))
-                            print(pre + rf.read(int(length)).hex() + post)
+                            print(pre + rf.read(int(length)).hex().upper() + post)
                     else:
-                        print(pre + rf.read().hex() + post)
+                        print(pre + rf.read().hex().upper() + post)
             elif "SIZE" == op:
                 print(pre + str(os.stat(os.path.expanduser(filename)).st_size) + post)
             elif "SHA-256" == op + param:
