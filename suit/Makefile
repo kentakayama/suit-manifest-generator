@@ -5,6 +5,7 @@
 #
 
 SUIT_SIGN := ~/github.com/kentakayama/libcsuit/bin/suit_manifest_sign
+SUIT_SIGN_DELEGATE := ~/github.com/kentakayama/libcsuit/bin/suit_manifest_sign_delegate
 SUIT_PROCESS := ~/github.com/kentakayama/libcsuit/bin/suit_manifest_process
 
 .PHONY: all
@@ -13,6 +14,9 @@ all:
 .PRECIOUS: ../cbor/%.cbor
 ../cbor/%.cbor:
 	$(MAKE) -C ../cbor $(notdir $@)
+
+suit_manifest_expS1.suit: ../cbor/suit_manifest_expS1.cbor
+	$(SUIT_SIGN_DELEGATE) $< $@
 
 %.suit: ../cbor/%.cbor
 	$(SUIT_SIGN) $< $@

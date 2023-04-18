@@ -21,19 +21,11 @@
       'depending.suit'
     ],
     / invoke / 9: << [
-      / directive-set-component-index / 12, true,
-      / directive-try-each / 15, [
-        << [
-          / condition-is-dependency / 8, 0,
-          / directive-process-depenency / 11, 0
-        ] >>,
-        << [
-          / directive-override-parameters / 20, {
-            / parameter-invoke-args / 23: 'cat 00 10'
-          },
-          / directive-invoke / 23, 15
-        ] >>
-      ]
+      / directive-set-component-index / 12, 0,
+      / directive-override-parameters / 20, {
+        / parameter-invoke-args / 23: 'cat 00 10'
+      },
+      / directive-invoke / 23, 15
     ] >>,
     / dependency-resolution / 15: << [
       / directive-set-component-index / 12, 1,

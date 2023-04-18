@@ -21,34 +21,35 @@
       'depending.suit'
     ],
     / invoke / 9: << [
-      / directive-set-component-index / 12, 0,
-      / directive-override-parameters / 20, {
-        / parameter-invoke-args / 23: 'cat 00 10'
-      },
-      / directive-invoke / 23, 15
+      / directive-set-component-index / 12, true,
+      / directive-try-each / 15, [
+        << [
+          / condition-is-dependency / 8, 0,
+          / directive-process-depenency / 11, 0
+        ] >>,
+        << [
+          / directive-override-parameters / 20, {
+            / parameter-invoke-args / 23: 'cat 00 10'
+          },
+          / directive-invoke / 23, 15
+        ] >>
+      ]
     ] >>,
     / dependency-resolution / 15: << [
       / directive-set-component-index / 12, 1,
       / directive-override-parameters / 20, {
         / parameter-image-digest / 3: << [
           / digest-algorithm-id: / -16 / SHA256 /,
-          / digest-bytes: / h'{{FILE-SHA-256 ../suit/suit_manifest_expS1.suit}}'
+          / digest-bytes: / h'{{FILE-SHA-256 ../suit/suit_manifest_expS0.suit}}'
         ] >>,
-        / parameter-image-size / 14: {{FILE-SIZE ../suit/suit_manifest_expS1.suit}},
-        / parameter-uri / 21: "http://example.com/dependent.suit"
+        / parameter-image-size / 14: {{FILE-SIZE ../suit/suit_manifest_expS0.suit}},
+        / parameter-uri / 21: "#dependent.suit"
       },
       / directive-fetch / 21, 2,
-      / condition-image-match / 3, 15,
+      / condition-image-match / 3, 15
     ] >>,
     / install / 17: << [
       / directive-set-component-index / 12, 1,
-      / directive-override-parameters / 20, {
-        / parameter-image-digest / 3: << [
-          / parameter-algorithm-id: / -16 / SHA256 /,
-          / parameter-bytes: / h'{{FILE-HEX-174+32 ../suit/suit_manifest_expS1.suit}}'
-        ] >>
-      },
-      / condition-dependency-integrity / 7, 15,
       / directive-process-dependency / 11, 0,
 
       / directive-set-component-index / 12, 0,
@@ -57,5 +58,6 @@
       },
       / directive-write / 18, 15
     ] >>
-  } >>
+  } >>,
+  "#dependent.suit": h'{{FILE-HEX ../suit/suit_manifest_expS0.suit}}'
 })

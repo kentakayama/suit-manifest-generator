@@ -1,52 +1,52 @@
 / SUIT_Envelope_Tagged / 107({
+  / delegation / 1: << [
+    [
+      / NOTE: signed by trust anchor /
+      << 18([
+        / protected: / << {
+          / alg / 1: -7 / ES256 /
+        } >>,
+        / unprotected / {
+        },
+        / payload: / << {
+          / cnf / 8: {
+            / NOTE: public key of delegated authority /
+            / COSE_Key / 1: {
+              / cty / 1: 2 / EC2 /,
+              / crv / -1: 1 / P-256 /,
+              / x / -2: h'0E908AA8F066DB1F084E0C3652C63952BD99F2A5BDB22F9E01367AAD03ABA68B',
+              / y / -3: h'77DA1BD8AC4F0CB490BA210648BF79AB164D49AD3551D71D314B2749EE42D29A'
+            }
+          }
+        } >>,
+        / signature: / h'{{FILE-HEX-90+64 ../teep/suit_delegation.cwt}}'
+      ]) >>
+    ]
+  ] >>,
+  / NOTE: signed by delegated authority /
   / authentication-wrapper /
   / manifest / 3: << {
     / manifest-version / 1: 1,
     / manifest-sequence-number / 2: 0,
     / common / 3: << {
-      / dependencies / 1: {
-        / component-index / 1: {
-          / dependency-prefix / 1: [
-            'dependent.suit'
-          ]
-        }
-      },
       / components / 2: [
         [
-          '10'
+          '00'
         ]
       ]
     } >>,
     / manifest-component-id / 5: [
-      'depending.suit'
+      'dependent.suit'
     ],
     / invoke / 9: << [
-      / directive-set-component-index / 12, 0,
       / directive-override-parameters / 20, {
-        / parameter-invoke-args / 23: 'cat 00 10'
+        / parameter-invoke-args / 23: 'cat 00'
       },
       / directive-invoke / 23, 15
     ] >>,
-    / dependency-resolution / 15: << [
-      / directive-set-component-index / 12, 1,
-      / directive-override-parameters / 20, {
-        / parameter-image-digest / 3: << [
-          / digest-algorithm-id: / -16 / SHA256 /,
-          / digest-bytes: / h'{{FILE-SHA-256 ../suit/suit_manifest_expS0.suit}}'
-        ] >>,
-        / parameter-image-size / 14: {{FILE-SIZE ../suit/suit_manifest_expS0.suit}},
-        / parameter-uri / 21: "http://example.com/dependent.suit"
-      },
-      / directive-fetch / 21, 2,
-      / condition-image-match / 3, 15
-    ] >>,
     / install / 17: << [
-      / directive-set-component-index / 12, 1,
-      / directive-process-dependency / 11, 0,
-
-      / directive-set-component-index / 12, 0,
       / directive-override-parameters / 20, {
-        / parameter-content / 18: ' in multiple trust domains'
+        / parameter-content / 18: 'hello world'
       },
       / directive-write / 18, 15
     ] >>
