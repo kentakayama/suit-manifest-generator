@@ -9,10 +9,10 @@ DIAG2CBOR := cbor-diag # https://github.com/Nullus157/cbor-diag-rs
 .PHONY: all
 all: $(GENERATED_CBORS)
 
+.PRECIOUS: ../diag/%.diag
 ../diag/%.diag:
 	$(MAKE) -C ../diag $(notdir $@)
 
-.PRECIOUS: ../diag/%.diag
 %.cbor: ../diag/%.diag
 	$(DIAG2CBOR) --to bytes --from diag < $< > $@
 

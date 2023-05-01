@@ -18,16 +18,16 @@ suit_manifest_expS3.diag: ../suit/suit_manifest_expS0.suit
 suit_manifest_expS4.diag: ../suit/suit_manifest_expS0.suit
 suit_personalization.diag: ../untagged_suit/suit_uri.suit
 
-.PRECIOUS: ../untagged_suit/*.suit
-../untagged_suit/*.suit:
+.PRECIOUS: ../untagged_suit/%.suit
+../untagged_suit/%.suit:
 	$(MAKE) -C ../untagged_suit $(notdir $@)
 
-.PRECIOUS: ../suit/*.suit
-../suit/*.suit:
+.PRECIOUS: ../suit/%.suit
+../suit/%.suit:
 	$(MAKE) -C ../suit $(notdir $@)
 
-.PRECIOUS: ../teep/*.cwt
-../teep/*.cwt:
+.PRECIOUS: ../teep/%.cwt
+../teep/%.cwt:
 	$(MAKE) -C ../teep $(notdir $@)
 
 %.diag: ../ediag/%.ediag

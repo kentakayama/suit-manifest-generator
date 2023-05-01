@@ -39,6 +39,7 @@ suit_delegation.cwt: ../cbor/suit_delegation.cbor
 	$(MAKE) -C ../untagged_suit $(notdir $@)
 
 .PRECIOUS: ../cbor/%.cbor
+../cbor/%.cbor:
 	$(MAKE) -C ../cbor $(notdir $@)
 
 %.teep:
