@@ -63,8 +63,8 @@ install: $(UNTAGGED_DIAGS)
 	echo "~~~~" >> $(FILENAME)
 	cp ../untagged_suit/suit_personalization.suit $(FILENAME:.md=.cbor)
 	$(eval FILENAME := ../../../ietf-teep/teep-protocol/cbor/suit_personalization.diag.txt)
-	cp ../untagged_diag/suit_personalization.diag $(FILENAME)
-	xxd -u -p ../untagged_suit/suit_personalization.suit > $(FILENAME:.diag.txt=.hex.txt)
+	cp ../untagged_diag/suit_manifest_aes_kw_config.diag $(FILENAME)
+	xxd -u -p ../untagged_suit/suit_manifest_aes_kw_config.suit > $(FILENAME:.diag.txt=.hex.txt)
 	@echo Example 4
 	$(eval FILENAME := ../../libcsuit/testfiles/suit_manifest_expR.md)
 	echo "<!--\n Copyright (c) 2020-2023 SECOM CO., LTD. All Rights reserved.\n\n SPDX-License-Identifier: BSD-2-Clause\n-->\n\n## E.4. Example 4: Unlink a Trusted Component {#suit-unlink}\n\n~~~~" > $(FILENAME)
@@ -73,9 +73,9 @@ install: $(UNTAGGED_DIAGS)
 	xxd -u -p ../untagged_suit/suit_unlink.suit >> $(FILENAME)
 	echo "~~~~" >> $(FILENAME)
 	cp ../untagged_suit/suit_unlink.suit $(FILENAME:.md=.cbor)
-	$(eval FILENAME := ../../../ietf-teep/teep-protocol/cbor/suit_unlink.diag.txt)
-	cp ../untagged_diag/suit_unlink.diag $(FILENAME)
-	xxd -u -p ../untagged_suit/suit_unlink.suit > $(FILENAME:.diag.txt=.hex.txt)
+	#$(eval FILENAME := ../../../ietf-teep/teep-protocol/cbor/suit_unlink.diag.txt)
+	#cp ../untagged_diag/suit_unlink.diag $(FILENAME)
+	#xxd -u -p ../untagged_suit/suit_unlink.suit > $(FILENAME:.diag.txt=.hex.txt)
 
 
 .PHONY: clean
