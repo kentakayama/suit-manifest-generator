@@ -7,9 +7,11 @@
 [submodule "t_cose"]
 	path = t_cose
 	url = https://github.com/kentakayama/t_cose.git
+	branch = dev-deterministic-ecdsa
 [submodule "QCBOR"]
 	path = QCBOR
 	url = https://github.com/laurencelundblade/QCBOR.git
 [submodule "mbedtls"]
 	path = mbedtls
 	url = https://github.com/Mbed-TLS/mbedtls.git
+	branch = v3.3.0
