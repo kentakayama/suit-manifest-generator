@@ -19,7 +19,7 @@ suit_manifest_expS1.suit: ../cbor/suit_manifest_expS1.cbor
 	$(SUIT_SIGN_DELEGATE) $< $@
 
 %.suit: ../cbor/%.cbor
-	$(SUIT_SIGN) $< $@
+	$(SUIT_SIGN_TRUSTANCHOR) $< $@
 
 .PHONY: test
 test: $(SUIT_MANIFESTS) $(SUIT_PROCESS)

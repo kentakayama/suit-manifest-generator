@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 SECOM CO., LTD. All Rights reserved.
+ * Copyright (c) 2023 SECOM CO., LTD. All Rights reserved.
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */
@@ -16,31 +16,13 @@
 #include <stdlib.h>
 #endif
 
-#if TEEP_ACTOR_AGENT == 1
-#include "teep_agent_es256_cose_key_private.h"
-UsefulBufC teep_private_key = teep_agent_es256_cose_key_private;
-UsefulBufC kid = (UsefulBufC){
-    .ptr = "101",
-    .len = 3,
-};
-#elif TEEP_ACTOR_TAM == 1
+UsefulBufC kid = NULLUsefulBufC;
+#if TEEP_ACTOR_TAM == 1
 #include "tam_es256_cose_key_private.h"
 UsefulBufC teep_private_key = tam_es256_cose_key_private;
-UsefulBufC kid = (UsefulBufC){
-    .ptr = "201",
-    .len = 3,
-};
-#elif TEEP_ACTOR_VERIFIER == 1
-#include "verifier_es256_cose_key_private.h"
-UsefulBufC teep_private_key = verifier_es256_cose_key_private;
-UsefulBufC kid = (UsefulBufC){
-    .ptr = "301",
-    .len = 3,
-};
 #elif TEEP_ACTOR_TRUST_ANCHOR == 1
 #include "trust_anchor_prime256v1_cose_key_private.h"
 UsefulBufC teep_private_key = trust_anchor_prime256v1_cose_key_private;
-UsefulBufC kid = NULLUsefulBufC;
 #else
 #error Signing key is not specified
 #endif

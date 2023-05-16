@@ -7,7 +7,7 @@
 .PHONY: all
 all: teep_cose_tam teep_cose_trustanchor
 
-CFLAGS = $(CMD_CFLAGS) -I./inc
+CFLAGS = $(CMD_CFLAGS)
 LDFLAGS = $(CMD_LDFLAGS) -lteep -lt_cose -lmbedcrypto -lqcbor -lm
 
 teep_cose_tam:
