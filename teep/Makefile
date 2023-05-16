@@ -4,9 +4,8 @@
 # SPDX-License-Identifier: BSD-2-Clause
 #
 
-TEEP_COSE_DIR := ~/github.com/kentakayama/libteep
-TEEP_COSE := $(TEEP_COSE_DIR)/bin/teep_cose_tam
-TRUST_ANCHOR_COSE := $(TEEP_COSE_DIR)/bin/teep_cose_trust_anchor
+TAM_COSE := ./bin/teep/teep_cose_tam
+TRUST_ANCHOR_COSE := ./bin/teep/teep_cose_trust_anchor
 
 TEEP_UPDATE_MESSAGES := \
 	teep_update_uri.teep \
@@ -44,7 +43,7 @@ suit_delegation.cwt: ../cbor/suit_delegation.cbor
 
 %.teep:
 	$(eval FILENAME := $(shell echo $@ | sed -r 's/teep_update_([a-z]+)\.teep/suit_\1.suit/'))
-	$(TEEP_COSE) ../untagged_suit/$(FILENAME) $@
+	$(TAM_COSE) ../untagged_suit/$(FILENAME) $@
 
 %.cwt:
 	$(TRUST_ANCHOR_COSE) ../cbor/$(@:.cwt=.cbor) $@

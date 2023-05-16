@@ -1,0 +1,15 @@
+[submodule "libcsuit"]
+	path = libcsuit
+	url = https://github.com/kentakayama/libcsuit.git
+[submodule "libteep"]
+	path = libteep
+	url = https://github.com/kentakayama/libteep.git
+[submodule "t_cose"]
+	path = t_cose
+	url = https://github.com/kentakayama/t_cose.git
+[submodule "QCBOR"]
+	path = QCBOR
+	url = https://github.com/laurencelundblade/QCBOR.git
+[submodule "mbedtls"]
+	path = mbedtls
+	url = https://github.com/Mbed-TLS/mbedtls.git

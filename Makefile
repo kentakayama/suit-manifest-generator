@@ -6,6 +6,7 @@
 
 .PHONY: all
 all:
+	$(MAKE) -C bin
 	$(MAKE) -C teep
 	$(MAKE) -C suit
 	$(MAKE) -C signed_diag
