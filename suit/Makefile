@@ -4,8 +4,8 @@
 # SPDX-License-Identifier: BSD-2-Clause
 #
 
-SUIT_SIGN := ~/github.com/kentakayama/libcsuit/bin/suit_manifest_sign
-SUIT_SIGN_DELEGATE := ~/github.com/kentakayama/libcsuit/bin/suit_manifest_sign_delegate
+SUIT_SIGN_TRUSTANCHOR := ../bin/suit/suit_manifest_sign_trustanchor
+SUIT_SIGN_DELEGATE := ../bin/suit/suit_manifest_sign_delegate
 SUIT_PROCESS := ~/github.com/kentakayama/libcsuit/bin/suit_manifest_process
 
 .PHONY: all
@@ -19,10 +19,10 @@ suit_manifest_expS1.suit: ../cbor/suit_manifest_expS1.cbor
 	$(SUIT_SIGN_DELEGATE) $< $@
 
 %.suit: ../cbor/%.cbor
-	$(SUIT_SIGN) $< $@
+	$(SUIT_SIGN_TRUSTANCHOR) $< $@
 
 .PHONY: test
-test: $(SUIT_MANIFESTS)
+test: $(SUIT_MANIFESTS) $(SUIT_PROCESS)
 	@for m in $(SUIT_MANIFESTS); do \
 		$(SUIT_PROCESS) $$m; \
 	done

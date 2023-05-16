@@ -6,6 +6,7 @@
 
 .PHONY: all
 all:
+	$(MAKE) -C bin
 	$(MAKE) -C teep
 	$(MAKE) -C suit
 	$(MAKE) -C signed_diag
@@ -20,11 +21,12 @@ install: all
 clean:
 	$(MAKE) clean -C diag
 	$(MAKE) clean -C cbor
-	$(MAKE) clean -C suit
-	$(MAKE) clean -C signed_diag
-	$(MAKE) clean -C untagged_diag
 	$(MAKE) clean -C untagged_suit
+	$(MAKE) clean -C untagged_diag
+	$(MAKE) clean -C signed_diag
+	$(MAKE) clean -C suit
 	$(MAKE) clean -C teep
+	$(MAKE) clean -C bin
 
 .PHONY: test
 test:

@@ -38,14 +38,14 @@
         / parameter-uri / 21: "http://example.com/dependent.suit"
       },
       / directive-fetch / 21, 2,
-      / condition-image-match / 3, 15,
+      / condition-image-match / 3, 15
     ] >>,
     / install / 17: << [
       / directive-set-component-index / 12, 1,
       / directive-override-parameters / 20, {
         / parameter-image-digest / 3: << [
-          / parameter-algorithm-id: / -16 / SHA256 /,
-          / parameter-bytes: / h'{{FILE-HEX-174+32 ../suit/suit_manifest_expS1.suit}}'
+          / digest-algorithm-id: / -16 / SHA256 /,
+          / digest-bytes: / h'{{FILE-HEX-174+32 ../suit/suit_manifest_expS1.suit}}'
         ] >>
       },
       / condition-dependency-integrity / 7, 15,

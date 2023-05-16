@@ -10,6 +10,7 @@ UNTAGGED_SUIT_MANIFESTS := \
 	suit_uri.suit \
 	suit_integrated.suit \
 	suit_personalization.suit \
+	suit_manifest_aes_kw_config.suit \
 	suit_unlink.suit \
 	suit_helloworld.suit
 
