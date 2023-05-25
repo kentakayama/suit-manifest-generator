@@ -20,42 +20,30 @@ $ ls -la teep/ suit/ # signed cbor binaries
 ``` mermaid
 graph TD
 
-TM[TEEP Message Update w/ Authentication]
-TM0[TEEP Message Update w/o Authentication]
-SUM[SUIT Untagged Manifest]
+TM[TEEP Message Update with Security Wrapper]
+TM0[TEEP Message Update w/o Security Wrapper]
+SUM[SUIT Untagged Manifest with Security Wrapper]
 
-SM[SUIT Manifest w/ Authentication]
-SM0[SUIT Manifest w/o Authentication]
-DSM[CBOR Diagnostic SUIT Manifest]
-DTM[CBOR Diagnostic TEEP Message]
+SM[SUIT Manifest with Authentication Wrapper]
+SM0[SUIT Manifest w/o Authentication Wrapper]
+DSM[CBOR Diagnostic SUIT Manifest w/o Authentication Wrapper]
+DTM[CBOR Diagnostic TEEP Message w/o Security Wrapper]
 EDSM[Extended CBOR Diagnostic SUIT Manifest]
 EDTM[Extended CBOR Diagnostic TEEP Message]
 
-subgraph Extended CBOR Diagnostic Processor
-    EDSM --> DSM
+subgraph "`$ make -C suit`"
+  EDSM -- ediag-to-diag.py --> DSM
+  DSM -- cbor-diag-cli --> SM0
+  SM0 -- "sign with Trust Anchor key (libcsuit)" --> SM
+  SM --> SUM
 end
 
-subgraph cbor-diag-cli
-    DSM --> SM0
-end
+subgraph "`$ make -C teep`"
+  EDTM -- ediag-to-diag.py --> DTM
+  SUM -- ediag-to-diag.py --> DTM
 
-subgraph libcsuit Trust Anchor sign
-    SM0 --> SM
-end
-
-SM --> SUM
-
-subgraph Extended CBOR Diagnostic Processor
-    EDTM --> DTM
-    SUM --> DTM
-end
-
-subgraph cbor-diag-cli
-    DTM --> TM0
-end
-
-subgraph libteep TAM sign
-    TM0 --> TM
+  DTM -- cbor-diag-cli --> TM0
+  TM0 -- "sign with TAM key (libteep)" --> TM
 end
 ```
 
