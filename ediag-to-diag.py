@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
 
+#
+# Copyright (c) 2023 SECOM CO., LTD. All Rights reserved.
+#
+# SPDX-License-Identifier: BSD-2-Clause
+#
+
 import sys
 import os
 import re
