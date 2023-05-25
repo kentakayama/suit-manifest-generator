@@ -14,8 +14,8 @@ teep_update_unlink.diag: ../untagged_suit/suit_unlink.suit
 teep_update_helloworld.diag: ../untagged_suit/suit_helloworld.suit
 suit_manifest_expS1.diag: ../teep/suit_delegation.cwt
 suit_manifest_expS2.diag: ../suit/suit_manifest_expS1.suit
-suit_manifest_expS3.diag: ../suit/suit_manifest_expS0.suit
-suit_manifest_expS4.diag: ../suit/suit_manifest_expS0.suit
+suit_manifest_expS3.diag: ../suit/suit_manifest_expS1.suit
+suit_manifest_expS4.diag: ../suit/suit_manifest_expS1.suit
 suit_personalization.diag: ../untagged_suit/suit_uri.suit
 
 .PRECIOUS: ../untagged_suit/%.suit
@@ -45,4 +45,12 @@ FIXED_DIAGS := \
 
 .PHONY: clean
 clean:
-	ls | grep -v -e Makefile -e suit_uri.diag -e suit_integrated.diag -e suit_unlink.diag -e suit_delegation.diag -e suit_manifest_expS0.diag -e suit_manifest_raw.diag -e suit_manifest_dependency.diag -e suit_manifest_aes_kw_dependent.diag | xargs $(RM)
+	ls | grep -v -e Makefile \
+		-e suit_uri.diag \
+		-e suit_integrated.diag \
+		-e suit_unlink.diag \
+		-e suit_delegation.diag \
+		-e suit_manifest_expS0.diag \
+		-e suit_manifest_raw.diag \
+		-e suit_manifest_dependency.diag \
+		-e suit_manifest_aes_kw_dependent.diag | xargs $(RM)
