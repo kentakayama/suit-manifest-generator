@@ -1,0 +1,26 @@
+/ SUIT_Envelope_Tagged / 107({
+  / authentication-wrapper /
+  / manifest / 3: << {
+    / manifest-version / 1: 1,
+    / manifest-sequence-number / 2: 1,
+    / common / 3: << {
+      / components / 2: [
+        [h'00'],
+        [h'01']
+      ],
+      / shared-sequence / 4: << [
+        / directive-set-component-index / 12, true,
+        / directive-override-parameters / 20, {
+          / parameter-use-before / 4: 1696291200
+        }
+      ] >>
+    } >>,
+    / run / 9: << [
+      / directive-set-component-index / 12, true,
+      / directive-run-sequence / 32, << [
+        / condition-use-before / 4, 15,
+        / directive-run / 23, 2
+      ] >>
+    ] >>
+  } >>
+})

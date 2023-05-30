@@ -39,6 +39,7 @@ FIXED_DIAGS := \
 	suit_unlink.diag \
 	suit_delegation.diag \
 	suit_manifest_expS0.diag \
+	suit_manifest_run_sequence.diag \
 	suit_manifest_raw.diag \
 	suit_manifest_dependency.diag \
 	suit_manifest_aes_kw_dependent.diag
@@ -51,6 +52,7 @@ clean:
 		-e suit_unlink.diag \
 		-e suit_delegation.diag \
 		-e suit_manifest_expS0.diag \
+		-e suit_manifest_run_sequence.diag \
 		-e suit_manifest_raw.diag \
 		-e suit_manifest_dependency.diag \
 		-e suit_manifest_aes_kw_dependent.diag | xargs $(RM)

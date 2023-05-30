@@ -18,7 +18,8 @@ UNTAGGED_DIAGS := \
 	suit_manifest_expS1.diag \
 	suit_manifest_expS2.diag \
 	suit_manifest_expS3.diag \
-	suit_manifest_expS4.diag
+	suit_manifest_expS4.diag \
+	suit_manifest_run_sequence.diag
 
 UNTAGGED_DIAGS_IETF116_HACKATHON := \
 	suit_helloworld.diag
