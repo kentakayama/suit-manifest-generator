@@ -42,7 +42,9 @@ FIXED_DIAGS := \
 	suit_manifest_run_sequence.diag \
 	suit_manifest_raw.diag \
 	suit_manifest_dependency.diag \
-	suit_manifest_aes_kw_dependent.diag
+	suit_manifest_aes_kw_dependent.diag \
+	suit_manifest_expU0.diag \
+	suit_manifest_expU1.diag
 
 .PHONY: clean
 clean:
@@ -55,4 +57,6 @@ clean:
 		-e suit_manifest_run_sequence.diag \
 		-e suit_manifest_raw.diag \
 		-e suit_manifest_dependency.diag \
-		-e suit_manifest_aes_kw_dependent.diag | xargs $(RM)
+		-e suit_manifest_aes_kw_dependent.diag \
+		-e suit_manifest_expU0.diag \
+		-e suit_manifest_expU1.diag | xargs $(RM)

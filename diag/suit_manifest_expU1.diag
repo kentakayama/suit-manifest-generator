@@ -1,0 +1,31 @@
+/ SUIT_Envelope_Tagged / 107({
+  / authentication-wrapper /
+  / manifest / 3: << {
+    / manifest-version / 1: 1,
+    / manifest-sequence-number / 2: 0,
+    / common / 3: << {
+      / components / 2: [
+        [h'00'],
+        [h'01']
+      ]
+    } >>,
+    / install / 17: << [
+      / directive-override-multiple / 34, {
+        / index / 0: {
+          / parameter-wait-info / 29: << {
+            / authorization / 1: -1 / 'critical' /,
+            / power / 2: 10 / >= 10% /
+          } >>
+        },
+        / index / 1: {
+          / parameter-wait-info / 29: << {
+            / time-of-day / 6: 82800 / 23:00:00 /
+          } >>
+        }
+      },
+
+      / directive-set-component-index / 12, true,
+      / directive-wait / 29, 15
+    ] >>
+  } >>
+})

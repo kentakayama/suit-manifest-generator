@@ -1,0 +1,44 @@
+/ SUIT_Envelope_Tagged / 107({
+  / authentication-wrapper /
+  / manifest / 3: << {
+    / manifest-version / 1: 1,
+    / manifest-sequence-number / 2: 0,
+    / common / 3: << {
+      / components / 2: [
+        [h'00'],
+        [h'01']
+      ]
+    } >>,
+    / install / 17: << [
+      / directive-set-component-index / 12, 0,
+      / directive-override-parameters / 20, {
+        / parameter-use-before / 4: 1696291200 / Tue 03 Oct 2023 12:00:00AM /,
+        / parameter-minimum-battery / 26: 10 / 10% /,
+        / parameter-update-priority / 27: -1 / 'critical' /,
+        / parameter-version / 28: [
+          / comparison-type: / 4 / lesser-equal /,
+          / comparison-value: / [ 1, 0 ]
+        ]
+      },
+
+      / directive-set-component-index / 12, 1,
+      / directive-copy-params / 35, {
+        / src-index / 0: [ 4, 26, 27 ] / use-before, minimum-battery, update-priority /
+      },
+      / directive-override-parameters / 20, {
+        / parameter-version / 28: [
+          / comparison-type: / 5 / lesser /,
+          / comparison-value: / [ 1, 0, 2 ]
+        ]
+      },
+
+      / directive-set-component-index / 12, true,
+      / directive-run-sequence / 32, << [
+        / condition-use-before / 4, 15,
+        / condition-minimum-battery / 26, 15,
+        / condition-version / 28, 15,
+        / condition-update-authorized / 27, 15
+      ] >>
+    ] >>
+  } >>
+})
