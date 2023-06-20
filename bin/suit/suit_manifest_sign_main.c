@@ -30,8 +30,8 @@ int main(int argc,
          char *argv[])
 {
     // check arguments.
-    if (argc < 3) {
-        printf("%s <manifest file path> <signed manifest file path>\n", argv[0]);
+    if (argc < 2) {
+        printf("%s <manifest file path> [<signed manifest file path>]\n", argv[0]);
         return EXIT_FAILURE;
     }
     suit_err_t result = 0;
@@ -39,7 +39,7 @@ int main(int argc,
     uint8_t indent = 4;
     uint8_t tabstop = 2;
     char *input_file = argv[1];
-    char *output_file = argv[2];
+    char *output_file = (argc >= 3) ? argv[2] : NULL;
     suit_mechanism_t mechanisms[SUIT_MAX_KEY_NUM] = {0};
     uint8_t *manifest_buf = NULL;
     uint8_t *encode_buf = NULL;
@@ -123,7 +123,9 @@ int main(int argc,
     }
     */
 
-    write_to_file(output_file, ret_pos, encode_len);
+    if (output_file != NULL) {
+        write_to_file(output_file, ret_pos, encode_len);
+    }
     ret = EXIT_SUCCESS;
 out:
     if (manifest_buf != NULL) {
