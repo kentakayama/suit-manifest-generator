@@ -11,6 +11,7 @@ all:
 	$(MAKE) -C suit
 	$(MAKE) -C signed_diag
 	$(MAKE) -C untagged_diag
+	$(MAKE) -C untagged_suit
 
 .PHONY: install
 install: all

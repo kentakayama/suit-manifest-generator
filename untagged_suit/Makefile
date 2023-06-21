@@ -10,9 +10,13 @@ UNTAGGED_SUIT_MANIFESTS := \
 	suit_uri.suit \
 	suit_integrated.suit \
 	suit_personalization.suit \
-	suit_manifest_aes_kw_config.suit \
-	suit_unlink.suit \
-	suit_helloworld.suit
+	suit_manifest_aes_kw_config.suit
+
+UNTAGGED_SUIT_MANIFESTS_IETF116_HACKATHON := \
+	suit_helloworld.diag
+ifeq ($(suit-ietf116), 1)
+UNTAGGED_SUIT_MANIFESTS += $(UNTAGGED_SUIT_MANIFESTS_IETF116_HACKATHON)
+endif
 
 .PHONY: all
 all: $(UNTAGGED_SUIT_MANIFESTS)

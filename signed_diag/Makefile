@@ -8,7 +8,6 @@ UNTAGGED_DIAGS := \
 	suit_uri.diag \
 	suit_integrated.diag \
 	suit_personalization.diag \
-	suit_unlink.diag \
 	suit_manifest_raw.diag \
 	suit_manifest_dependency.diag \
 	suit_manifest_aes_kw.diag \
@@ -44,7 +43,7 @@ suit_manifest_expS1.diag: ../suit/suit_manifest_expS1.suit
 	sed -e "s?/ authentication-wrapper /?/ authentication-wrapper / 2: << [\n    << [\n      / digest-algorithm-id: / -16 / SHA256 /,\n      / digest-bytes: / h'$(shell xxd -p -u -c 32 -s 13 -l 32 $<)'\n    ] >>,\n    << / COSE_Sign1_Tagged / 18\([\n      / protected: / << {\n        / algorithm-id / 1: -7 / ES256 /\n      } >>,\n      / unprotected: / {},\n      / payload: / null,\n      / signature: / h'$(shell xxd -p -u -c 64 -s 57 -l 64 $<)'\n    ]\) >>\n  ] >>,?" ../diag/$@ > $@
 
 .PHONY: install
-install:
+install: $(UNTAGGED_DIAGS)
 	@echo Simple Example
 	$(eval SOURCE := suit_manifest_expS0)
 	$(eval TARGET := suit_manifest_expS0)
@@ -121,6 +120,26 @@ install:
 	cp $(SOURCE).diag ../../../suit-wg/suit-firmware-encryption/examples/$(TARGET).diag.signed
 	cp ../suit/$(SOURCE).suit ../../libcsuit/testfiles/$(CSUITNAME).cbor
 	xxd -p -u ../suit/$(SOURCE).suit ../../../suit-wg/suit-firmware-encryption/examples/$(TARGET).hex.signed
+	@echo SUIT Update Management Example 0
+	$(eval SOURCE := suit_manifest_expU0)
+	$(eval TARGET := suit_manifest_expU0)
+	$(eval MD := ../../libcsuit/testfiles/$(TARGET).md)
+	echo "<!--\n Copyright (c) 2020-2023 SECOM CO., LTD. All Rights reserved.\n\n SPDX-License-Identifier: BSD-2-Clause\n-->\n\n## Example 0: Copy Params Example\n{: numbered='no'}\n\n### CBOR Diagnostic Notation of SUIT Manifest\n{: numbered='no'}\n\n~~~~" > $(MD)
+	cat $(SOURCE).diag >> $(MD)
+	echo "~~~~\n\n\n### CBOR Binary in Hex\n{: numbered='no'}\n\n~~~~" >> $(MD)
+	xxd -u -p ../suit/$(SOURCE).suit >> $(MD)
+	echo "~~~~" >> $(MD)
+	cp ../suit/$(SOURCE).suit ../../libcsuit/testfiles/$(TARGET).cbor
+	@echo SUIT Update Management Example 1
+	$(eval SOURCE := suit_manifest_expU1)
+	$(eval TARGET := suit_manifest_expU1)
+	$(eval MD := ../../libcsuit/testfiles/$(TARGET).md)
+	echo "<!--\n Copyright (c) 2020-2023 SECOM CO., LTD. All Rights reserved.\n\n SPDX-License-Identifier: BSD-2-Clause\n-->\n\n## Example 1: Override Multiple Example\n{: numbered='no'}\n\n### CBOR Diagnostic Notation of SUIT Manifest\n{: numbered='no'}\n\n~~~~" > $(MD)
+	cat $(SOURCE).diag >> $(MD)
+	echo "~~~~\n\n\n### CBOR Binary in Hex\n{: numbered='no'}\n\n~~~~" >> $(MD)
+	xxd -u -p ../suit/$(SOURCE).suit >> $(MD)
+	echo "~~~~" >> $(MD)
+	cp ../suit/$(SOURCE).suit ../../libcsuit/testfiles/$(TARGET).cbor
 
 .PHONY: clean
 clean:
