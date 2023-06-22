@@ -43,7 +43,8 @@
           / digest-bytes: / h'{{FILE-SHA-256 ../suit/suit_manifest_expS1.suit}}'
         ] >>,
         / parameter-image-size / 14: {{FILE-SIZE ../suit/suit_manifest_expS1.suit}},
-        / parameter-uri / 21: "#dependent.suit"
+        / parameter-uri / 21: "#dependent.suit",
+        / parameter-fetch-args / 30: 'Content-Type: application/cbor'
       },
       / directive-fetch / 21, 2,
       / condition-image-match / 3, 15
