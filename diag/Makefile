@@ -48,15 +48,20 @@ FIXED_DIAGS := \
 
 .PHONY: clean
 clean:
-	ls | grep -v -e Makefile \
-		-e suit_uri.diag \
-		-e suit_integrated.diag \
-		-e suit_unlink.diag \
-		-e suit_delegation.diag \
-		-e suit_manifest_expS0.diag \
-		-e suit_manifest_run_sequence.diag \
-		-e suit_manifest_raw.diag \
-		-e suit_manifest_dependency.diag \
-		-e suit_manifest_aes_kw_dependent.diag \
-		-e suit_manifest_expU0.diag \
-		-e suit_manifest_expU1.diag | xargs $(RM)
+	$(RM) \
+	suit_helloworld.diag \
+	suit_manifest_aes_kw_config.diag \
+	suit_manifest_aes_kw_content.diag \
+	suit_manifest_aes_kw.diag \
+	suit_manifest_expS1.diag \
+	suit_manifest_expS2.diag \
+	suit_manifest_expS3.diag \
+	suit_manifest_expS4.diag \
+	suit_personalization.diag \
+	teep_update_example1.diag \
+	teep_update_example3.diag \
+	teep_update_helloworld.diag \
+	teep_update_integrated.diag \
+	teep_update_personalization.diag \
+	teep_update_unlink.diag \
+	teep_update_uri.diag
