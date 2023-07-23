@@ -55,4 +55,4 @@ teep_error_agent_attestation.teep: ../cbor/teep_error_agent_attestation.cbor
 
 .PHONY: clean
 clean:
-	$(RM) $(TEEP_UPDATE_MESSAGES) $(TEEP_IETF116_HACKATHON) $(SUIT_DELEGATIONS)
+	$(RM) $(TEEP_UPDATE_MESSAGES) $(TEEP_ERROR_MESSAGES) $(TEEP_IETF116_HACKATHON) $(SUIT_DELEGATIONS)
