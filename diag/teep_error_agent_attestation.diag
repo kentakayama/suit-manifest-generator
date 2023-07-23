@@ -1,0 +1,10 @@
+[
+  / type: / 6 / TEEP-TYPE-error /,
+  / options: /
+  {
+    / token / 20 : h'A0A1A2A3A4A5A6A7A8A9AAABACADAEAF',
+    / err-msg / 12: "attestation-required",
+    / challenge / 2: h'FEDCBA9876543210',
+  },
+  7 / ERR_ATTESTATION_REQUESTED /
+]
