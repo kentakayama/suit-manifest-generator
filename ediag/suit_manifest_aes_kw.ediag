@@ -5,21 +5,21 @@
     / manifest-sequence-number / 2: 1,
     / common / 3: << {
       / components / 2: [
-        [h'00'] / to be decrypted firmware /,
-        [h'01'] / encrypted firmware /
+        ['plaintext-firmware'],
+        ['encrypted-firmware']
       ]
     } >>,
     / install / 17: << [
       / fetch encrypted firmware /
-      / directive-set-component-index / 12, 1 / [h'01'] /,
+      / directive-set-component-index / 12, 1 / ['encrypted-firmware'] /,
       / directive-override-parameters / 20, {
         / parameter-image-size / 14: {{FILE-SIZE ../libcsuit/testfiles/encrypted_image.bin}},
-        / parameter-uri / 21: "https://author.example.com/encrypted-firmware.bin"
+        / parameter-uri / 21: "https://example.com/encrypted-firmware"
       },
       / directive-fetch / 21, 15,
 
       / decrypt encrypted firmware /
-      / directive-set-component-index / 12, 0 / [h'00'] /,
+      / directive-set-component-index / 12, 0 / ['plaintext-firmware'] /,
       / directive-override-parameters / 20, {
         / parameter-encryption-info / 19: << 96([
           / protected: / << {
@@ -41,7 +41,7 @@
             ]
           ]
         ]) >>,
-        / parameter-source-component / 22: 1 / [h'01'] /
+        / parameter-source-component / 22: 1 / ['encrypted-firmware'] /
       },
       / directive-copy / 22, 15 / consumes the SUIT_Encryption_Info above /,
 
