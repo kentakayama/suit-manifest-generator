@@ -32,7 +32,7 @@ def replace_from_pattern(f):
                 print(pre + str(os.stat(os.path.expanduser(filename)).st_size) + post)
             elif "SHA-256" == op + param:
                 with open(os.path.expanduser(filename), 'rb') as rf:
-                    print(pre + hashlib.sha256(rf.read()).hexdigest() + post)
+                    print(pre + hashlib.sha256(rf.read()).hexdigest().upper() + post)
         else:
             print(line, end="")
 
