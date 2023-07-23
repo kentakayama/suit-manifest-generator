@@ -11,10 +11,11 @@ RUN cargo install cbor-diag-cli
 COPY . /root/github.com/kentakayama/suit-manifest-generator/
 
 WORKDIR /root/github.com/kentakayama/suit-manifest-generator
+RUN pip install -r ./mbedtls/scripts/driver.requirements.txt
 RUN make -j $(nproc) -C mbedtls install
 RUN make -j $(nproc) -C QCBOR libqcbor.a install
 RUN make -j $(nproc) -C t_cose -f Makefile.psa libt_cose.a install
 RUN make -j $(nproc) -C libteep MBEDTLS=1 install
 RUN make -j $(nproc) -C libcsuit Makefile MBEDTLS=1 install
 
-CMD make
+CMD umask 000 && make
