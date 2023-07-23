@@ -7,7 +7,8 @@
 UNTAGGED_DIAGS := \
 	suit_uri.diag \
 	suit_integrated.diag \
-	suit_personalization.diag
+	suit_personalization.diag \
+	suit_manifest_aes_kw_config.diag
 
 UNTAGGED_DIAGS_IETF116_HACKATHON := \
 	suit_helloworld.diag
