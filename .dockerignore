@@ -29,7 +29,6 @@ cbor/suit_manifest_expS3.cbor
 cbor/suit_manifest_expS4.cbor
 cbor/suit_manifest_raw.cbor
 cbor/suit_personalization.cbor
-cbor/suit_unlink.cbor
 cbor/suit_uri.cbor
 
 diag/suit_helloworld.diag
@@ -38,6 +37,5 @@ diag/teep_update_example3.diag
 diag/teep_update_uri.diag
 diag/teep_update_integrated.diag
 diag/teep_update_personalization.diag
-diag/teep_update_unlink.diag
 diag/teep_update_helloworld.diag
 

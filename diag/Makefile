@@ -10,7 +10,6 @@ all: $(GENERATED_DIAGS)
 teep_update_uri.diag: ../untagged_suit/suit_uri.suit
 teep_update_integrated.diag: ../untagged_suit/suit_integrated.suit
 teep_update_personalization.diag: ../untagged_suit/suit_personalization.suit
-teep_update_unlink.diag: ../untagged_suit/suit_unlink.suit
 teep_update_helloworld.diag: ../untagged_suit/suit_helloworld.suit
 suit_manifest_expS1.diag: ../teep/suit_delegation.cwt
 suit_manifest_expS2.diag: ../suit/suit_manifest_expS1.suit
@@ -36,7 +35,6 @@ suit_personalization.diag: ../untagged_suit/suit_uri.suit
 FIXED_DIAGS := \
 	suit_uri.diag \
 	suit_integrated.diag \
-	suit_unlink.diag \
 	suit_delegation.diag \
 	suit_manifest_expS0.diag \
 	suit_manifest_run_sequence.diag \
@@ -63,5 +61,4 @@ clean:
 	teep_update_helloworld.diag \
 	teep_update_integrated.diag \
 	teep_update_personalization.diag \
-	teep_update_unlink.diag \
 	teep_update_uri.diag
