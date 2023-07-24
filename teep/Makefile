@@ -48,6 +48,9 @@ suit_delegation.cwt: ../cbor/suit_delegation.cbor
 teep_error_agent_attestation.teep: ../cbor/teep_error_agent_attestation.cbor
 	$(TEEP_AGENT_COSE) $< $@
 
+%.teep:
+	$(TAM_COSE) ../untagged_suit/$< $@
+
 %.cwt:
 	$(TRUST_ANCHOR_COSE) ../cbor/$(@:.cwt=.cbor) $@
 
