@@ -13,6 +13,7 @@ UNTAGGED_DIAGS := \
 	suit_manifest_aes_kw.diag \
 	suit_manifest_aes_kw_content.diag \
 	suit_manifest_aes_kw_dependent.diag \
+        suit_manifest_esdh_content.diag \
 	suit_manifest_expS0.diag \
 	suit_manifest_expS1.diag \
 	suit_manifest_expS2.diag \
