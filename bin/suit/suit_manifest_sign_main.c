@@ -44,7 +44,8 @@ int main(int argc,
     uint8_t *manifest_buf = NULL;
     uint8_t *encode_buf = NULL;
 
-    result = suit_set_mechanism_from_cose_key(private_key, &mechanisms[0]);
+    mechanisms[0].key.cose_algorithm_id = T_COSE_ALGORITHM_ES256;
+    result = suit_set_suit_key_from_cose_key(private_key, &mechanisms[0].key);
     if (result != SUIT_SUCCESS) {
         printf("main : Failed to create signing key. %s(%d)\n", suit_err_to_str(result), result);
         return EXIT_FAILURE;
@@ -53,7 +54,8 @@ int main(int argc,
     mechanisms[0].use = true;
 
     if (!UsefulBuf_IsNULLOrEmptyC(public_key)) {
-        result = suit_set_mechanism_from_cose_key(public_key, &mechanisms[1]);
+        mechanisms[1].key.cose_algorithm_id = T_COSE_ALGORITHM_ES256;
+        result = suit_set_suit_key_from_cose_key(public_key, &mechanisms[1].key);
         if (result != SUIT_SUCCESS) {
             printf("main : Failed to create verification key of trust anchor. %s(%d)\n", suit_err_to_str(result), result);
             return EXIT_FAILURE;
