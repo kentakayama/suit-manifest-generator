@@ -13,7 +13,11 @@ UNTAGGED_DIAGS := \
 	suit_manifest_aes_kw.diag \
 	suit_manifest_aes_kw_content.diag \
 	suit_manifest_aes_kw_dependent.diag \
-        suit_manifest_esdh_content.diag \
+	suit_manifest_aes_kw_config.diag \
+	suit_manifest_esdh_content.diag \
+	suit_manifest_esdh_dependency.diag \
+	suit_manifest_dependency_decrypt.diag \
+	suit_manifest_esdh_config.diag \
 	suit_manifest_expS0.diag \
 	suit_manifest_expS1.diag \
 	suit_manifest_expS2.diag \
@@ -37,8 +41,9 @@ all: $(UNTAGGED_DIAGS)
 ../suit/%.suit:
 	$(MAKE) -C ../suit $(notdir $@)
 
-suit_manifest_expS1.diag: ../suit/suit_manifest_expS1.suit
-	sed -e "s?/ authentication-wrapper /?/ authentication-wrapper / 2: << [\n    << [\n      / digest-algorithm-id: / -16 / SHA256 /,\n      / digest-bytes: / h'$(shell xxd -p -u -c 32 -s 174 -l 32 $<)'\n    ] >>,\n    << / COSE_Sign1_Tagged / 18\([\n      / protected: / << {\n        / algorithm-id / 1: -7 / ES256 /\n      } >>,\n      / unprotected: / {},\n      / payload: / null,\n      / signature: / h'$(shell xxd -p -u -c 64 -s 218 -l 64 $<)'\n    ]\) >>\n  ] >>,?" ../diag/$@ > $@
+.PRECIOUS: ../diag/%.diag
+../diag/%.diag:
+	$(MAKE) -C ../diag $(notdir $@)
 
 # use delegation chain
 suit_manifest_expS1.diag: ../suit/suit_manifest_expS1.suit ../diag/suit_manifest_expS1.diag

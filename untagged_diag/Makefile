@@ -8,7 +8,8 @@ UNTAGGED_DIAGS := \
 	suit_uri.diag \
 	suit_integrated.diag \
 	suit_personalization.diag \
-	suit_manifest_aes_kw_config.diag
+	suit_manifest_aes_kw_config.diag \
+	suit_manifest_esdh_config.diag
 
 UNTAGGED_DIAGS_IETF116_HACKATHON := \
 	suit_helloworld.diag
@@ -26,6 +27,10 @@ all: $(UNTAGGED_DIAGS)
 	@echo make $@
 	$(MAKE) -C ../signed_diag $(notdir $@)
 
+suit_manifest_aes_kw_config.diag: ../libcsuit/testfiles/encrypted_config_aes.bin ../libcsuit/testfiles/encryption_info_config_aes.cose
+suit_manifest_esdh_config.diag: ../libcsuit/testfiles/encrypted_config_esdh.bin ../libcsuit/testfiles/encryption_info_config_esdh.cose
+
+.PRECIOUS: ../signed_diag/%.diag
 %.diag: ../signed_diag/%.diag
 	@echo $@ depends $<
 	sed -e "s?/ SUIT_Envelope_Tagged / 107(?/ SUIT_Envelope / ?" -e "s/})$$/}/" $< > $@

@@ -25,7 +25,7 @@
         / directive-set-component-index / 12, 0,
         / directive-override-parameters / 20, {
           / parameter-vendor-identifier / 1: h'C0DDD5F15243566087DB4F5B0AA26C2F',
-          / parameter-class-identifier / 2: h'DB42F7093D8C55BAA8C5265FC5820F4E',
+          / parameter-class-identifier / 2: h'DB42F7093D8C55BAA8C5265FC5820F4E'
         },
         / condition-vendor-identifier / 1, 15,
         / condition-class-identifier / 2, 15
@@ -75,7 +75,7 @@
           / recipients: / [
             [
               / protected: / << {
-                / alg / 1: -29 / ECDH-ES + A128KW /,
+                / alg / 1: -29 / ECDH-ES + A128KW /
               } >>,
               / unprotected: / {
                 / ephemeral key / -1: {
@@ -83,10 +83,9 @@
                   / crv / -1: 1 / P-256 /,
                   / x / -2: h'{{FILE-HEX-44+32 ../libcsuit/testfiles/encryption_info_config_esdh.cose}}',
                   / y / -3: h'{{FILE-HEX-79+32 ../libcsuit/testfiles/encryption_info_config_esdh.cose}}'
-                },
-                / kid / 4: 'kid-3'
+                }
               },
-              / payload: / h'{{FILE-HEX-120+100 ../libcsuit/testfiles/encryption_info_config_esdh.cose}}'
+              / payload: / h'{{FILE-HEX-113+100 ../libcsuit/testfiles/encryption_info_config_esdh.cose}}'
                 / CEK encrypted with KEK /
             ]
           ]
@@ -95,6 +94,7 @@
 
       / decrypt encrypted firmware /
       / directive-write / 18, 15 / consumes the SUIT_Encryption_Info above /
+      / NOTE: decrypted payload would be ``{"name":"FOO Bar","secret":"0123456789abfcdef0123456789abcd"}'' /
     ] >>,
     / uninstall / 24: << [
       / directive-set-component-index / 12, 1,

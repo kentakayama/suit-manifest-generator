@@ -23,6 +23,7 @@
       ]) >>
     ]
   ] >>,
+
   / NOTE: signed by delegated authority /
   / AUTHENTICATION-WRAPPER /
   / manifest / 3: << {
