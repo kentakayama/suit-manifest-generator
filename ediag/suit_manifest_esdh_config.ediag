@@ -83,7 +83,8 @@
                   / crv / -1: 1 / P-256 /,
                   / x / -2: h'{{FILE-HEX-44+32 ../libcsuit/testfiles/encryption_info_config_esdh.cose}}',
                   / y / -3: h'{{FILE-HEX-79+32 ../libcsuit/testfiles/encryption_info_config_esdh.cose}}'
-                }
+                },
+                / kid / 4: 'kid-2'
               },
               / payload: / h'{{FILE-HEX-113+100 ../libcsuit/testfiles/encryption_info_config_esdh.cose}}'
                 / CEK encrypted with KEK /
