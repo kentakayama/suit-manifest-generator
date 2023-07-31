@@ -31,7 +31,7 @@ all: $(TEEP_UPDATE_MESSAGES) $(TEEP_ERROR_MESSAGES)
 
 teep_update_uri.teep: ../untagged_suit/suit_uri.suit
 teep_update_integrated.teep: ../untagged_suit/suit_integrated.suit
-teep_update_personalization.teep: ../untagged_suit/suit_manifest_aes_kw_config.suit
+teep_update_personalization.teep: ../untagged_suit/suit_manifest_esdh_config.suit
 teep_update_helloworld.teep: ../untagged_suit/suit_helloworld.suit
 	$(TAM_COSE) ../untagged_suit/$< $@
 
