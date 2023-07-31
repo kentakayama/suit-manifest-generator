@@ -12,7 +12,7 @@
           / cnf / 8: {
             / NOTE: public key of delegated authority /
             / COSE_Key / 1: {
-              / cty / 1: 2 / EC2 /,
+              / kty / 1: 2 / EC2 /,
               / crv / -1: 1 / P-256 /,
               / x / -2: h'0E908AA8F066DB1F084E0C3652C63952BD99F2A5BDB22F9E01367AAD03ABA68B',
               / y / -3: h'77DA1BD8AC4F0CB490BA210648BF79AB164D49AD3551D71D314B2749EE42D29A'
@@ -31,9 +31,7 @@
     / manifest-sequence-number / 2: 0,
     / common / 3: << {
       / components / 2: [
-        [
-          '00'
-        ]
+        ['00']
       ]
     } >>,
     / manifest-component-id / 5: [
