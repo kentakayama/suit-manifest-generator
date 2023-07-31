@@ -45,6 +45,9 @@ all: $(UNTAGGED_DIAGS)
 ../diag/%.diag:
 	$(MAKE) -C ../diag $(notdir $@)
 
+# track dependency files
+suit_manifest_esdh_dependency.diag: ../ediag/${@:.diag=.ediag} ../teep/suit_delegation.cwt ../libcsuit/testfiles/encrypted_image_esdh.bin ../libcsuit/testfiles/encryption_info_esdh.cose ../ediag/suit_manifest_dependency_decrypt.ediag ../ediag/suit_manifest_dependency_decrypt.ediag
+
 # use delegation chain
 suit_manifest_expS1.diag: ../suit/suit_manifest_expS1.suit ../diag/suit_manifest_expS1.diag
 suit_manifest_esdh_dependency.diag: ../suit/suit_manifest_esdh_dependency.suit ../diag/suit_manifest_esdh_dependency.diag
