@@ -40,8 +40,14 @@ all: $(UNTAGGED_DIAGS)
 suit_manifest_expS1.diag: ../suit/suit_manifest_expS1.suit
 	sed -e "s?/ authentication-wrapper /?/ authentication-wrapper / 2: << [\n    << [\n      / digest-algorithm-id: / -16 / SHA256 /,\n      / digest-bytes: / h'$(shell xxd -p -u -c 32 -s 174 -l 32 $<)'\n    ] >>,\n    << / COSE_Sign1_Tagged / 18\([\n      / protected: / << {\n        / algorithm-id / 1: -7 / ES256 /\n      } >>,\n      / unprotected: / {},\n      / payload: / null,\n      / signature: / h'$(shell xxd -p -u -c 64 -s 218 -l 64 $<)'\n    ]\) >>\n  ] >>,?" ../diag/$@ > $@
 
-%.diag: ../suit/%.suit
-	sed -e "s?/ authentication-wrapper /?/ authentication-wrapper / 2: << [\n    << [\n      / digest-algorithm-id: / -16 / SHA256 /,\n      / digest-bytes: / h'$(shell xxd -p -u -c 32 -s 13 -l 32 $<)'\n    ] >>,\n    << / COSE_Sign1_Tagged / 18\([\n      / protected: / << {\n        / algorithm-id / 1: -7 / ES256 /\n      } >>,\n      / unprotected: / {},\n      / payload: / null,\n      / signature: / h'$(shell xxd -p -u -c 64 -s 57 -l 64 $<)'\n    ]\) >>\n  ] >>,?" ../diag/$@ > $@
+# use delegation chain
+suit_manifest_expS1.diag: ../suit/suit_manifest_expS1.suit ../diag/suit_manifest_expS1.diag
+suit_manifest_esdh_dependency.diag: ../suit/suit_manifest_esdh_dependency.suit ../diag/suit_manifest_esdh_dependency.diag
+	sed -e "s?/ AUTHENTICATION-WRAPPER /?/ authentication-wrapper / 2: << [\n    << [\n      / digest-algorithm-id: / -16 / SHA256 /,\n      / digest-bytes: / h'$(shell xxd -p -u -c 32 -s 174 -l 32 $<)'\n    ] >>,\n    << / COSE_Sign1_Tagged / 18\([\n      / protected: / << {\n        / algorithm-id / 1: -7 / ES256 /\n      } >>,\n      / unprotected: / {},\n      / payload: / null,\n      / signature: / h'$(shell xxd -p -u -c 64 -s 218 -l 64 $<)'\n    ]\) >>\n  ] >>,?" ../diag/$@ > $@
+
+# do not use delegation chain
+%.diag: ../suit/%.suit ../diag/%.diag
+	sed -e "s?/ AUTHENTICATION-WRAPPER /?/ authentication-wrapper / 2: << [\n    << [\n      / digest-algorithm-id: / -16 / SHA256 /,\n      / digest-bytes: / h'$(shell xxd -p -u -c 32 -s 13 -l 32 $<)'\n    ] >>,\n    << / COSE_Sign1_Tagged / 18\([\n      / protected: / << {\n        / algorithm-id / 1: -7 / ES256 /\n      } >>,\n      / unprotected: / {},\n      / payload: / null,\n      / signature: / h'$(shell xxd -p -u -c 64 -s 57 -l 64 $<)'\n    ]\) >>\n  ] >>,?" ../diag/$@ > $@
 
 .PHONY: install
 install: $(UNTAGGED_DIAGS)
