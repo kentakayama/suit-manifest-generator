@@ -19,7 +19,13 @@ all:
 suit_manifest_expS1.suit: ../cbor/suit_manifest_expS1.cbor
 	$(SUIT_SIGN_DELEGATE) $< $@
 
-suit_manifest_aes_kw.suit suit_manifest_aes_kw_config.suit suit_manifest_aes_kw_content.suit:
+suit_manifest_aes_kw.suit: ../cbor/suit_manifest_aes_kw.cbor
+	$(SUIT_MAC_TRUSTANCHOR) $< $@
+
+suit_manifest_aes_kw_config.suit: ../cbor/suit_manifest_aes_kw_config.cbor
+	$(SUIT_MAC_TRUSTANCHOR) $< $@
+
+suit_manifest_aes_kw_content.suit: ../cbor/suit_manifest_aes_kw_content.cbor
 	$(SUIT_MAC_TRUSTANCHOR) $< $@
 
 %.suit: ../cbor/%.cbor

@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: BSD-2-Clause
 #
 
-TAM_COSE := ../bin/teep/teep_cose_tam
+TAM_COSE := ../bin/teep/teep_cose_tam1
 TRUST_ANCHOR_COSE := ../bin/teep/teep_cose_trustanchor
 TEEP_AGENT_COSE := ../bin/teep/teep_cose_agent
 
