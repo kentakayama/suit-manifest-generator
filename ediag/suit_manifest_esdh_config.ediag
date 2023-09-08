@@ -75,7 +75,7 @@
           / recipients: / [
             [
               / protected: / << {
-                / alg / 1: -29 / ECDH-ES + A128KW /,
+                / alg / 1: -29 / ECDH-ES + A128KW /
               } >>,
               / unprotected: / {
                 / ephemeral key / -1: {
@@ -94,6 +94,7 @@
 
       / decrypt encrypted firmware /
       / directive-write / 18, 15 / consumes the SUIT_Encryption_Info above /
+      / NOTE: decrypted payload would be ``{"name":"FOO Bar","secret":"0123456789abfcdef0123456789abcd"}'' /
     ] >>,
     / uninstall / 24: << [
       / directive-set-component-index / 12, 1,

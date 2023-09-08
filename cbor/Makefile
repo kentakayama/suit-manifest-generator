@@ -7,7 +7,7 @@
 DIAG2CBOR := cbor-diag # https://github.com/Nullus157/cbor-diag-rs
 
 .PHONY: all
-all: $(GENERATED_CBORS)
+all:
 
 .PRECIOUS: ../diag/%.diag
 ../diag/%.diag:

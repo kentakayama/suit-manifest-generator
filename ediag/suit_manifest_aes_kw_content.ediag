@@ -1,23 +1,23 @@
 / SUIT_Envelope_Tagged / 107({
-  / authentication-wrapper /
+  / AUTHENTICATION-WRAPPER /
   / manifest / 3: << {
     / manifest-version / 1: 1,
     / manifest-sequence-number / 2: 1,
     / common / 3: << {
       / components / 2: [
-        [h'00'] / to be decrypted firmware /,
+        ['plaintext-firmware'],
       ]
     } >>,
     / install / 17: << [
       / fetch encrypted firmware /
       / directive-override-parameters / 20, {
-        / parameter-content / 18: h'{{FILE-HEX ../libcsuit/testfiles/encrypted_image.bin}}',
+        / parameter-content / 18: h'{{FILE-HEX ../libcsuit/testfiles/encrypted_image_aes.bin}}',
         / parameter-encryption-info / 19: << 96([
           / protected: / << {
             / alg / 1: 1 / AES-GCM-128 /
           } >>,
           / unprotected: / {
-            / IV / 5: h'{{FILE-HEX-10+16 ../libcsuit/testfiles/encryption_info.cose}}'
+            / IV / 5: h'{{FILE-HEX-10+16 ../libcsuit/testfiles/encryption_info_aes.cose}}'
           },
           / payload: / null / detached ciphertext /,
           / recipients: / [
@@ -28,24 +28,15 @@
                 / alg / 1: -3 / A128KW /,
                 / kid / 4: 'kid-1'
               },
-              / payload: / h'{{FILE-HEX-43+100 ../libcsuit/testfiles/encryption_info.cose}}' / CEK encrypted with KEK /
+              / payload: / h'{{FILE-HEX-43+100 ../libcsuit/testfiles/encryption_info_aes.cose}}' / CEK encrypted with KEK /
             ]
           ]
         ]) >>
       },
 
       / decrypt encrypted firmware /
-      / directive-write / 18, 15 / consumes the SUIT_Encryption_Info above /,
-
-      / verify decrypted firmware /
-      / directive-override-parameters / 20, {
-        / parameter-image-digest / 3: << [
-          / digest-algorithm-id: / -16 / SHA-256 /,
-          / digest-bytes: / h'{{FILE-SHA-256 ../libcsuit/testfiles/raw_image.bin}}'
-        ] >>,
-        / parameter-image-size / 14: {{FILE-SIZE ../libcsuit/testfiles/raw_image.bin}}
-      },
-      / condition-image-match / 3, 15
+      / directive-write / 18, 15
+        / consumes the SUIT_Encryption_Info above /
     ] >>
   } >>
 })

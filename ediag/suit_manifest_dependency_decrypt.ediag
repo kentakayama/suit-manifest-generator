@@ -1,0 +1,36 @@
+/ SUIT_Envelope_Tagged / 107({
+  / AUTHENTICATION-WRAPPER /
+  / manifest / 3: << {
+    / manifest-version / 1: 1,
+    / manifest-sequence-number / 2: 1,
+    / common / 3: << {
+      / components / 2: [
+        ['decrypted-firmware']
+      ],
+      / shared-sequence / 4: << [
+        / directive-set-componnt-index / 12, 0 / ['decrypted-firmware'] /,
+        / directive-override-parameters / 20, {
+          / parameter-image-digest / 3: << [
+            / algorithm-id / -16 / SHA256 /,
+            / digest-bytes / h'{{FILE-SHA-256 ../libcsuit/testfiles/raw_image.bin}}'
+          ] >>,
+          / parameter-image-size / 14: {{FILE-SIZE ../libcsuit/testfiles/raw_image.bin}}
+        }
+      ] >>
+    } >>,
+    / manifest-component-id / 5: [
+      'dependency-manifest.suit'
+    ],
+    / validate / 7: << [
+      / condition-image-match / 3, 15
+    ] >>,
+    / install / 17: << [
+      / directive-set-component-index / 12, 0
+        / ['decrypted-firmware'] /,
+      / directive-write / 18, 15
+        / consumes the SUIT_Encryption_Info set by dependent /,
+      / condition-image-match / 3, 15
+        / check the integrity of the decrypted payload /
+    ] >>
+  } >>
+})
