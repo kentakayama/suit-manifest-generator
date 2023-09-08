@@ -23,7 +23,7 @@
           / recipients: / [
             [
               / protected: / << {
-                / alg / 1: -29 / ECDH-ES + A128KW /,
+                / alg / 1: -29 / ECDH-ES + A128KW /
               } >>,
               / unprotected: / {
                 / ephemeral key / -1: {
@@ -34,13 +34,13 @@
                 },
                 / kid / 4: 'kid-2'
               },
-              / payload: / h'{{FILE-HEX-113+100 ../libcsuit/testfiles/encryption_info_esdh.cose}}'
+              / payload: / h'{{FILE-HEX-120+100 ../libcsuit/testfiles/encryption_info_esdh.cose}}'
                 / CEK encrypted with KEK /
             ]
           ]
         ]) >>
       },
-      / directive-write / 18, 15 / consumes the SUIT_Encryption_Info above /,
+      / directive-write / 18, 15 / consumes the SUIT_Encryption_Info above /
     ] >>
   } >>
 })

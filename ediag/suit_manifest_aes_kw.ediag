@@ -43,17 +43,7 @@
         ]) >>,
         / parameter-source-component / 22: 1 / ['encrypted-firmware'] /
       },
-      / directive-copy / 22, 15 / consumes the SUIT_Encryption_Info above /,
-
-      / verify decrypted firmware /
-      / directive-override-parameters / 20, {
-        / parameter-image-digest / 3: << [
-          / digest-algorithm-id: / -16 / SHA-256 /,
-          / digest-bytes: / h'{{FILE-SHA-256 ../libcsuit/testfiles/raw_image.bin}}'
-        ] >>,
-        / parameter-image-size / 14: {{FILE-SIZE ../libcsuit/testfiles/raw_image.bin}}
-      },
-      / condition-image-match / 3, 15
+      / directive-copy / 22, 15 / consumes the SUIT_Encryption_Info above /
     ] >>
   } >>
 })
