@@ -5,10 +5,10 @@
 #
 
 .PHONY: all
-all: suit_manifest_sign_trustanchor suit_manifest_sign_delegate
+all: suit_manifest_sign_trustanchor suit_manifest_sign_delegate suit_manifest_mac_trustanchor
 
-CFLAGS = $(CMD_CFLAGS) -DLIBCSUIT_PSA_CRYPTO_C=1 -I./inc
-LDFLAGS = $(CMD_LDFLAGS) -lcsuit -lt_cose -lmbedcrypto -lqcbor -lm
+CFLAGS = $(CMD_CFLAGS) -I./inc -g
+LDFLAGS = $(CMD_LDFLAGS) -lcsuit -lt_cose -lcrypto -lqcbor -lm
 
 suit_manifest_sign_trustanchor:
 	$(CC) $(CFLAGS) -o suit_examples_common.o -c suit_examples_common.c
@@ -20,7 +20,12 @@ suit_manifest_sign_delegate:
 	$(CC) $(CFLAGS) -o suit_manifest_sign_delegate.o -c suit_manifest_sign_main.c -DSUIT_MANIFEST_SIGNER_TAM=1
 	$(CC) -o $@ suit_manifest_sign_delegate.o suit_examples_common.o $(LDFLAGS)
 
+suit_manifest_mac_trustanchor:
+	$(CC) $(CFLAGS) -o suit_examples_common.o -c suit_examples_common.c
+	$(CC) $(CFLAGS) -o suit_manifest_mac_trustanchor.o -c suit_manifest_mac_main.c -DSUIT_MANIFEST_SIGNER_TRUST_ANCHOR=1
+	$(CC) -o $@ suit_manifest_mac_trustanchor.o suit_examples_common.o $(LDFLAGS)
+
 .PHONY: clean
 clean:
-	$(RM) suit_manifest_sign_trustanchor suit_manifest_sign_delegate *.o
+	$(RM) suit_manifest_sign_trustanchor suit_manifest_sign_delegate suit_manifest_mac_trustanchor *.o
 
