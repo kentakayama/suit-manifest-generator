@@ -12,9 +12,7 @@
         }
       },
       / components / 2: [
-        [
-          '10'
-        ]
+        ['10']
       ]
     } >>,
     / manifest-component-id / 5: [

@@ -5,9 +5,7 @@
     / manifest-sequence-number / 2: 0,
     / common / 3: << {
       / components / 2: [
-        [
-          '00'
-        ]
+        ['00']
       ]
     } >>,
     / manifest-component-id / 5: [
