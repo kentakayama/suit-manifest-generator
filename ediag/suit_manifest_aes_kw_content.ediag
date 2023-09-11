@@ -5,7 +5,7 @@
     / manifest-sequence-number / 2: 1,
     / common / 3: << {
       / components / 2: [
-        ['plaintext-firmware'],
+        ['plaintext-firmware']
       ]
     } >>,
     / install / 17: << [
