@@ -62,14 +62,14 @@ install: $(UNTAGGED_DIAGS)
 	@echo Example 3
 	$(eval FILENAME := ../../libcsuit/testfiles/suit_manifest_expD.md)
 	echo "<!--\n Copyright (c) 2020-2023 SECOM CO., LTD. All Rights reserved.\n\n SPDX-License-Identifier: BSD-2-Clause\n-->\n\n## Example 3: Supplying Personalization Data for Trusted Component Binary {#suit-personalization}\n\n~~~~" > $(FILENAME)
-	cat suit_personalization.diag >> $(FILENAME)
+	cat suit_manifest_esdh_config.diag >> $(FILENAME)
 	echo "~~~~\n\n\n### CBOR Binary in Hex\n{: numbered='no'}\n\n~~~~" >> $(FILENAME)
-	xxd -u -p ../untagged_suit/suit_personalization.suit >> $(FILENAME)
+	xxd -u -p ../untagged_suit/suit_manifest_esdh_config.suit >> $(FILENAME)
 	echo "~~~~" >> $(FILENAME)
-	cp ../untagged_suit/suit_personalization.suit $(FILENAME:.md=.cbor)
-	$(eval FILENAME := ../../../ietf-teep/teep-protocol/cbor/suit_personalization.diag.txt)
-	cp ../untagged_diag/suit_manifest_aes_kw_config.diag $(FILENAME)
-	xxd -u -p ../untagged_suit/suit_manifest_aes_kw_config.suit > $(FILENAME:.diag.txt=.hex.txt)
+	cp ../untagged_suit/suit_manifest_esdh_config.suit $(FILENAME:.md=.cbor)
+	$(eval FILENAME := ../../../ietf-teep/teep-protocol/cbor/suit_manifest_esdh_config.diag.txt)
+	cp ../untagged_diag/suit_manifest_esdh_config.diag $(FILENAME)
+	xxd -u -p ../untagged_suit/suit_manifest_esdh_config.suit > $(FILENAME:.diag.txt=.hex.txt)
 
 .PHONY: clean
 clean:
