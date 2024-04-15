@@ -17,7 +17,7 @@
             / alg / 1: 1 / AES-GCM-128 /
           } >>,
           / unprotected: / {
-            / IV / 5: h'{{FILE-HEX-10+16 ../libcsuit/testfiles/encryption_info_esdh.cose}}'
+            / IV / 5: {{FILE-CQ-[1][5] ../ciphertext/encryption_info_image_esdh_gcm.cose}}
           },
           / payload: / null / detached ciphertext /,
           / recipients: / [
