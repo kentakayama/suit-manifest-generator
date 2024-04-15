@@ -5,10 +5,11 @@
 #
 
 .PHONY: all
-all: teep_cose_tam0 teep_cose_tam1 teep_cose_trustanchor teep_cose_agent
+all: teep_cose_tam0 teep_cose_tam1 teep_cose_trustanchor teep_cose_agent teep_cose_verifier
 
-CFLAGS = $(CMD_CFLAGS) #-DLIBTEEP_PSA_CRYPTO_C=1
-LDFLAGS = $(CMD_LDFLAGS) -lteep -lt_cose -lcrypto -lqcbor -lm
+CRYPTO_LIB = -lmbedcrypto
+CFLAGS = $(CMD_CFLAGS) -DLIBTEEP_PSA_CRYPTO_C=1
+LDFLAGS = $(CMD_LDFLAGS) -lteep -lt_cose $(CRYPTO_LIB) -lqcbor -lm
 
 teep_cose_tam0: teep_cose_main.c teep_examples_common.c
 	$(CC) $(CFLAGS) -o teep_examples_common.o -c teep_examples_common.c
@@ -29,6 +30,12 @@ teep_cose_agent: teep_cose_main.c teep_examples_common.c
 	$(CC) $(CFLAGS) -o teep_examples_common.o -c teep_examples_common.c
 	$(CC) $(CFLAGS) -o teep_cose_agent.o -c teep_cose_main.c -DTEEP_ACTOR_AGENT=1
 	$(CC) -o $@ teep_cose_agent.o teep_examples_common.o $(LDFLAGS)
+
+teep_cose_verifier: teep_cose_main.c teep_examples_common.c
+	$(CC) $(CFLAGS) -o teep_examples_common.o -c teep_examples_common.c
+	$(CC) $(CFLAGS) -o teep_cose_verifier.o -c teep_cose_main.c -DTEEP_ACTOR_VERIFIER=1
+	$(CC) -o $@ teep_cose_verifier.o teep_examples_common.o $(LDFLAGS)
+
 
 .PHONY: clean
 clean:

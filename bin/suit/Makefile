@@ -7,8 +7,10 @@
 .PHONY: all
 all: suit_manifest_sign_trustanchor suit_manifest_sign_delegate suit_manifest_mac_trustanchor
 
-CFLAGS = $(CMD_CFLAGS) -I./inc -g
-LDFLAGS = $(CMD_LDFLAGS) -lcsuit -lt_cose -lcrypto -lqcbor -lm
+CRYPTO_LIB = -lmbedcrypto
+
+CFLAGS = $(CMD_CFLAGS) -I./inc -g -DLIBCSUIT_PSA_CRYPTO_C=1
+LDFLAGS = $(CMD_LDFLAGS) -lcsuit -lt_cose $(CRYPTO_LIB) -lqcbor -lm
 
 suit_manifest_sign_trustanchor:
 	$(CC) $(CFLAGS) -o suit_examples_common.o -c suit_examples_common.c

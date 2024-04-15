@@ -1,0 +1,12 @@
+{
+    / iss / 1 : "Verifier",
+    / cnf / 8 : {
+        / kid / 3 : h'E96788B10B1610ABE478F9CE8DCFE2304C0911DD8CFEADDE25EC30CCB5A7B5AF'
+    },
+    / eat_nonce / 10 : h'A0A1A2A3A4A5A6A7A8A9AAABACADAEAF',
+    / ueid / 256 : h'0198F50A4FF6C05861C8860D13A638EA',
+    / oemid / 258 : h'894823',
+    / hwmodel / 259 : h'549DCECC8B987C737B44E40F7C635CE8',
+    / hwversion / 260 : [ '3.1.4', 1 ],
+    / verifier_nonce / -70000 : h'000102030405060708090A0B0C0D0E0F'
+}
