@@ -20,11 +20,15 @@ suit_manifest_aes_kw.diag: ../libcsuit/testfiles/encrypted_image_aes.bin ../libc
 suit_manifest_aes_kw_content.diag: ../libcsuit/testfiles/encrypted_image_aes.bin ../libcsuit/testfiles/encryption_info_aes.cose
 suit_manifest_aes_kw_config.diag: ../libcsuit/testfiles/encrypted_config_aes.bin ../libcsuit/testfiles/encryption_info_config_aes.cose
 suit_manifest_esdh_content.diag: ../libcsuit/testfiles/encrypted_image_esdh.bin ../libcsuit/testfiles/encryption_info_esdh.cose
-suit_manifest_esdh_config.diag: ../libcsuit/testfiles/encrypted_config_esdh.bin ../libcsuit/testfiles/encryption_info_config_esdh.cose
+suit_manifest_esdh_config.diag: ../ciphertext/encryption_info_config_esdh_ctr.cose ../ciphertext/encrypted_config_esdh_ctr.bin
 suit_manifest_esdh_dependency.diag: ../suit/suit_manifest_dependency_decrypt.suit ../teep/suit_delegation.cwt ../signed_diag/suit_manifest_dependency_decrypt.diag
 suit_manifest_dependency_decrypt.diag: ../libcsuit/testfiles/raw_image.bin
+
 %.diag: ../ediag/%.ediag
-	$(PYTHON3) ../ediag-to-diag.py $< > $@
+	$(PYTHON3) ../scripts/ediag-to-diag.py $< > $@
+
+../ciphertext/%.cose:
+	$(MAKE) -C ../ciphertext $(notdir $@)
 
 .PRECIOUS: ../untagged_suit/%.suit
 ../untagged_suit/%.suit:

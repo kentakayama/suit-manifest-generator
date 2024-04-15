@@ -38,7 +38,47 @@ def encrypt_aeskw(plaintext: bytes, kek_alg: str, cek_alg: str, encryption_info:
     save_to_files(encoded, encryption_info, encrypted_payload)
 
 
-def encrypt_esdh(plaintext: bytes, kek_alg: str, cek_alg: str, encryption_info: str, encrypted_payload: str):
+def encrypt_esdh_hkdf(plaintext: bytes, kek_alg: str, cek_alg: str, encryption_info: str, encrypted_payload: str):
+    receiver_public_key_jwk = {
+        "kty": "EC2",
+        "crv": "P-256",
+        "x": base64.b64encode(bytes.fromhex('5886CD61DD875862E5AAA820E7A15274C968A9BC96048DDCACE32F50C3651BA3')).decode(),
+        "y": base64.b64encode(bytes.fromhex('9EED8125E932CD60C0EAD3650D0A485CF726D378D1B016ED4298B2961E258F1B')).decode(),
+        #"d": base64.b64encode(bytes.fromhex('60FE6DD6D85D5740A5349B6F91267EEAC5BA81B8CB53EE249E4B4EB102C476B3')).decode(),
+    }
+
+    t = kek_alg.rsplit("+")
+    if 1 == len(t):
+        print(f"Unknown KEK alg: {kek_alg}")
+        sys.exit(1)
+
+    context = {
+        "alg": cek_alg,
+        "supp_pub": {
+            "key_data_length": 128,
+            "protected": {"alg": kek_alg}, # e.g. ECDH-ES+HKDF-256
+            "other": "SUIT Payload Encryption",
+        }
+    }
+    r = Recipient.new(
+        protected={"alg": kek_alg},
+        recipient_key=COSEKey.from_jwk(receiver_public_key_jwk),
+        context=context
+    )
+
+    cek = COSEKey.from_symmetric_key(alg=cek_alg)
+    sender = COSE.new()
+    encoded = sender.encode_and_encrypt(
+        plaintext,
+        cek,
+        protected={"alg": cek_alg},
+        unprotected={"iv": cek.generate_nonce()},
+        recipients=[r],
+    )
+    save_to_files(encoded, encryption_info, encrypted_payload)
+
+
+def encrypt_esdh_aeskw(plaintext: bytes, kek_alg: str, cek_alg: str, encryption_info: str, encrypted_payload: str):
     print(f"{plaintext}, {kek_alg}, {cek_alg}, {encryption_info}, {encrypted_payload}")
 
     sender_private_key_jwk = {
@@ -55,35 +95,51 @@ def encrypt_esdh(plaintext: bytes, kek_alg: str, cek_alg: str, encryption_info: 
         "crv": "P-256",
         "x": base64.b64encode(bytes.fromhex('5886CD61DD875862E5AAA820E7A15274C968A9BC96048DDCACE32F50C3651BA3')).decode(),
         "y": base64.b64encode(bytes.fromhex('9EED8125E932CD60C0EAD3650D0A485CF726D378D1B016ED4298B2961E258F1B')).decode(),
+        #"d": base64.b64encode(bytes.fromhex('60FE6DD6D85D5740A5349B6F91267EEAC5BA81B8CB53EE249E4B4EB102C476B3')).decode(),
     }
 
-    t = kek_alg.rsplit("+")
-    if 1 == len(t):
+    kek_alg_id, kw_alg, key_len = \
+        (-29, "A128KW", 128) if "ECDH-ES+A128KW" == kek_alg else \
+        (-30, "A192KW", 192) if "ECDH-ES+A192KW" == kek_alg else \
+        (-31, "A256KW", 256) if "ECDH-ES+A256KW" == kek_alg else \
+        (0, "Unknown", 0)
+    if key_len == 0:
         print(f"Unknown KEK alg: {kek_alg}")
         sys.exit(1)
 
+    inner_protected_header = {"alg": kek_alg} # {1 : kek_alg_id} # {"alg": kek_alg}
+
     context = {
-        "alg": t[-1],
+        "alg": kw_alg, # e.g. A128KW
         "supp_pub": {
-            "key_data_length": 128,
-            "protected": {"alg": kek_alg}, # e.g. ECDH-ES+A128KW
+            "key_data_length": key_len, # e.g. 128
+            "protected": inner_protected_header,
             "other": "SUIT Payload Encryption",
         }
     }
+
     r = Recipient.new(
-        protected={"alg": kek_alg},
+        protected=inner_protected_header,
         sender_key=COSEKey.from_jwk(sender_private_key_jwk),
         recipient_key=COSEKey.from_jwk(receiver_public_key_jwk),
         context=context
     )
 
+    is_aead = cek_alg in ("A128GCM", "A192GCM", "A256GCM")
     cek = COSEKey.from_symmetric_key(alg=cek_alg)
+    if is_aead:
+        outer_protected_header = {"alg": cek_alg}
+        outer_unprotected_header = {"iv": cek.generate_nonce()}
+    else:
+        outer_protected_header = {}
+        outer_unprotected_header = {"alg": cek_alg, "iv": cek.generate_nonce()}
+
     sender = COSE.new()
     encoded = sender.encode(
         plaintext,
         cek,
-        protected={"alg": cek_alg},
-        unprotected={"iv": cek.generate_nonce()},
+        protected=outer_protected_header,
+        unprotected=outer_unprotected_header,
         recipients=[r],
     )
     save_to_files(encoded, encryption_info, encrypted_payload)
@@ -91,7 +147,7 @@ def encrypt_esdh(plaintext: bytes, kek_alg: str, cek_alg: str, encryption_info: 
 def print_usage():
     print("[Usage] ./suit_payload_encryption.py plaintext KEK-alg CEK-alg encryption_info [encrypted_payload]")
     print("    plaintext: filename of input plaintext")
-    print("    KEK-alg: A128KW, ECDH-ES+A128KW, ...")
+    print("    KEK-alg: A128KW, ECDH-ES+HKDF-256, ECDH-ES+A128KW, ...")
     print("    CEK-alg: A128GCM, A128CTR, ...")
     print("    encryption_info: filename of output SUIT_Encryption_Info")
     print("    encrypted_payload(Optional): filename of output ciphertext (detached)")
@@ -113,8 +169,10 @@ if __name__ == "__main__":
 
     if "A128KW" == kek_alg:
         encrypt_aeskw(plaintext, kek_alg, cek_alg, encryption_info_filename, encrypted_payload_filename)
+    elif "ECDH-ES+HKDF-256" == kek_alg:
+        encrypt_esdh_hkdf(plaintext, kek_alg, cek_alg, encryption_info_filename, encrypted_payload_filename)
     elif "ECDH-ES+A128KW" == kek_alg:
-        encrypt_esdh(plaintext, kek_alg, cek_alg, encryption_info_filename, encrypted_payload_filename)
+        encrypt_esdh_aeskw(plaintext, kek_alg, cek_alg, encryption_info_filename, encrypted_payload_filename)
     else:
         print_usage()
         sys.exit(1)

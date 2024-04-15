@@ -9,11 +9,12 @@
 import sys
 import os
 import re
+import subprocess
 import binascii
 import hashlib
 
 def replace_from_pattern(f):
-    pat = re.compile(r"(.*)\{\{FILE-(HEX|SIZE|SHA|RAW)(-\d+|-\d+\+\d+|) ([~_\-\./0-9a-zA-Z]+)\}\}(.*)")
+    pat = re.compile(r"(.*)\{\{FILE-(HEX|SIZE|SHA|RAW|CQ)(-\d+|-\d+\+\d+|-[^ ]*|) ([~_\-\./0-9a-zA-Z]+)\}\}(.*)")
     for line in f:
         m = pat.match(line)
         if m:
@@ -38,6 +39,14 @@ def replace_from_pattern(f):
                     indent = (- int(param)) * " "
                     for l in rf.read().splitlines():
                         print(indent + l)
+            elif "CQ" == op:
+                position = param[1:] if len(param) > 0 and param[0] == "-" else "[value]"
+                cmd = f"{os.path.dirname(__file__)}/cq.py {filename} {position}"
+                status, output = subprocess.getstatusoutput(cmd)
+                if status != 0:
+                    sys.exit(1)
+                else:
+                    print(pre + output + post)
         else:
             print(line, end="")
 
