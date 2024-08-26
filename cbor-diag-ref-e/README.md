@@ -23,8 +23,8 @@ its SUIT Manifest (`hello.envelope.cbor`) described below.
 On Debian/Ubuntu environment, run commands below.
 ```bash
 sudo apt-get install -y git
-git clone ssh://git-codecommit.ap-northeast-1.amazonaws.com/v1/repos/suit-manifest-generator2
-cd suit-manifest-generator2
+git clone https://github.com/kentakayama/suit-manifest-generator
+cd suit-manifest-generator/cbor-diag-ref-e
 sudo apt-get -y install gcc make ruby ruby-dev python3
 pip3 install --user -r requirements.txt
 sudo gem install cbor-diag cbor-diag-e cddlc cbor-diag-ref cddl

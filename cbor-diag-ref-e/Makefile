@@ -3,7 +3,7 @@ RUBYDEBUG=RUBYOPT="-W0"
 CFLAGS=-Os -Wall
 
 .PHONY: all
-all: hello hello.envelope.cbor
+all: hello hello.suit-envelope.cbor
 
 hello: hello.o
 	$(CC) $(CFLAGS) -o $@ $<
@@ -36,7 +36,7 @@ hello.suit-manifest.digest.hdiag: hello.suit-manifest.digest.hex
 	@echo "'" >> $@
 
 
-hello.envelope.gdiag: hello.suit-digest.gdiag hello.suit-mac.mdiag hello.suit-manifest.gdiag hello.bin.hdiag
+hello.suit-envelope.gdiag: hello.suit-digest.gdiag hello.suit-mac.mdiag hello.suit-manifest.gdiag hello.bin.hdiag
 
 hello.suit-digest.gdiag: hello.suit-manifest.digest.hdiag
 
@@ -57,13 +57,13 @@ cddl: $(SUIT_MANIFEST_CDDL)
 $(SUIT_MANIFEST_CDDL):
 	$(MAKE) -C cddl
 
-TEST_COMMAND := $(RUBYDEBUG) cddl $(SUIT_MANIFEST_CDDL) validate hello.envelope.cbor
+TEST_COMMAND := $(RUBYDEBUG) cddl $(SUIT_MANIFEST_CDDL) validate hello.suit-envelope.cbor
 .PHONY: test
 test: all
 	@echo ${TEST_COMMAND}
 	@${TEST_COMMAND} && ([ $$? -eq 0 ] && \
-		echo "[SUCCESS] Generated SUIT Manifest binary 'hello.envelope.cbor' matches to the CDDL of SUIT Manifest.") || \
-		echo "[FAIL] Generated SUIT Manifest binary 'hello.envelope.cbor' doesn't match to the CDDL of SUIT Manifest."
+		echo "[SUCCESS] Generated SUIT Manifest binary 'hello.suit-envelope.cbor' matches to the CDDL of SUIT Manifest.") || \
+		echo "[FAIL] Generated SUIT Manifest binary 'hello.suit-envelope.cbor' doesn't match to the CDDL of SUIT Manifest."
 
 .PHONY: clean
 clean:

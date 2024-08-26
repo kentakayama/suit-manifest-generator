@@ -4,5 +4,5 @@
     << ref'hello.suit-mac.mdiag' >>
   ] >>,
   e'suit-manifest': ref'hello.suit-manifest.gdiag',
-  "#hello": ref'dummy.bin.hdiag'
+  "#hello": ref'dummy.bin.diag'
 })
