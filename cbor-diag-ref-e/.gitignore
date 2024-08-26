@@ -1,0 +1,9 @@
+hello
+hello.o
+
+*.cbor
+*.gdiag
+*.mdiag
+*.hdiag
+*.bin
+*.hex

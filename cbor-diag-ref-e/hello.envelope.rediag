@@ -1,0 +1,8 @@
+/ SUIT_Envelope_Tagged / 107({
+  e'suit-authentication-wrapper': << [
+    << ref'hello.suit-digest.gdiag' >>,
+    << ref'hello.suit-mac.mdiag' >>
+  ] >>,
+  e'suit-manifest': ref'hello.suit-manifest.gdiag',
+  "#hello": ref'dummy.bin.hdiag'
+})
