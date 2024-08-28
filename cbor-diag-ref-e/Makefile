@@ -61,9 +61,11 @@ TEST_COMMAND := $(RUBYDEBUG) cddl $(SUIT_MANIFEST_CDDL) validate hello.suit-enve
 .PHONY: test
 test: all
 	@echo ${TEST_COMMAND}
-	@${TEST_COMMAND} && ([ $$? -eq 0 ] && \
-		echo "[SUCCESS] Generated SUIT Manifest binary 'hello.suit-envelope.cbor' matches to the CDDL of SUIT Manifest.") || \
-		echo "[FAIL] Generated SUIT Manifest binary 'hello.suit-envelope.cbor' doesn't match to the CDDL of SUIT Manifest."
+	@if ${TEST_COMMAND}; then \
+		echo "[SUCCESS] Generated SUIT Manifest binary 'hello.suit-envelope.cbor' matches to the CDDL of SUIT Manifest."; \
+	else \
+		echo "[FAIL] Generated SUIT Manifest binary 'hello.suit-envelope.cbor' doesn't match to the CDDL of SUIT Manifest."; exit 1; \
+	fi
 
 .PHONY: clean
 clean:
