@@ -14,7 +14,7 @@ The sample materials below use CBOR diagnostic notation with `e''` and `ref''` r
 
 ## Quick start
 
-As an example, this tool generates a "hello, world!" binary (`hello`) and
+As an example, this tool generates a "hello, world!" static binary (`hello`) and
 its SUIT Manifest (`hello.suit-envelope.cbor`) described below.
 
 ![](./img/manifest.png)
@@ -25,7 +25,7 @@ On Debian/Ubuntu environment, run commands below.
 sudo apt-get install -y git
 git clone https://github.com/kentakayama/suit-manifest-generator
 cd suit-manifest-generator/cbor-diag-ref-e
-sudo apt-get -y install curl gcc make ruby ruby-dev python3 python3-pip
+sudo apt-get -y install curl musl-tools make ruby ruby-dev python3 python3-pip
 pip3 install --user -r requirements.txt
 sudo gem install cbor-diag cbor-diag-e cddlc cbor-diag-ref cddl
 make -C cddl
