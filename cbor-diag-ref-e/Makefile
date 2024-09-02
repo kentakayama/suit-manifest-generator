@@ -16,11 +16,15 @@ hello.o: hello.c
 	$(RUBYDEBUG) diag2cbor.rb $< > $@
 
 %.gdiag: %.rediag # generated diag files
-	$(RUBYDEBUG) CBOR_DIAG_CDDL=$(SUIT_MANIFEST_CDDL) diag2diag.rb -d -aref -ae $< > $@
+	$(RUBYDEBUG) CBOR_DIAG_CDDL=$(SUIT_MANIFEST_CDDL) diag2diag.rb -e -d -aref -ae $< > $@
 
 hello.bin.hdiag: hello
 %.bin.hdiag:
 	python3 ./bin-to-diag-hex.py $< > $@
+
+hello.size.gdiag: hello
+%.size.gdiag:
+	ls -s $< | awk '{printf "%s",$$1}' > $@
 
 .PRECIOUS: hello.digest.hex hello.suit-manifest.digest.hex
 hello.digest.hex: hello
@@ -35,21 +39,17 @@ hello.suit-manifest.digest.hdiag: hello.suit-manifest.digest.hex
 	cat $< >> $@
 	@echo "'" >> $@
 
-
 hello.suit-envelope.gdiag: hello.suit-digest.gdiag hello.suit-mac.mdiag hello.suit-manifest.gdiag hello.bin.hdiag
 
 hello.suit-digest.gdiag: hello.suit-manifest.digest.hdiag
 
-hello.suit-manifest.gdiag: hello.digest.hdiag
+hello.suit-manifest.gdiag: hello.digest.hdiag hello.size.gdiag
 
-hello.suit-mac.bin: hello.suit-manifest.digest.hex
+hello.suit-mac.bin: hello.suit-digest.cbor
 	python3 cwt-mac.py $< $@
 
 hello.suit-mac.mdiag: hello.suit-mac.bin
 	cbor2diag.rb -e $< > $@
-
-hello.suit-manifest.digest.bin: hello.suit-manifest.digest.hdiag
-	diag2cbor.rb $< > $@
 
 .PHONY: cddl
 cddl: $(SUIT_MANIFEST_CDDL)
