@@ -1,5 +1,6 @@
 SUIT_MANIFEST_CDDL=./cddl/suit-manifest.cddl
 RUBYDEBUG=RUBYOPT="-W0"
+CC=musl-gcc -static
 CFLAGS=-Os -Wall
 
 .PHONY: all

@@ -12,6 +12,8 @@ The sample materials below use CBOR diagnostic notation with `e''` and `ref''` r
 * hello.suit-digest.rediag: the sha256 digest of the manifest in `SUIT_Digest`
 * hello.suit-envelope.rediag: the manifest wrapper containing the MAC and/or the digital signature of the manifest
 
+Note that this tool generates CBOR binaries with canonical encoding which is required in the [Section 8.1 of draft-ietf-suit-manifest](https://datatracker.ietf.org/doc/html/draft-ietf-suit-manifest#section-8.1).
+
 ## Quick start
 
 As an example, this tool generates a "hello, world!" static binary (`hello`) and
