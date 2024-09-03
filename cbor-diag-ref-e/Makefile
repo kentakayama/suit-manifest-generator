@@ -25,7 +25,7 @@ hello.bin.hdiag: hello
 
 hello.size.gdiag: hello
 %.size.gdiag:
-	ls -s $< | awk '{printf "%s",$$1}' > $@
+	stat --format=%s $< > $@
 
 .PRECIOUS: hello.digest.hex hello.suit-manifest.digest.hex
 hello.digest.hex: hello
