@@ -6,6 +6,13 @@ CFLAGS=-Os -Wall
 .PHONY: all
 all: hello hello.suit-envelope.cbor
 
+#hello: hello.o
+#	ld -m elf_i386 -o $@ $<
+#	strip hello
+
+#hello.o: hello.asm
+#	nasm -f elf32 -o $@ $<
+
 hello: hello.o
 	$(CC) $(CFLAGS) -o $@ $<
 	strip hello
