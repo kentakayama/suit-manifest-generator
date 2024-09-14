@@ -43,7 +43,7 @@
       },
       / directive-invoke / 23, 15
     ] >>,
-    / install / 17: << [
+    / install / 20: << [
       / directive-override-parameters / 20, {
         / parameter-content / 18: 'hello world'
       },

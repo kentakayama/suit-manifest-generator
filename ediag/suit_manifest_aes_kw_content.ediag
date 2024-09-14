@@ -8,7 +8,7 @@
         ['plaintext-firmware']
       ]
     } >>,
-    / install / 17: << [
+    / install / 20: << [
       / fetch encrypted firmware /
       / directive-override-parameters / 20, {
         / parameter-content / 18: h'{{FILE-HEX ../libcsuit/testfiles/encrypted_image_aes.bin}}',

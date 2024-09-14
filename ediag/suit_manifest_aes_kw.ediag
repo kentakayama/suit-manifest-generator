@@ -9,7 +9,7 @@
         ['encrypted-firmware']
       ]
     } >>,
-    / install / 17: << [
+    / install / 20: << [
       / fetch encrypted firmware /
       / directive-set-component-index / 12, 1 / ['encrypted-firmware'] /,
       / directive-override-parameters / 20, {

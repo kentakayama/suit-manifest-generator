@@ -13,7 +13,7 @@
         [h'01'] / dependent component e.g. App /
       ]
     } >>,
-    / suit-install / 17: << [
+    / suit-install / 20: << [
       / fetch and install dependency manifest /
       / suit-set-component-identifier / 12, 1 / dependency manifest /,
       / suit-override-parameters / 20, {

@@ -60,7 +60,7 @@
       },
       / directive-fetch / 21, 2
     ] >>,
-    / install / 17: << [
+    / install / 20: << [
       / directive-set-component-index / 12, 1,
       / directive-process-dependency / 11, 0,
 
