@@ -1,0 +1,69 @@
+/ SUIT_Envelope = / 107({
+  / AUTHENTICATION-WRAPPER /
+  / manifest / 3: << {
+    / manifest-version / 1: 1,
+    / manifest-sequence-number / 2: 4,
+    / common / 3: << {
+      / components / 2: [
+        [h'00'],
+        [h'02'],
+        [h'01']
+      ],
+      / shared-sequence / 4: << [
+        / directive-set-component-index / 12, 0,
+        / directive-override-parameters / 20, {
+          / vendor-id / 1: h'fa6b4a53d5ad5fdfbe9de663e4d41ffe' / fa6b4a53-d5ad-5fdf-be9d-e663e4d41ffe /,
+          / class-id / 2: h'1492af1425695e48bf429b2d51f2ab45' / 1492af14-2569-5e48-bf42-9b2d51f2ab45 /,
+          / image-digest / 3: << [
+            / algorithm-id: / -16 / SHA-256 /,
+            / digest-bytes: / h'00112233445566778899aabbccddeeff0123456789abcdeffedcba9876543210'
+          ] >>,
+          / image-size / 14: 34768
+        },
+        / condition-vendor-identifier / 1, 15,
+        / condition-class-identifier / 2, 15
+      ] >>
+    } >>,
+    / validate / 7: << [
+      / directive-set-component-index / 12, 0,
+      / condition-image-match / 3, 15
+    ] >>,
+    / load / 8: << [
+      / directive-set-component-index / 12, 2,
+      / directive-override-parameters / 20, {
+        / image-digest / 3: << [
+          / algorithm-id: / -16 / SHA-256 /,
+          / digest-bytes: / h'0123456789abcdeffedcba987654321000112233445566778899aabbccddeeff'
+        ] >>,
+        / image-size / 14: 76834,
+        / source-component / 22: 0
+      },
+      / directive-copy / 22, 2,
+      / condition-image-match / 3, 15
+    ] >>,
+    / invoke / 9: << [
+      / directive-set-component-index / 12, 2,
+      / directive-invoke / 23, 2
+    ] >>,
+    / payload-fetch / 16: << [
+      / directive-set-component-index / 12, 1,
+      / directive-override-parameters / 20, {
+        / image-digest / 3: << [
+          / algorithm-id: / -16 / SHA-256 /,
+          / digest-bytes: / h'00112233445566778899aabbccddeeff0123456789abcdeffedcba9876543210'
+        ] >>,
+        / uri / 21: "http://example.com/file.bin"
+      },
+      / directive-fetch / 21, 2,
+      / condition-image-match / 3, 15
+    ] >>,
+    / install / 20: << [
+      / directive-set-component-index / 12, 0,
+      / directive-override-parameters / 20, {
+        / source-component / 22: 1
+      },
+      / directive-copy / 22, 2,
+      / condition-image-match / 3, 15
+    ] >>
+  } >>
+})
