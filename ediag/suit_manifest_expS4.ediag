@@ -38,9 +38,9 @@
       / directive-override-parameters / 20, {
         / parameter-image-digest / 3: << [
           / digest-algorithm-id: / -16 / SHA256 /,
-          / digest-bytes: / h'{{FILE-SHA-256 ../suit/suit_manifest_expS1.suit}}'
+          / digest-bytes: / h'{{FILE-SHA-256 ../suit/suit_manifest_expS0.suit}}'
         ] >>,
-        / parameter-image-size / 14: {{FILE-SIZE ../suit/suit_manifest_expS1.suit}},
+        / parameter-image-size / 14: {{FILE-SIZE ../suit/suit_manifest_expS0.suit}},
         / parameter-uri / 21: "#dependent.suit",
         / parameter-fetch-args / 30: 'Content-Type: application/cbor'
       },
@@ -58,5 +58,5 @@
       / directive-write / 18, 15
     ] >>
   } >>,
-  "#dependent.suit": h'{{FILE-HEX ../suit/suit_manifest_expS1.suit}}'
+  "#dependent.suit": h'{{FILE-HEX ../suit/suit_manifest_expS0.suit}}'
 })

@@ -11,10 +11,9 @@ teep_update_uri.diag: ../untagged_suit/suit_uri.suit
 teep_update_integrated.diag: ../untagged_suit/suit_integrated.suit
 teep_update_personalization.diag: ../untagged_suit/suit_manifest_esdh_config.suit
 teep_update_helloworld.diag: ../untagged_suit/suit_helloworld.suit
-suit_manifest_expS1.diag: ../teep/suit_delegation.cwt
-suit_manifest_expS2.diag: ../suit/suit_manifest_expS1.suit
-suit_manifest_expS3.diag: ../suit/suit_manifest_expS1.suit
-suit_manifest_expS4.diag: ../suit/suit_manifest_expS1.suit
+suit_manifest_expS2.diag: ../suit/suit_manifest_expS0.suit
+suit_manifest_expS3.diag: ../suit/suit_manifest_expS0.suit
+suit_manifest_expS4.diag: ../suit/suit_manifest_expS0.suit
 suit_personalization.diag: ../untagged_suit/suit_uri.suit
 suit_manifest_aes_kw.diag: ../libcsuit/testfiles/encrypted_image_aes.bin ../libcsuit/testfiles/encryption_info_aes.cose
 suit_manifest_aes_kw_content.diag: ../libcsuit/testfiles/encrypted_image_aes.bin ../libcsuit/testfiles/encryption_info_aes.cose

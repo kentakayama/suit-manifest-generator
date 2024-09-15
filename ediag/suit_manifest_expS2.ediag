@@ -30,9 +30,9 @@
       / directive-override-parameters / 20, {
         / parameter-image-digest / 3: << [
           / digest-algorithm-id: / -16 / SHA256 /,
-          / digest-bytes: / h'{{FILE-SHA-256 ../suit/suit_manifest_expS1.suit}}'
+          / digest-bytes: / h'{{FILE-SHA-256 ../suit/suit_manifest_expS0.suit}}'
         ] >>,
-        / parameter-image-size / 14: {{FILE-SIZE ../suit/suit_manifest_expS1.suit}},
+        / parameter-image-size / 14: {{FILE-SIZE ../suit/suit_manifest_expS0.suit}},
         / parameter-uri / 21: "http://example.com/dependent.suit"
       },
       / directive-fetch / 21, 2,
@@ -43,7 +43,7 @@
       / directive-override-parameters / 20, {
         / parameter-image-digest / 3: << [
           / digest-algorithm-id: / -16 / SHA256 /,
-          / digest-bytes: / h'{{FILE-HEX-174+32 ../suit/suit_manifest_expS1.suit}}'
+          / digest-bytes: / {{FILE-CQ-[2][wrapped][0][wrapped][1] ../suit/suit_manifest_expS0.suit}}
         ] >>
       },
       / condition-dependency-integrity / 7, 15,
