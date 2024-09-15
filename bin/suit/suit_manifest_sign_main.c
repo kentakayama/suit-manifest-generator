@@ -13,13 +13,10 @@
 #include "suit_examples_common.h"
 #if defined(SUIT_MANIFEST_SIGNER_TRUST_ANCHOR)
 #include "trust_anchor_prime256v1_cose_key_private.h"
-UsefulBufC private_key = trust_anchor_prime256v1_cose_key_private;
-UsefulBufC public_key = NULLUsefulBufC;
-#elif defined(SUIT_MANIFEST_SIGNER_TAM)
-#include "tam_es256_cose_key_private.h"
-UsefulBufC private_key = tam_es256_cose_key_private;
-#include "trust_anchor_prime256v1_cose_key_public.h"
-UsefulBufC public_key = trust_anchor_prime256v1_cose_key_public;
+const UsefulBufC private_key = trust_anchor_prime256v1_cose_key_private;
+#elif defined(SUIT_MANIFEST_SIGNER_DELEGATED_AUTHORITY)
+#include "delegated_authority_es256_cose_key_private.h"
+const UsefulBufC private_key = delegated_authority_es256_cose_key_private;
 #else
 #error Signing key is not specified
 #endif
@@ -52,17 +49,6 @@ int main(int argc,
     }
     mechanisms[0].cose_tag = CBOR_TAG_COSE_SIGN1;
     mechanisms[0].use = true;
-
-    if (!UsefulBuf_IsNULLOrEmptyC(public_key)) {
-        mechanisms[1].key.cose_algorithm_id = T_COSE_ALGORITHM_ES256;
-        result = suit_set_suit_key_from_cose_key(public_key, &mechanisms[1].key);
-        if (result != SUIT_SUCCESS) {
-            printf("main : Failed to create verification key of trust anchor. %s(%d)\n", suit_err_to_str(result), result);
-            return EXIT_FAILURE;
-        }
-        mechanisms[1].cose_tag = CBOR_TAG_COSE_SIGN1;
-        mechanisms[1].use = true;
-    }
 
     // Read manifest file.
     printf("main : Read Manifest file.\n");

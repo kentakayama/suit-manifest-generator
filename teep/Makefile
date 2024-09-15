@@ -23,9 +23,6 @@ QUERY_RESPONSE_MESSAGES := \
 TEEP_IETF116_HACKATHON := \
 	teep_update_helloworld.teep
 
-SUIT_DELEGATIONS := \
-	suit_delegation.cwt
-
 ifeq ($(teep-ietf116),1)
 TEEP_UPDATE_MESSAGES += $(TEEP_IETF116_HACKATHON)
 endif
@@ -38,8 +35,6 @@ teep_update_integrated.teep: ../untagged_suit/suit_integrated.suit
 teep_update_personalization.teep: ../untagged_suit/suit_manifest_esdh_config.suit
 teep_update_helloworld.teep: ../untagged_suit/suit_helloworld.suit
 	$(TAM_COSE) ../untagged_suit/$< $@
-
-suit_delegation.cwt: ../cbor/suit_delegation.cbor
 
 attestation_results.cwt: ../cbor/attestation_results.cbor
 	$(VERIFIER_COSE) $< $@
