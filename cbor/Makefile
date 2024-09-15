@@ -18,4 +18,4 @@ all:
 
 .PHONY: clean
 clean:
-	ls | grep -v -e "suit_manifest_exp1.cbor" -e "suit_manifest_exp3.cbor" -e Makefile | xargs $(RM)
+	$(RM) *.cbor
