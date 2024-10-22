@@ -23,6 +23,7 @@ UNTAGGED_DIAGS := \
 	suit_manifest_raw.diag \
 	suit_manifest_dependency.diag \
 	suit_manifest_aes_kw.diag \
+	suit_manifest_aes_kw_slot.diag \
 	suit_manifest_aes_kw_content.diag \
 	suit_manifest_aes_kw_config.diag \
 	suit_manifest_esdh_content.diag \
@@ -61,11 +62,12 @@ all: $(UNTAGGED_DIAGS)
 suit_manifest_esdh_dependency.diag: ../ediag/${@:.diag=.ediag} ../teep/suit_delegation.cwt ../libcsuit/testfiles/encrypted_image_esdh.bin ../libcsuit/testfiles/encryption_info_esdh.cose ../ediag/suit_manifest_dependency_decrypt.ediag ../ediag/suit_manifest_dependency_decrypt.ediag
 
 # use COSE_Mac0
-suit_manifest_aes_kw.diag: ../suit/suit_manifest_aes_kw.suit
 suit_manifest_aes_kw_content.diag: ../suit/suit_manifest_aes_kw_content.suit
+suit_manifest_aes_kw.diag: ../suit/suit_manifest_aes_kw.suit
+suit_manifest_aes_kw_slot.diag: ../suit/suit_manifest_aes_kw_slot.suit
 suit_manifest_aes_kw_config.diag: ../suit/suit_manifest_aes_kw_config.suit
 
-suit_manifest_aes_kw.diag suit_manifest_aes_kw_content.diag suit_manifest_aes_kw_config.diag:
+suit_manifest_aes_kw.diag suit_manifest_aes_kw_slot.diag suit_manifest_aes_kw_content.diag suit_manifest_aes_kw_config.diag:
 	sed -e "s?/ AUTHENTICATION-WRAPPER /?/ authentication-wrapper / 2: << [\n    << [\n      / digest-algorithm-id: / -16 / SHA256 /,\n      / digest-bytes: / h'$(shell xxd -p -u -c 32 -s 13 -l 32 $<)'\n    ] >>,\n    << / COSE_Mac0_Tagged / 17\([\n      / protected: / << {\n        / algorithm-id / 1: 5 / HMAC256 /\n      } >>,\n      / unprotected: / {},\n      / payload: / null,\n      / tag: / h'$(shell xxd -p -u -c 64 -s 57 -l 32 $<)'\n    ]\) >>\n  ] >>,?" ../diag/$@ > $@
 
 
@@ -184,7 +186,7 @@ install_multiple: suit_manifest_expS0.diag suit_manifest_expS2.diag suit_manifes
 	cp ../suit/$(SOURCE).suit $(LIBCSUIT_DIR)/testfiles/$(TARGET).cbor
 
 .PHONY: install_encryption
-install_encryption: suit_manifest_aes_kw.diag suit_manifest_aes_kw_content.diag suit_manifest_esdh_content.diag suit_manifest_esdh_dependency.diag suit_manifest_dependency_decrypt.diag
+install_encryption: suit_manifest_aes_kw_content.diag suit_manifest_aes_kw.diag suit_manifest_aes_kw_slot.diag suit_manifest_esdh_content.diag suit_manifest_esdh_dependency.diag suit_manifest_dependency_decrypt.diag
 	@echo AES-KW content Example
 	$(eval SOURCE := suit_manifest_aes_kw_content)
 	$(eval TARGET := suit-manifest-aes-kw-content)
@@ -202,6 +204,18 @@ install_encryption: suit_manifest_aes_kw.diag suit_manifest_aes_kw_content.diag 
 	$(eval SOURCE := suit_manifest_aes_kw)
 	$(eval TARGET := suit-manifest-aes-kw)
 	$(eval CSUITNAME := suit_manifest_expAF)
+	$(eval MD := $(LIBCSUIT_DIR)/testfiles/$(CSUITNAME).md)
+	echo "<!--\n Copyright (c) 2020-2023 SECOM CO., LTD. All Rights reserved.\n\n SPDX-License-Identifier: BSD-2-Clause\n-->\n\n## Example 1: Fetch and Decrypt AES-KW + Encrypted Payload\n{: numbered='no'}\n\n### CBOR Diagnostic Notation of SUIT Manifest\n{: numbered='no'}\n\n~~~~" > $(MD)
+	cat $(SOURCE).diag >> $(MD)
+	echo "~~~~\n\n\n### CBOR Binary in Hex\n{: numbered='no'}\n\n~~~~" >> $(MD)
+	xxd -u -p ../suit/$(SOURCE).suit >> $(MD)
+	echo "~~~~" >> $(MD)
+	cp $(SOURCE).diag $(SUIT_FIRMWARE_ENCRYPTION_DIR)/examples/$(TARGET).diag.signed
+	cp ../suit/$(SOURCE).suit $(LIBCSUIT_DIR)/testfiles/$(CSUITNAME).cbor
+	xxd -p -u ../suit/$(SOURCE).suit $(SUIT_FIRMWARE_ENCRYPTION_DIR)/examples/$(TARGET).hex.signed
+	$(eval SOURCE := suit_manifest_aes_kw_slot)
+	$(eval TARGET := suit-manifest-aes-kw-slot)
+	$(eval CSUITNAME := suit_manifest_expAFS)
 	$(eval MD := $(LIBCSUIT_DIR)/testfiles/$(CSUITNAME).md)
 	echo "<!--\n Copyright (c) 2020-2023 SECOM CO., LTD. All Rights reserved.\n\n SPDX-License-Identifier: BSD-2-Clause\n-->\n\n## Example 1: Fetch and Decrypt AES-KW + Encrypted Payload\n{: numbered='no'}\n\n### CBOR Diagnostic Notation of SUIT Manifest\n{: numbered='no'}\n\n~~~~" > $(MD)
 	cat $(SOURCE).diag >> $(MD)

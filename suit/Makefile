@@ -16,13 +16,12 @@ all:
 ../cbor/%.cbor:
 	$(MAKE) -C ../cbor $(notdir $@)
 
-suit_manifest_aes_kw.suit: ../cbor/suit_manifest_aes_kw.cbor
-	$(SUIT_MAC_TRUSTANCHOR) $< $@
-
-suit_manifest_aes_kw_config.suit: ../cbor/suit_manifest_aes_kw_config.cbor
-	$(SUIT_MAC_TRUSTANCHOR) $< $@
-
 suit_manifest_aes_kw_content.suit: ../cbor/suit_manifest_aes_kw_content.cbor
+suit_manifest_aes_kw_slot.suit: ../cbor/suit_manifest_aes_kw_slot.cbor
+suit_manifest_aes_kw.suit: ../cbor/suit_manifest_aes_kw.cbor
+suit_manifest_aes_kw_config.suit: ../cbor/suit_manifest_aes_kw_config.cbor
+
+suit_manifest_aes_kw_content.suit suit_manifest_aes_kw.suit suit_manifest_aes_kw_slot.suit suit_manifest_aes_kw_config.suit:
 	$(SUIT_MAC_TRUSTANCHOR) $< $@
 
 suit_manifest_esdh_dependency.suit: ../cbor/suit_manifest_esdh_dependency.cbor
