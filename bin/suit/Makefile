@@ -5,7 +5,7 @@
 #
 
 .PHONY: all
-all: suit_manifest_sign_trustanchor suit_manifest_sign_delegate suit_manifest_mac_trustanchor
+all: suit_manifest_sign_trustanchor suit_manifest_sign_delegatedauthority suit_manifest_mac_trustanchor
 
 CRYPTO_LIB = -lmbedcrypto
 
@@ -17,10 +17,10 @@ suit_manifest_sign_trustanchor:
 	$(CC) $(CFLAGS) -o suit_manifest_sign_trustanchor.o -c suit_manifest_sign_main.c -DSUIT_MANIFEST_SIGNER_TRUST_ANCHOR=1
 	$(CC) -o $@ suit_manifest_sign_trustanchor.o suit_examples_common.o $(LDFLAGS)
 
-suit_manifest_sign_delegate:
+suit_manifest_sign_delegatedauthority:
 	$(CC) $(CFLAGS) -o suit_examples_common.o -c suit_examples_common.c
-	$(CC) $(CFLAGS) -o suit_manifest_sign_delegate.o -c suit_manifest_sign_main.c -DSUIT_MANIFEST_SIGNER_TAM=1
-	$(CC) -o $@ suit_manifest_sign_delegate.o suit_examples_common.o $(LDFLAGS)
+	$(CC) $(CFLAGS) -o suit_manifest_sign_delegatedauthority.o -c suit_manifest_sign_main.c -DSUIT_MANIFEST_SIGNER_DELEGATED_AUTHORITY=1
+	$(CC) -o $@ suit_manifest_sign_delegatedauthority.o suit_examples_common.o $(LDFLAGS)
 
 suit_manifest_mac_trustanchor:
 	$(CC) $(CFLAGS) -o suit_examples_common.o -c suit_examples_common.c

@@ -5,9 +5,11 @@
  *
  */
 
-#ifndef TAM_ES256_COSE_KEY_PRIVATE_H
-#define TAM_ES256_COSE_KEY_PRIVATE_H
-const unsigned char tam_es256_cose_key_private_buf[] = {
+#ifndef DELEGATED_AUTHORITY_ES256_COSE_KEY_PRIVATE_H
+#define DELEGATED_AUTHORITY_ES256_COSE_KEY_PRIVATE_H
+#include "qcbor/UsefulBuf.h"
+
+const unsigned char delegated_authority_es256_cose_key_private_buf[] = {
     0xA5,                                 //# map(5)
        0x01,                              //# unsigned(1) / 1 = kty /
        0x02,                              //# unsigned(2) / 2 = EC2 /
@@ -32,8 +34,8 @@ const unsigned char tam_es256_cose_key_private_buf[] = {
           0x77, 0xD2, 0x3D, 0x2A, 0xC5, 0xBF, 0x2B, 0x6B,
           0x2D, 0x83, 0x79, 0x43, 0x2A, 0x1F, 0xEA, 0x98,
 };
-const UsefulBufC tam_es256_cose_key_private = {
-    .ptr = tam_es256_cose_key_private_buf,
-    .len = sizeof(tam_es256_cose_key_private_buf)
+const UsefulBufC delegated_authority_es256_cose_key_private = {
+    .ptr = delegated_authority_es256_cose_key_private_buf,
+    .len = sizeof(delegated_authority_es256_cose_key_private_buf)
 };
-#endif /* TAM_ES256_COSE_KEY_PRIVATE_H */
+#endif /* DELEGATED_AUTHORITY_ES256_COSE_KEY_PRIVATE_H */

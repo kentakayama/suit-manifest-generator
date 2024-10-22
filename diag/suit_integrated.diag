@@ -32,7 +32,7 @@
       h'8D82573A926D4754935332DC29997F74',  / tc-uuid /
        'suit'
     ],
-    / install / 17: << [
+    / install / 20: << [
       / directive-override-parameters / 20, {
         / uri / 21: "#tc"
       },
