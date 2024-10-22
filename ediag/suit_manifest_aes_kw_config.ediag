@@ -66,7 +66,7 @@
         / parameter-content / 18: h'{{FILE-HEX ../libcsuit/testfiles/encrypted_config_esdh.bin}}',
         / parameter-encryption-info / 19: << 96([
           / protected: / << {
-            / alg / 1: 1 / AES-GCM-128 /
+            / alg / 1: 1 / A128GCM /
           } >>,
           / unprotected: / {
             / IV / 5: h'{{FILE-HEX-10+16 ../libcsuit/testfiles/encryption_info_config_esdh.cose}}'
@@ -75,7 +75,7 @@
           / recipients: / [
             [
               / protected: / << {
-                / alg / 1: -29 / ECDH-ES + A128KW /,
+                / alg / 1: -29 / ECDH-ES + A128KW /
               } >>,
               / unprotected: / {
                 / ephemeral key / -1: {

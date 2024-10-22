@@ -53,7 +53,7 @@
       / directive-override-parameters / 20, {
         / parameter-image-digest / 3: << [
           / algorithm-id / -16 / SHA256 /,
-          / digest-bytes / h'{{FILE-HEX-13+32 ../suit/suit_uri.suit}}'
+          / digest-bytes / {{FILE-CQ-[2][wrapped][0][wrapped][1] ../suit/suit_uri.suit}}
         ] >>,
         / parameter-image-size / 14: {{FILE-SIZE ../suit/suit_uri.suit}},
         / parameter-uri / 21: "https://example.org/8d82573a-926d-4754-9353-32dc29997f74.suit"

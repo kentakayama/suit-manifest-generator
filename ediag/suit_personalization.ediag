@@ -30,7 +30,7 @@
             / digest-algorithm-id: / -16 / SHA256 /,
             / digest-bytes: / h'{{FILE-SHA-256 ../libcsuit/testfiles/config.json}}'
           ] >>,
-          / image-size / 14: {{FILE-SIZE ../libcsuit/testfiles/config.json}}
+          / parameter-image-size / 14: {{FILE-SIZE ../libcsuit/testfiles/config.json}}
         },
         / condition-vendor-identifier / 1, 15,
         / condition-class-identifier / 2, 15
@@ -48,6 +48,11 @@
     / dependency-resolution / 15: << [
       / directive-set-component-index / 12, 1,
       / directive-override-parameters / 20, {
+        / parameter-image-sigest / 3: << [
+          / digest-algorithm-id: / -16 / SHA256 /,
+          / digest-bytes: / {{FILE-CQ-[2][wrapped][0][wrapped][1] ../untagged_suit/suit_uri.suit}}
+        ] >>,
+        / parameter-image-size / 14: {{FILE-SIZE ../untagged_suit/suit_uri.suit}},
         / parameter-uri / 21: "https://example.org/8d82573a-926d-4754-9353-32dc29997f74"
       },
       / directive-fetch / 21, 2
