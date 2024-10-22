@@ -4,7 +4,8 @@
 # SPDX-License-Identifier: BSD-2-Clause
 #
 
-DIAG2CBOR := cbor-diag # https://github.com/Nullus157/cbor-diag-rs
+DIAG2CBOR := cbor-diag --to bytes --from diag # https://github.com/Nullus157/cbor-diag-rs
+DIAG2CBOR := diag2cbor.rb
 
 .PHONY: all
 all:
@@ -14,7 +15,7 @@ all:
 	$(MAKE) -C ../diag $(notdir $@)
 
 %.cbor: ../diag/%.diag
-	$(DIAG2CBOR) --to bytes --from diag < $< > $@
+	$(DIAG2CBOR) < $< > $@
 
 .PHONY: clean
 clean:
