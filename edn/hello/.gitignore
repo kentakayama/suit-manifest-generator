@@ -2,8 +2,7 @@ hello
 hello.o
 
 *.cbor
+*.cose
 *.gdiag
 *.mdiag
 *.hdiag
-*.bin
-*.hex
