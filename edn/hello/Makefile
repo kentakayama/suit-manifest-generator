@@ -20,7 +20,7 @@ CFLAGS=-Os -Wall
 hello.envelope.gdiag: \
 	hello.envelope.rediag \
 	hello.manifest.digest.gdiag \
-	hello.manifest.digest.mac.mdiag \
+	hello.manifest.digest.mac.cose.gdiag \
 	hello.manifest.gdiag \
 	hello.bin.hdiag
 
@@ -30,6 +30,11 @@ hello.manifest.gdiag: \
 	hello.digest.hdiag \
 	hello.size.gdiag
 
+# generate SUIT_Digest of SUIT_Manifest
+hello.manifest.digest.gdiag: \
+	hello.manifest.digest.hdiag
+hello.manifest.digest.hdiag: \
+	hello.manifest.cbor
 
 # generate hex file for integrated payload
 hello.bin.hdiag: hello
