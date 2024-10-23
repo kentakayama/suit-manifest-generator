@@ -1,0 +1,36 @@
+<< {
+  e'suit-manifest-version': 1,
+  e'suit-manifest-sequence-number': 0,
+  e'suit-common': << {
+    e'suit-components': [
+      [
+        'hello'
+      ]
+    ],
+    e'suit-shared-sequence': << [
+      e'suit-directive-override-parameters', {
+        e'suit-parameter-image-digest': << [
+          / algorithm-id: / e'cose-alg-sha-256',
+          / digest-bytes: / ref'hello.digest.hdiag'
+        ] >>,
+        e'suit-parameter-image-size': ref'hello.size.gdiag'
+      }
+    ] >>
+  } >>,
+  e'suit-invoke': << [
+    e'suit-directive-override-parameters', {
+      / NOTE: replace below with actual arguments /
+      e'suit-parameter-invoke-args': './hello'
+    },
+    e'suit-directive-invoke', 2
+  ] >>,
+  e'suit-install': << [
+    e'suit-directive-override-parameters', {
+      e'suit-parameter-uri': "#encrypted",
+      e'suit-parameter-encryption-info': ref'encrypted.a128kw.a128ctr.encrypt.cose.gdiag'
+    },
+    e'suit-directive-fetch', 2,
+
+    e'suit-condition-image-match', 15
+  ] >>
+} >>

@@ -19,20 +19,25 @@ def save_to_files(encoded, encryption_info, encrypted_payload):
 
 
 def encrypt_aeskw(plaintext: bytes, kek_alg: str, cek_alg: str, encryption_info: str, encrypted_payload: str):
-    print(f"{plaintext}, {kek_alg}, {cek_alg}, {encryption_info}, {encrypted_payload}")
-
     cek = COSEKey.from_symmetric_key(alg=cek_alg)
     kek = COSEKey.from_symmetric_key("a" * 16, alg=kek_alg, kid="kid-1")
+
+    p = {}
+    u = {"iv": cek.generate_nonce()}
+    if cek_alg in ["A128CTR", "A192CTR", "A256CTR", "A128CBC", "A192CBC", "A256CBC"]:
+        # non-AEAD
+        u["alg"] = cek_alg
+    else:
+        # AEAD (default)
+        p["alg"] = cek_alg
 
     r = Recipient.new(unprotected={"alg": kek_alg, "kid": kek.kid}, sender_key=kek)
     sender = COSE.new()
     encoded = sender.encode_and_encrypt(
         plaintext,
         cek,
-        protected={"alg": cek_alg},
-        unprotected={
-            "iv": cek.generate_nonce()
-        },
+        protected=p,
+        unprotected=u,
         recipients=[r],
     )
     save_to_files(encoded, encryption_info, encrypted_payload)

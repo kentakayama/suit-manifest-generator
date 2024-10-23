@@ -1,0 +1,8 @@
+hello
+hello.o
+*.bin
+
+*.cbor
+*.cose
+*.gdiag
+*.hdiag
