@@ -16,6 +16,13 @@ CFLAGS=-Os -Wall
 # NOTE: if one target requires multiple sources,
 # list them from direct source (e.g. gdiag requires rediag directly)
 
+# the target depends on these materials
+encrypted.envelope.cbor: \
+	encrypted.envelope.rediag \
+	encrypted.manifest.rediag \
+	encrypted.manifest.digest.rediag \
+	hello.c
+
 # generate SUIT_Envelope_Tagged
 encrypted.envelope.gdiag: \
 	encrypted.envelope.rediag \
@@ -32,10 +39,8 @@ encrypted.manifest.gdiag: \
 	hello.size.gdiag
 
 # generate SUIT_Digest of SUIT_Manifest
-encrypted.manifest.digest.gdiag: \
-	encrypted.manifest.digest.hdiag
-encrypted.manifest.digest.hdiag: \
-	encrypted.manifest.cbor
+encrypted.manifest.digest.gdiag: encrypted.manifest.digest.hdiag
+encrypted.manifest.digest.hdiag: encrypted.manifest.cbor
 
 # generate hex file for integrated payload
 encrypted.bin.hdiag: hello
