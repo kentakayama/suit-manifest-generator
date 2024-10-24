@@ -47,7 +47,7 @@ $(SUIT_MANIFEST_CDDL):
 
 # generate byte string diag from a binary
 %.bin.hdiag:
-	python3 ../scripts/bin-to-diag-hex.py $< > $@
+	python3 ../scripts/bin2hdiag.py $< > $@
 
 # generate A128KW+A128CTR encrypted payload
 %.a128kw.a128ctr.encrypt.cose:
