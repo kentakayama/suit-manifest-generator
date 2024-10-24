@@ -1,0 +1,5 @@
+{
+    "kty": "Symmetric",
+    "alg": "A128CTR",
+    "key_ops": ["encrypt", "decrypt"]
+}

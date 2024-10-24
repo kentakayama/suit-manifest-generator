@@ -1,0 +1,7 @@
+{
+    "kty": "Symmetric",
+    "alg": "A128KW",
+    "k": "YWFhYWFhYWFhYWFhYWFhYQ==",
+    "k-in-hex": "61616161616161616161616161616161",
+    "key_ops": ["wrapKey", "unwrapKey"]
+}
