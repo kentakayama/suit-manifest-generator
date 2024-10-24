@@ -3,9 +3,8 @@
   e'suit-manifest-sequence-number': 0,
   e'suit-common': << {
     e'suit-components': [
-      [
-        'hello'
-      ]
+      ['hello'],
+      ['encrypted']
     ],
     e'suit-shared-sequence': << [
       e'suit-directive-override-parameters', {
@@ -19,18 +18,24 @@
   } >>,
   e'suit-invoke': << [
     e'suit-directive-override-parameters', {
-      / NOTE: replace below with actual arguments /
       e'suit-parameter-invoke-args': './hello'
     },
     e'suit-directive-invoke', 2
   ] >>,
-  e'suit-install': << [
+  e'suit-payload-fetch': << [
+    e'suit-directive-set-component-index', 1 / ['encrypted'] /,
     e'suit-directive-override-parameters', {
-      e'suit-parameter-uri': "#encrypted",
-      e'suit-parameter-encryption-info': ref'encrypted.a128kw.a128ctr.encrypt.cose.gdiag'
+      e'suit-parameter-uri': "#encrypted"
     },
-    e'suit-directive-fetch', 2,
-
+    e'suit-directive-fetch', 2
+  ] >>,
+  e'suit-install': << [
+    e'suit-directive-set-component-index', 0 / ['hello'] /,
+    e'suit-directive-override-parameters', {
+      e'suit-parameter-encryption-info': << ref'encrypted.a128kw.a128ctr.encrypt.cose.gdiag' >>,
+      e'suit-parameter-source-component': 1
+    },
+    e'suit-directive-copy', 15,
     e'suit-condition-image-match', 15
   ] >>
 } >>

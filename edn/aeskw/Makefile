@@ -4,8 +4,9 @@
 # SPDX-License-Identifier: BSD-2-Clause
 #
 
+TARGET=encrypted.envelope.cbor
 .PHONY: all
-all: encrypted.envelope.cbor
+all: $(TARGET)
 
 # load generic rules
 include ../scripts/common.mk
@@ -13,8 +14,12 @@ include ../scripts/common.mk
 CC=musl-gcc -static
 CFLAGS=-Os -Wall
 
-# NOTE: if one target requires multiple sources,
-# list them from direct source (e.g. gdiag requires rediag directly)
+# list dependencies as prerequisites here
+#
+# NOTE: %.hdiag files and %.size.gdiag files are special: order sensitive
+#       You need to start from the direct source
+#       because the common.mk cannot automatically detect the
+#       first input ($<) file to be used in the recipies
 
 # the target depends on these materials
 encrypted.envelope.cbor: \
@@ -65,8 +70,8 @@ encrypted.a128kw.a128ctr.encrypt.bin.hdiag: encrypted.a128kw.a128ctr.encrypt.bin
 
 .PHONY: test
 test: all $(SUIT_MANIFEST_CDDL)
-	@echo ${TEST_COMMAND} $<
-	@if ${TEST_COMMAND} $<; then \
+	@echo ${TEST_COMMAND} ${TARGET}
+	@if ${TEST_COMMAND} ${TARGET}; then \
 		echo "[SUCCESS] Generated SUIT Manifest binary 'encrypted.envelope.cbor' matches to the CDDL of SUIT Manifest."; \
 	else \
 		echo "[FAIL] Generated SUIT Manifest binary 'encrypted.envelope.cbor' doesn't match to the CDDL of SUIT Manifest."; exit 1; \

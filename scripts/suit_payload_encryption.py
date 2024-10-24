@@ -22,14 +22,16 @@ def encrypt_aeskw(plaintext: bytes, kek_alg: str, cek_alg: str, encryption_info:
     cek = COSEKey.from_symmetric_key(alg=cek_alg)
     kek = COSEKey.from_symmetric_key("a" * 16, alg=kek_alg, kid="kid-1")
 
+    # care deterministic encoding before consuming protected header
     p = {}
-    u = {"iv": cek.generate_nonce()}
+    u = {}
     if cek_alg in ["A128CTR", "A192CTR", "A256CTR", "A128CBC", "A192CBC", "A256CBC"]:
         # non-AEAD
         u["alg"] = cek_alg
     else:
         # AEAD (default)
         p["alg"] = cek_alg
+    u["iv"] = cek.generate_nonce()
 
     r = Recipient.new(unprotected={"alg": kek_alg, "kid": kek.kid}, sender_key=kek)
     sender = COSE.new()
