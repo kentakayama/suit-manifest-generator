@@ -4,5 +4,5 @@
     << ref'aeskw.manifest.digest.mac.cose.gdiag' >>
   ] >>,
   e'suit-manifest': ref'aeskw.manifest.gdiag',
-  "#encrypted": ref'a128kw.a128ctr.bin.hdiag'
+  "#encrypted": ref'a128ctr.bin.hdiag'
 })

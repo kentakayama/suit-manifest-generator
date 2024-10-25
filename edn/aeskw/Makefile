@@ -34,7 +34,7 @@ aeskw.envelope.gdiag: \
 	aeskw.manifest.digest.gdiag \
 	aeskw.manifest.digest.mac.cose.gdiag \
 	aeskw.manifest.gdiag \
-	a128kw.a128ctr.bin.hdiag
+	a128ctr.bin.hdiag
 
 # generate SUIT_Manifest
 aeskw.manifest.gdiag: \
@@ -46,9 +46,6 @@ aeskw.manifest.gdiag: \
 # generate SUIT_Digest of SUIT_Manifest
 aeskw.manifest.digest.gdiag: aeskw.manifest.digest.hdiag
 aeskw.manifest.digest.hdiag: aeskw.manifest.cbor
-
-# generate hex file for integrated payload
-aeskw.bin.hdiag: hello
 
 # generate parameters for the hello world app
 hello.size.gdiag: hello
@@ -66,7 +63,7 @@ hello.o: hello.c
 a128kw.a128ctr.cose: hello
 
 # generate encrypted payload in hex
-a128kw.a128ctr.bin.hdiag: a128kw.a128ctr.bin
+a128ctr.bin.hdiag: a128ctr.bin
 
 .PHONY: test
 test: all $(SUIT_MANIFEST_CDDL)
