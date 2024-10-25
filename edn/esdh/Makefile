@@ -32,7 +32,7 @@ esdh.envelope.cbor: \
 esdh.envelope.gdiag: \
 	esdh.envelope.rediag \
 	esdh.manifest.digest.gdiag \
-	esdh.manifest.digest.mac.cose.gdiag \
+	esdh.manifest.digest.hmac256.cose.gdiag \
 	esdh.manifest.gdiag \
 	a128ctr.bin.hdiag
 

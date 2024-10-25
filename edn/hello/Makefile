@@ -32,7 +32,7 @@ hello.envelope.cbor: \
 hello.envelope.gdiag: \
 	hello.envelope.rediag \
 	hello.manifest.digest.gdiag \
-	hello.manifest.digest.mac.cose.gdiag \
+	hello.manifest.digest.hmac256.cose.gdiag \
 	hello.manifest.gdiag \
 	hello.bin.hdiag
 

@@ -1,26 +1,27 @@
 #!/usr/bin/env python3
 
-import sys
-from cwt import COSE, COSEKey, COSEKeyParams, COSEMessage
+import argparse
+import json
+from cwt import COSE, COSEKey, COSEMessage
 
-if len(sys.argv) != 3:
-    print(f"{sys.argv[0]} [input cbor file] [output cose file]", file=sys.stderr)
-    sys.exit(1)
+parser = argparse.ArgumentParser(description="Generate COSE_Mac0 binary without payload")
+parser.add_argument("plaintext_payload", help="input filename to be MACed")
+parser.add_argument("mac_jwk",           help="jwk filename of MAC key")
+parser.add_argument("cose",              help="output filename of COSE_Mac0 binary")
+args = parser.parse_args()
 
-with open(sys.argv[1], "rb") as f:
+with open(args.plaintext_payload, "rb") as f:
     input_bin = f.read()
 
-mac_key = COSEKey.new({
-    COSEKeyParams.KTY: 4, # oct
-    COSEKeyParams.ALG: 5, # HMAC 256/256
-    COSEKeyParams.K: b'a' * 32 # '6161...61'
-})
+with open(args.mac_jwk, "r") as f:
+    mac_key_jwk = json.loads(f.read())
+mac_key = COSEKey.from_jwk(mac_key_jwk)
 
-sender = COSE.new()
+sender = COSE.new(alg_auto_inclusion=True, kid_auto_inclusion=True)
 encoded = sender.encode(
     input_bin,
     mac_key,
-    protected={"alg": "HMAC 256/256"}
+    protected={"alg": mac_key_jwk["alg"]}
 )
 cose_mac0 = COSEMessage.loads(encoded)
 encoded, detached_payload = cose_mac0.detach_payload()
@@ -29,5 +30,5 @@ encoded, detached_payload = cose_mac0.detach_payload()
 recipient = COSE.new()
 assert input_bin == recipient.decode(encoded.dumps(), mac_key, detached_payload=detached_payload)
 
-with open(sys.argv[2], "wb") as f:
+with open(args.cose, "wb") as f:
     f.write(encoded.dumps())

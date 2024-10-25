@@ -10,9 +10,11 @@ export SUIT_MANIFEST_CDDL=../../cddl/suit-manifest.cddl
 RUBYDEBUG=RUBYOPT="-W0"
 DIAG2CBOR=$(RUBYDEBUG) diag2cbor.rb
 DIAG2DIAG=$(RUBYDEBUG) CBOR_DIAG_CDDL=$(SUIT_MANIFEST_CDDL) diag2diag.rb -e -d -aref -ae # embedded + deterministic + edn-ref + edn-e
-CBOR2DIAG=$(RUBYDEBUG) cbor2diag.rb -e # embedded
+CBOR2DIAG=$(RUBYDEBUG) cbor2diag.rb -e -d # embedded + deterministic
 TEST_COMMAND=$(RUBYDEBUG) cddl $(SUIT_MANIFEST_CDDL) validate
 PAYLOAD_ENCRYPTION=../scripts/suit_payload_encryption.py
+
+HMAC256_SEC_KEY=../scripts/hmac256-sec.jwk
 AESCTR_SEC_KEY=../scripts/aesctr-sec.jwk
 AESKW_SEC_KEY=../scripts/aeskw-sec.jwk
 ESDH_SENDER_PRIV_KEY=../scripts/esdh-sender-priv.jwk
@@ -42,8 +44,8 @@ $(SUIT_MANIFEST_CDDL):
 	sha256sum $< | awk '{printf "h'\''%s'\''",$$1}' > $@
 
 # generate COSE_Mac0 binary
-%.mac.cose: %.cbor
-	python3 ../scripts/cwt-mac.py $< $@
+%.hmac256.cose: %.cbor
+	python3 ../scripts/cwt-mac.py $< ${HMAC256_SEC_KEY} $@
 
 # generate COSE_Mac0 diag
 %.cose.gdiag: %.cose

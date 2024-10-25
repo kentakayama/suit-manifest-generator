@@ -32,7 +32,7 @@ aeskw.envelope.cbor: \
 aeskw.envelope.gdiag: \
 	aeskw.envelope.rediag \
 	aeskw.manifest.digest.gdiag \
-	aeskw.manifest.digest.mac.cose.gdiag \
+	aeskw.manifest.digest.hmac256.cose.gdiag \
 	aeskw.manifest.gdiag \
 	a128ctr.bin.hdiag
 
