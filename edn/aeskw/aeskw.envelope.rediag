@@ -1,0 +1,8 @@
+/ SUIT_Envelope_Tagged / 107({
+  e'suit-authentication-wrapper': << [
+    << ref'aeskw.manifest.digest.gdiag' >>,
+    << ref'aeskw.manifest.digest.mac.cose.gdiag' >>
+  ] >>,
+  e'suit-manifest': ref'aeskw.manifest.gdiag',
+  "#encrypted": ref'a128kw.a128ctr.bin.hdiag'
+})

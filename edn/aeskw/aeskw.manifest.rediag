@@ -32,7 +32,7 @@
   e'suit-install': << [
     e'suit-directive-set-component-index', 0 / ['hello'] /,
     e'suit-directive-override-parameters', {
-      e'suit-parameter-encryption-info': << ref'encrypted.a128kw.a128ctr.encrypt.cose.gdiag' >>,
+      e'suit-parameter-encryption-info': << ref'a128kw.a128ctr.cose.gdiag' >>,
       e'suit-parameter-source-component': 1
     },
     e'suit-directive-copy', 15,

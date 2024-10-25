@@ -54,10 +54,10 @@ $(SUIT_MANIFEST_CDDL):
 	python3 ../scripts/bin2hdiag.py $< > $@
 
 # generate A128KW+A128CTR encrypted payload
-%.a128kw.a128ctr.encrypt.cose:
+a128kw.a128ctr.cose:
 	python3 $(PAYLOAD_ENCRYPTION) -e ${@:.cose=.bin} -k ${AESKW_SEC_KEY} $< ${AESCTR_SEC_KEY} $@
 
-%.ecdh.a128kw.a128ctr.encrypt.cose:
+esdh.a128kw.a128ctr.cose:
 	python3 $(PAYLOAD_ENCRYPTION) -e ${@:.cose=.bin} -s $(ESDH_SENDER_PRIV_KEY) -r $(ESDH_RECEIVER_PUB_KEY) $< $(AESCTR_SEC_KEY) $@
 
 .PHONY: common-clean

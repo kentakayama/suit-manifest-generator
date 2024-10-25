@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: BSD-2-Clause
 #
 
-TARGET=encrypted.envelope.cbor
+TARGET=aeskw.envelope.cbor
 .PHONY: all
 all: $(TARGET)
 
@@ -22,33 +22,33 @@ CFLAGS=-Os -Wall
 #       first input ($<) file to be used in the recipies
 
 # the target depends on these materials
-encrypted.envelope.cbor: \
-	encrypted.envelope.rediag \
-	encrypted.manifest.rediag \
-	encrypted.manifest.digest.rediag \
+aeskw.envelope.cbor: \
+	aeskw.envelope.rediag \
+	aeskw.manifest.rediag \
+	aeskw.manifest.digest.rediag \
 	hello.c
 
 # generate SUIT_Envelope_Tagged
-encrypted.envelope.gdiag: \
-	encrypted.envelope.rediag \
-	encrypted.manifest.digest.gdiag \
-	encrypted.manifest.digest.mac.cose.gdiag \
-	encrypted.manifest.gdiag \
-	encrypted.a128kw.a128ctr.encrypt.bin.hdiag
+aeskw.envelope.gdiag: \
+	aeskw.envelope.rediag \
+	aeskw.manifest.digest.gdiag \
+	aeskw.manifest.digest.mac.cose.gdiag \
+	aeskw.manifest.gdiag \
+	a128kw.a128ctr.bin.hdiag
 
 # generate SUIT_Manifest
-encrypted.manifest.gdiag: \
-	encrypted.manifest.rediag \
-	encrypted.a128kw.a128ctr.encrypt.cose.gdiag \
+aeskw.manifest.gdiag: \
+	aeskw.manifest.rediag \
+	a128kw.a128ctr.cose.gdiag \
 	hello.digest.hdiag \
 	hello.size.gdiag
 
 # generate SUIT_Digest of SUIT_Manifest
-encrypted.manifest.digest.gdiag: encrypted.manifest.digest.hdiag
-encrypted.manifest.digest.hdiag: encrypted.manifest.cbor
+aeskw.manifest.digest.gdiag: aeskw.manifest.digest.hdiag
+aeskw.manifest.digest.hdiag: aeskw.manifest.cbor
 
 # generate hex file for integrated payload
-encrypted.bin.hdiag: hello
+aeskw.bin.hdiag: hello
 
 # generate parameters for the hello world app
 hello.size.gdiag: hello
@@ -63,20 +63,20 @@ hello.o: hello.c
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 # generate encryption-info (and encrypted payload)
-encrypted.a128kw.a128ctr.encrypt.cose: hello
+a128kw.a128ctr.cose: hello
 
 # generate encrypted payload in hex
-encrypted.a128kw.a128ctr.encrypt.bin.hdiag: encrypted.a128kw.a128ctr.encrypt.bin
+a128kw.a128ctr.bin.hdiag: a128kw.a128ctr.bin
 
 .PHONY: test
 test: all $(SUIT_MANIFEST_CDDL)
 	@echo ${TEST_COMMAND} ${TARGET}
 	@if ${TEST_COMMAND} ${TARGET}; then \
-		echo "[SUCCESS] Generated SUIT Manifest binary 'encrypted.envelope.cbor' matches to the CDDL of SUIT Manifest."; \
+		echo "[SUCCESS] Generated SUIT Manifest binary 'aeskw.envelope.cbor' matches to the CDDL of SUIT Manifest."; \
 	else \
-		echo "[FAIL] Generated SUIT Manifest binary 'encrypted.envelope.cbor' doesn't match to the CDDL of SUIT Manifest."; exit 1; \
+		echo "[FAIL] Generated SUIT Manifest binary 'aeskw.envelope.cbor' doesn't match to the CDDL of SUIT Manifest."; exit 1; \
 	fi
 
 .PHONY: clean
 clean: common-clean
-	$(RM) hello hello.o
+	$(RM) hello hello.o *.bin
