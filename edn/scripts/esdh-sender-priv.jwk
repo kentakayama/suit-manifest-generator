@@ -1,5 +1,6 @@
 {
     "kty": "EC",
+    "crv": "P-256",
     "alg": "ECDH-ES+A128KW",
     "x": "hJaBGq4LqqvSYVcYnuzaJr6qi/Ebbz/m4rVlnIXbwK0=",
     "x-in-hex": "8496811AAE0BAAABD26157189EECDA26BEAA8BF11B6F3FE6E2B5659C85DBC0AD",
@@ -7,5 +8,5 @@
     "y-in-hex": "3B1F2A4B6C098131C0A36DACD1D78BD381DCDFB09C052DB33991DB7338B4A896",
     "d": "ApZYjZCUGLM50VBCCjYStX+09jGmnyJPrpDLTz/hiXM=",
     "d-in-hex": "0296588D909418B339D150420A3612B57FB4F631A69F224FAE90CB4F3FE18973",
-    "key_ops": "deriveKey"
+    "key_ops": ["deriveKey"]
 }

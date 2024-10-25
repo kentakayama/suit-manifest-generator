@@ -47,7 +47,7 @@ def encrypt_ecdh_aeskw(plaintext: bytes, cek_jwk: COSEKey, sender_priv_jwk: COSE
         print(f"Unknown alg: {sender_priv_jwk['alg']}")
         sys.exit(1)
 
-    u = {"kid": key_wrap_jwk['kid']} if 'kid' in key_wrap_jwk else {}
+    u = {"kid": sender_priv_jwk['kid']} if 'kid' in sender_priv_jwk else {}
     inner_protected_header = {"alg": sender_priv_jwk['alg']}
     context = {
         "alg": kw_alg, # e.g. "A128KW"
@@ -89,7 +89,7 @@ if __name__ == "__main__":
         cek_jwk = json.loads(f.read())
     if args.sender_priv_jwk:
         # asymmetric key distribution methods
-        if not args.sender_pub_jwk or args.key_wrap:
+        if not args.sender_priv_jwk or args.key_wrap_jwk:
             parser.print_help()
             sys.exit(1)
         with open(args.sender_priv_jwk, "r") as f:
