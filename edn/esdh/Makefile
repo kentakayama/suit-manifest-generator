@@ -1,0 +1,82 @@
+#
+# Copyright (c) 2024 SECOM CO., LTD. All Rights reserved.
+#
+# SPDX-License-Identifier: BSD-2-Clause
+#
+
+TARGET=esdh.envelope.cbor
+.PHONY: all
+all: $(TARGET)
+
+# load generic rules
+include ../scripts/common.mk
+
+CC=musl-gcc -static
+CFLAGS=-Os -Wall
+
+# list dependencies as prerequisites here
+#
+# NOTE: %.hdiag files and %.size.gdiag files are special: order sensitive
+#       You need to start from the direct source
+#       because the common.mk cannot automatically detect the
+#       first input ($<) file to be used in the recipies
+
+# the target depends on these materials
+esdh.envelope.cbor: \
+	esdh.envelope.rediag \
+	esdh.manifest.rediag \
+	esdh.manifest.digest.rediag \
+	hello.c
+
+# generate SUIT_Envelope_Tagged
+esdh.envelope.gdiag: \
+	esdh.envelope.rediag \
+	esdh.manifest.digest.gdiag \
+	esdh.manifest.digest.mac.cose.gdiag \
+	esdh.manifest.gdiag \
+	a128ctr.bin.hdiag
+
+# generate SUIT_Manifest
+esdh.manifest.gdiag: \
+	esdh.manifest.rediag \
+	esdh.a128kw.a128ctr.cose.gdiag \
+	hello.digest.hdiag \
+	hello.size.gdiag
+
+# generate SUIT_Digest of SUIT_Manifest
+esdh.manifest.digest.gdiag: esdh.manifest.digest.hdiag
+esdh.manifest.digest.hdiag: esdh.manifest.cbor
+
+# generate hex file for integrated payload
+esdh.bin.hdiag: hello
+
+# generate parameters for the hello world app
+hello.size.gdiag: hello
+hello.digest.hdiag: hello
+
+# compile the hello world app
+hello: hello.o
+	$(CC) $(CFLAGS) -o $@ $<
+	strip hello
+
+hello.o: hello.c
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+# generate encryption-info (and encrypted payload)
+esdh.a128kw.a128ctr.cose: hello
+
+# generate encrypted payload in hex
+a128ctr.bin.hdiag: a128ctr.bin
+
+.PHONY: test
+test: all $(SUIT_MANIFEST_CDDL)
+	@echo ${TEST_COMMAND} ${TARGET}
+	@if ${TEST_COMMAND} ${TARGET}; then \
+		echo "[SUCCESS] Generated SUIT Manifest binary '${TARGET}' matches to the CDDL of SUIT Manifest."; \
+	else \
+		echo "[FAIL] Generated SUIT Manifest binary '${TARGET}' doesn't match to the CDDL of SUIT Manifest."; exit 1; \
+	fi
+
+.PHONY: clean
+clean: common-clean
+	$(RM) hello hello.o *.bin
