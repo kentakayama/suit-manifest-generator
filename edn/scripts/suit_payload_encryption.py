@@ -5,7 +5,7 @@ from typing import List, Tuple
 import argparse
 import json
 from cwt import COSE, COSEMessage, COSEKey, Recipient
-from cwt.const import COSE_ALGORITHMS_CEK_NON_AEAD, COSE_ALGORITHMS_KEY_WRAP, COSE_ALGORITHMS_CKDM_KEY_AGREEMENT_WITH_KEY_WRAP_ES, COSE_ALGORITHMS_CKDM_KEY_AGREEMENT_WITH_KEY_WRAP_SS, COSE_ALGORITHMS_CKDM_KEY_AGREEMENT_WITH_KEY_WRAP
+from cwt.const import COSE_ALGORITHMS_CEK_NON_AEAD, COSE_ALGORITHMS_KEY_WRAP, COSE_ALGORITHMS_CKDM_KEY_AGREEMENT_WITH_KEY_WRAP
 
 def encrypt_content(plaintext: bytes, cek_jwk: dict, recipients: List[Recipient], detached_payload: bool = False) -> Tuple[bytes, bytes]:
     # care deterministic encoding before consuming protected header
