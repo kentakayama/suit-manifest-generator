@@ -15,6 +15,7 @@ TEST_COMMAND=$(RUBYDEBUG) cddl $(SUIT_MANIFEST_CDDL) validate
 PAYLOAD_ENCRYPTION=../scripts/suit_payload_encryption.py
 
 HMAC256_SEC_KEY=../scripts/hmac256-sec.jwk
+ES256_SIGN_KEY=../scripts/es256-sender-priv.jwk
 AESCTR_SEC_KEY=../scripts/aesctr-sec.jwk
 AESKW_SEC_KEY=../scripts/aeskw-sec.jwk
 ESDH_SENDER_PRIV_KEY=../scripts/esdh-sender-priv.jwk
@@ -45,9 +46,13 @@ $(SUIT_MANIFEST_CDDL):
 
 # generate COSE_Mac0 binary
 %.hmac256.cose: %.cbor
-	python3 ../scripts/cwt-mac.py $< ${HMAC256_SEC_KEY} $@
+	python3 ../scripts/cwt-mac-or-sign.py $< ${HMAC256_SEC_KEY} $@
 
-# generate COSE_Mac0 diag
+# generate COSE_Sign1 binary
+%.es256.cose: %.cbor
+	python3 ../scripts/cwt-mac-or-sign.py $< ${ES256_SIGN_KEY} $@
+
+# generate COSE_Mac0 or COSE_Sign1 diag
 %.cose.gdiag: %.cose
 	$(CBOR2DIAG) $< > $@
 

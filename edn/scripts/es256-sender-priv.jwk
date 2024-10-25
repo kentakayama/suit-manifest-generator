@@ -1,7 +1,7 @@
 {
     "kty": "EC",
     "crv": "P-256",
-    "alg": "ECDH-ES+A128KW",
+    "alg": "ES256",
     "x": "hJaBGq4LqqvSYVcYnuzaJr6qi/Ebbz/m4rVlnIXbwK0=",
     "x-in-hex": "8496811AAE0BAAABD26157189EECDA26BEAA8BF11B6F3FE6E2B5659C85DBC0AD",
     "y": "Ox8qS2wJgTHAo22s0deL04Hc37CcBS2zOZHbczi0qJY=",
