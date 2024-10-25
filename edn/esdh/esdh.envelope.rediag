@@ -1,7 +1,7 @@
 / SUIT_Envelope_Tagged / 107({
   e'suit-authentication-wrapper': << [
     << ref'esdh.manifest.digest.gdiag' >>,
-    << ref'esdh.manifest.digest.hmac256.cose.gdiag' >>
+    << ref'esdh.manifest.digest.es256.cose.gdiag' >>
   ] >>,
   e'suit-manifest': ref'esdh.manifest.gdiag',
   "#encrypted": ref'a128ctr.bin.hdiag'
