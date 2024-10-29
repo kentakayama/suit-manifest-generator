@@ -12,7 +12,7 @@ def encrypt_content(plaintext: bytes, cek_jwk: dict, recipients: List[Recipient]
     cek = COSEKey.from_jwk(cek_jwk)
     u = {"iv": cek.generate_nonce()}
 
-    sender = COSE.new(alg_auto_inclusion=True, kid_auto_inclusion=True)
+    sender = COSE.new(alg_auto_inclusion=True, kid_auto_inclusion=True, deterministic_header=True)
     encoded = sender.encode_and_encrypt(
         plaintext,
         key=cek,

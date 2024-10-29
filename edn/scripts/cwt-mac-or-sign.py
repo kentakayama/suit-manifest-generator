@@ -7,7 +7,7 @@ from cwt import COSE, COSEKey, COSEMessage
 parser = argparse.ArgumentParser(description="Generate COSE_Mac0 or COSE_Sign1 binary without payload")
 parser.add_argument("plaintext_payload", help="input filename to be MACed/signed")
 parser.add_argument("jwk",               help="jwk filename of MAC/sign key")
-parser.add_argument("cose",              help="output filename of COSE_Mac0 binary")
+parser.add_argument("cose",              help="output filename of COSE_Mac0 or COSE_Sign1 binary")
 args = parser.parse_args()
 
 with open(args.plaintext_payload, "rb") as f:
@@ -20,8 +20,7 @@ key = COSEKey.from_jwk(key_jwk)
 sender = COSE.new(alg_auto_inclusion=True, kid_auto_inclusion=True)
 encoded = sender.encode(
     input_bin,
-    key,
-    protected={"alg": key_jwk["alg"]}
+    key
 )
 cose = COSEMessage.loads(encoded)
 encoded, detached_payload = cose.detach_payload()
