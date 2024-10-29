@@ -31,7 +31,6 @@ UNTAGGED_DIAGS := \
 	suit_manifest_dependency_decrypt.diag \
 	suit_manifest_esdh_config.diag \
 	suit_manifest_expS0.diag \
-	suit_manifest_expS1.diag \
 	suit_manifest_expS2.diag \
 	suit_manifest_expS3.diag \
 	suit_manifest_expS4.diag \
