@@ -1,0 +1,28 @@
+<< {
+  e'suit-manifest-version': 1,
+  e'suit-manifest-sequence-number': 0,
+  e'suit-common': << {
+    e'suit-components': [
+      ['usr', 'bin', 'example'],
+      ['usr', 'local', 'bin'],
+      ['usr', 'local', 'bin', 'example3']
+    ],
+    e'suit-shared-sequence': << [
+      e'suit-directive-override-parameters', {
+        e'suit-parameter-vendor-identifier': h'fa6b4a53d5ad5fdfbe9de663e4d41ffe',
+        e'suit-parameter-class-identifier': h'1492af1425695e48bf429b2d51f2ab45',
+        e'suit-parameter-image-digest': << [
+          / algorithm-id: / e'cose-alg-sha-256',
+          / digest-bytes: / ref'comp-meta.digest.hdiag'
+        ] >>,
+        e'suit-parameter-image-size': ref'comp-meta.size.gdiag'
+      }
+    ] >>
+  } >>,
+  e'suit-invoke': << [
+    e'suit-directive-override-parameters', {
+      e'suit-parameter-invoke-args': 'cat /usr/bin/example'
+    },
+    e'suit-directive-invoke', 2
+  ] >>
+} >>

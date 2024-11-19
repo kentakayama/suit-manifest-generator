@@ -1,0 +1,7 @@
+/ SUIT_Envelope_Tagged / 107({
+  e'suit-authentication-wrapper': << [
+    << ref'comp-meta.manifest.digest.gdiag' >>,
+    << ref'comp-meta.manifest.digest.es256.cose.gdiag' >>
+  ] >>,
+  e'suit-manifest': ref'comp-meta.manifest.gdiag'
+})

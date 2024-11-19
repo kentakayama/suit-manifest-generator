@@ -1,18 +1,26 @@
-CONCATENATED_SUIT_CDDL	:= suit-manifest.cddl
-SUIT_MANIFEST_CDDL		:= draft-ietf-suit-manifest.cddl
-SUIT_TRUST_DOMAINS_CDDL	:= draft-ietf-suit-trust-domains.cddl
-SUIT_ENCRYPTED_PAYLOADS_CDDL	:= draft-ietf-suit-firmware-encryption.cddl
-SUIT_REPORT_CDDL		:= draft-ietf-suit-report.cddl
-SUIT_MTI_CDDL			:= draft-ietf-suit-mti.cddl
-COSE_XML			:= rfc-9052-cose.xml
-COSE_CDDL			:= rfc-9052-cose.cddl
+CONCATENATED_SUIT_CDDL       := suit-manifest.cddl
+SUIT_MANIFEST_CDDL           := draft-ietf-suit-manifest.cddl
+SUIT_TRUST_DOMAINS_CDDL      := draft-ietf-suit-trust-domains.cddl
+SUIT_UPDATE_MANAGEMENT_CDDL  := draft-ietf-suit-update-management.cddl
+SUIT_ENCRYPTED_PAYLOADS_CDDL := draft-ietf-suit-firmware-encryption.cddl
+SUIT_REPORT_CDDL             := draft-ietf-suit-report.cddl
+SUIT_MTI_CDDL                := draft-ietf-suit-mti.cddl
+COSE_XML                     := rfc-9052-cose.xml
+COSE_CDDL                    := rfc-9052-cose.cddl
 
-CDDLS				:= $(COSE_CDDL) $(SUIT_MANIFEST_CDDL) $(SUIT_TRUST_DOMAINS_CDDL) $(SUIT_REPORT_CDDL)
+CDDLS := \
+	$(SUIT_MANIFEST_CDDL) \
+	$(SUIT_TRUST_DOMAINS_CDDL) \
+	$(SUIT_UPDATE_MANAGEMENT_CDDL) \
+	$(SUIT_ENCRYPTED_PAYLOADS_CDDL) \
+	$(SUIT_REPORT_CDDL) \
+	$(SUIT_MTI_CDDL) \
+	$(COSE_CDDL)
 
 .PHONY: cat-cddl
 cat-cddl: $(CONCATENATED_SUIT_CDDL)
 
-$(CONCATENATED_SUIT_CDDL): $(SUIT_MANIFEST_CDDL) $(SUIT_TRUST_DOMAINS_CDDL) $(SUIT_REPORT_CDDL) $(SUIT_MTI_CDDL) $(SUIT_ENCRYPTED_PAYLOADS_CDDL) $(COSE_CDDL)
+$(CONCATENATED_SUIT_CDDL): $(CDDLS)
 	cat $^ > $@
 
 $(SUIT_MANIFEST_CDDL):
@@ -21,6 +29,9 @@ $(SUIT_MANIFEST_CDDL):
 
 $(SUIT_TRUST_DOMAINS_CDDL):
 	curl https://raw.githubusercontent.com/suit-wg/suit-multiple-trust-domains/main/draft-ietf-suit-trust-domains.cddl -o $@
+
+$(SUIT_UPDATE_MANAGEMENT_CDDL):
+	curl https://raw.githubusercontent.com/suit-wg/suit-update-management/main/draft-ietf-suit-update-management.cddl -o $@
 
 $(SUIT_ENCRYPTED_PAYLOADS_CDDL):
 	curl https://raw.githubusercontent.com/suit-wg/suit-firmware-encryption/main/draft-ietf-suit-firmware-encryption.cddl -o $@

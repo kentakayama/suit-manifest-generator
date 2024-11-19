@@ -9,8 +9,10 @@ export SUIT_MANIFEST_CDDL=../../cddl/suit-manifest.cddl
 
 RUBYDEBUG=RUBYOPT="-W0"
 DIAG2CBOR=$(RUBYDEBUG) diag2cbor.rb
-DIAG2DIAG=$(RUBYDEBUG) CBOR_DIAG_CDDL=$(SUIT_MANIFEST_CDDL) diag2diag.rb -e -d -aref -ae # embedded + deterministic + edn-ref + edn-e
-CBOR2DIAG=$(RUBYDEBUG) cbor2diag.rb -e -d # embedded + deterministic
+# embedded + deterministic + edn-ref + edn-e + edn-dt
+DIAG2DIAG=$(RUBYDEBUG) CBOR_DIAG_CDDL=$(SUIT_MANIFEST_CDDL) diag2diag.rb -e -d -aref -ae -adt
+# embedded + deterministic
+CBOR2DIAG=$(RUBYDEBUG) cbor2diag.rb -e -d
 TEST_COMMAND=$(RUBYDEBUG) cddl $(SUIT_MANIFEST_CDDL) validate
 PAYLOAD_ENCRYPTION=../scripts/suit_payload_encryption.py
 
@@ -30,11 +32,11 @@ $(SUIT_MANIFEST_CDDL):
 
 # generate cbor file from generated diag file
 %.cbor: %.gdiag
-	$(DIAG2CBOR) $< > $@
+	$(DIAG2CBOR) < $< > $@
 
 # generate diag file from EDN+ref+e file
 %.gdiag: %.rediag
-	$(DIAG2DIAG) $< > $@
+	$(DIAG2DIAG) < $< > $@
 
 # store file size as an integer
 %.size.gdiag:

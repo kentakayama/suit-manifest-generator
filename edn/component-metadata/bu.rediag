@@ -1,0 +1,43 @@
+  ] >>,
+  e'suit-payload-fetch': << [
+    / create a directory /
+    e'suit-directive-set-component-index',
+      1 / ['usr', 'local', 'bin'] /,
+    e'suit-directive-override-parameters', {
+      e'suit-parameter-content': h'',
+      e'suit-parameter-component-metadata': << {
+        e'suit-meta-file-type': e'suit-filetype-directory'
+      } >>
+    },
+    e'suit-directive-write', 2,
+
+    / fetch the binary /
+    e'suit-directive-set-component-index',
+      2 / ['usr', 'local', 'bin', 'example3'] /,
+    e'suit-directive-override-parameters', {
+      e'suit-parameter-uri': "https://cdn.example/example3.bin",
+      e'suit-parameter-component-metadata': << {
+        e'suit-meta-default-permissions': 0b100 / r-- /,
+        e'suit-meta-user-permissions': {
+          / default user / 1000: 0b110 / rw- /
+        },
+        e'suit-meta-group-permissions': {
+          / default group / 1000: 0b100 / r-- /
+        },
+        e'suit-meta-file-type': e'suit-filetype-regular'
+      } >>
+    },
+    e'suit-directive-fetch', 2,
+    e'suit-condition-image-match', 15
+  ] >>,
+  e'suit-install': << [
+    e'suit-directive-set-component-index',
+      0 / ['usr', 'bin', 'example'] /,
+    e'suit-directive-override-parameters', {
+      e'suit-parameter-content': '/usr/local/bin/example3',
+      e'suit-parameter-component-metadata': << {
+        e'suit-meta-file-type': e'suit-filetype-symlink'
+      } >>
+    },
+    e'suit-directive-write', 2
+
