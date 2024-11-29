@@ -22,7 +22,9 @@ include ../scripts/common.mk
 update.envelope.cbor: \
 	update.envelope.rediag \
 	update.manifest.rediag \
-	update.manifest.digest.rediag
+	update.manifest.digest.rediag \
+	update.coswid.rediag \
+	update.coswid.digest.rediag
 
 # generate SUIT_Envelope_Tagged
 update.envelope.gdiag: \
@@ -30,17 +32,23 @@ update.envelope.gdiag: \
 	update.manifest.digest.gdiag \
 	update.manifest.digest.es256.cose.gdiag \
 	update.manifest.gdiag \
+	update.coswid.gdiag \
 	raw_image.bin.hdiag
 
 # generate SUIT_Manifest
 update.manifest.gdiag: \
 	update.manifest.rediag \
+	update.coswid.digest.gdiag \
 	update.digest.hdiag \
 	update.size.gdiag
 
 # generate SUIT_Digest of SUIT_Manifest
 update.manifest.digest.gdiag: update.manifest.digest.hdiag
 update.manifest.digest.hdiag: update.manifest.cbor
+
+# generate SUIT_Digest of concise-swid-tag
+update.coswid.digest.gdiag: update.coswid.digest.hdiag
+update.coswid.digest.hdiag: update.coswid.cbor
 
 # generate hex file for integrated payload
 raw_image.bin.hdiag: raw_image.bin
@@ -62,3 +70,15 @@ test: all $(SUIT_MANIFEST_CDDL)
 .PHONY: clean
 clean: common-clean
 
+LIBCSUIT_DIR := ~/github.com/kentakayama/libcsuit/
+.PHONY: install
+install: $(TARGET)
+	@echo SUIT Update Management Example 2
+	$(eval TARGET := suit_manifest_expU2)
+	$(eval MD := $(LIBCSUIT_DIR)/testfiles/$(TARGET).md)
+	echo "<!--\n Copyright (c) 2020-2024 SECOM CO., LTD. All Rights reserved.\n\n SPDX-License-Identifier: BSD-2-Clause\n-->\n\n## Example 2: Wait and Condition Example\n{: numbered='no'}\n\n### CBOR Diagnostic Notation of SUIT Manifest\n{: numbered='no'}\nNOTE: only SUIT_Manifest part excluding severed suit-coswid is displayed here.\n\n~~~~" > $(MD)
+	cat ${<:.envelope.cbor=.manifest.rediag} >> $(MD)
+	echo "~~~~\n\n\n### CBOR Binary in Hex\n{: numbered='no'}\n\n~~~~" >> $(MD)
+	xxd -u -p $< >> $(MD)
+	echo "~~~~" >> $(MD)
+	cp $< $(LIBCSUIT_DIR)/testfiles/$(TARGET).cbor

@@ -3,7 +3,7 @@
   e'suit-manifest-sequence-number': 0,
   e'suit-common': << {
     e'suit-components': [
-      ['00']
+      [h'00']
     ],
     e'suit-shared-sequence': << [
       e'suit-directive-override-parameters', {
@@ -24,12 +24,15 @@
       e'suit-condition-class-identifier', 15
     ] >>
   } >>,
+  e'suit-set-version': << [1, 0, 0] >>,
   e'suit-validate': << [
     e'suit-directive-override-parameters', {
       e'suit-parameter-use-before': dt'2016-06-14T23:59:59Z'
     },
-    e'suit-condition-image-match', 15
+    e'suit-condition-image-match', 15,
+    e'suit-condition-use-before', 15
   ] >>,
+  e'suit-coswid': ref'update.coswid.digest.gdiag',
   e'suit-payload-fetch': << [
     e'suit-directive-override-parameters', {
       e'suit-parameter-uri': "http://example.com/file.bin",

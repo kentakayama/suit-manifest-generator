@@ -3,5 +3,6 @@
     << ref'update.manifest.digest.gdiag' >>,
     << ref'update.manifest.digest.es256.cose.gdiag' >>
   ] >>,
-  e'suit-manifest': ref'update.manifest.gdiag'
+  e'suit-manifest': ref'update.manifest.gdiag',
+  e'suit-coswid': ref'update.coswid.gdiag'
 })
