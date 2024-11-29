@@ -1,0 +1,9 @@
+<< {
+  e'tag-id': h'a4156106eba941a1b98d22e42a5a1287',
+  e'tag-version': 0,
+  e'software-name': "suit-firmware-example",
+  e'entity': {
+    e'entity-name': "SUIT WG",
+    e'role': [ e'tag-creator', e'software-creator' ]
+  }
+} >>
