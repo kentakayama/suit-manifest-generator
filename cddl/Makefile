@@ -5,6 +5,7 @@ SUIT_UPDATE_MANAGEMENT_CDDL  := draft-ietf-suit-update-management.cddl
 SUIT_ENCRYPTED_PAYLOADS_CDDL := draft-ietf-suit-firmware-encryption.cddl
 SUIT_REPORT_CDDL             := draft-ietf-suit-report.cddl
 SUIT_MTI_CDDL                := draft-ietf-suit-mti.cddl
+COSWID_CDDL                  := rfc-9393-coswid.cddl
 COSE_XML                     := rfc-9052-cose.xml
 COSE_CDDL                    := rfc-9052-cose.cddl
 
@@ -15,6 +16,7 @@ CDDLS := \
 	$(SUIT_ENCRYPTED_PAYLOADS_CDDL) \
 	$(SUIT_REPORT_CDDL) \
 	$(SUIT_MTI_CDDL) \
+	$(COSWID_CDDL) \
 	$(COSE_CDDL)
 
 .PHONY: cat-cddl
@@ -43,11 +45,14 @@ $(SUIT_REPORT_CDDL):
 $(SUIT_MTI_CDDL):
 	curl https://raw.githubusercontent.com/bremoran/suit-mti/main/draft-ietf-suit-mti.cddl -o $@
 
+$(COSWID_CDDL):
+	curl https://raw.githubusercontent.com/sacmwg/draft-ietf-sacm-coswid/refs/heads/master/concise-swid-tag.cddl | sed -e 's/label /coswid-label /g' > $@
+
 $(COSE_XML):
 	curl https://www.rfc-editor.org/rfc/rfc9052.xml -o $@
 
 $(COSE_CDDL): $(COSE_XML)
-	sed -n -e '/<sourcecode type="cddl"/,/<\/sourcecode>/ p' $< | sed -e '/<sourcecode type="cddl"/ d' -e '/<\/sourcecode>/ d' -e 's/\&gt;/>/g' > $@
+	sed -n -e '/<sourcecode type="cddl"/,/<\/sourcecode>/ p' $< | sed -e '/<sourcecode type="cddl"/ d' -e '/<\/sourcecode>/ d' -e 's/\&lt;/</g' -e 's/\&gt;/>/g' > $@
 
 define FuncValidateCddl
 	cddl $1 validate $2
