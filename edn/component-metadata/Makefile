@@ -62,3 +62,15 @@ test: all $(SUIT_MANIFEST_CDDL)
 .PHONY: clean
 clean: common-clean
 
+LIBCSUIT_DIR := ~/github.com/kentakayama/libcsuit/
+.PHONY: install
+install: $(TARGET)
+	@echo SUIT Update Management Example 3
+	$(eval TARGET := suit_manifest_expU3)
+	$(eval MD := $(LIBCSUIT_DIR)/testfiles/$(TARGET).md)
+	echo "<!--\n Copyright (c) 2020-2024 SECOM CO., LTD. All Rights reserved.\n\n SPDX-License-Identifier: BSD-2-Clause\n-->\n\n## Example 3: Component Metadata Example\n{: numbered='no'}\n\n### CBOR Diagnostic Notation of SUIT Manifest\n{: numbered='no'}\nNOTE: only SUIT_Manifest part is displayed here.\n\n~~~~" > $(MD)
+	cat ${<:.envelope.cbor=.manifest.rediag} >> $(MD)
+	echo "~~~~\n\n\n### CBOR Binary in Hex\n{: numbered='no'}\n\n~~~~" >> $(MD)
+	xxd -u -p $< >> $(MD)
+	echo "~~~~" >> $(MD)
+	cp $< $(LIBCSUIT_DIR)/testfiles/$(TARGET).cbor
