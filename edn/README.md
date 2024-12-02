@@ -11,9 +11,13 @@ The sample materials use CBOR diagnostic notation with `e''` and `ref''` represe
 Note that this tool generates CBOR binaries with canonical encoding which is required in the [Section 8.1 of draft-ietf-suit-manifest](https://datatracker.ietf.org/doc/html/draft-ietf-suit-manifest#section-8.1).
 
 ## Samples
-- [Hello World](./hello): Simple distribution of "hello, world!" program
-- [Encrypted Payload with AES-KW + AES-CTR](./aeskw): encrypted "hello, world!" program with symmetric key
-- [Encrypted Payload with ECDH-ES+AES-KW + AES-CTR](./esdh): encrypted "hello, world!" program with asymmetric key
+| Sample | Used features |
+|--|--|
+| [Hello World](./hello) | uri-fetch, integrated payload |
+| [Encrypted Payload with AES-KW + AES-CTR](./aeskw) | uri-fetch, integrated payload, encryption info (symmetric AES-KW) |
+| [Encrypted Payload with ECDH-ES+AES-KW + AES-CTR](./esdh) | uri-fetch, integrated payload, encryption info (asymmetric ECDH-ES+AES-KW) |
+| [Update Management](./update) | uri-fetch, minimum-battery, update-priority, wait-info |
+| [Component Metadata](./component-metadata) | uri-fetch, seevred element, component metadata (RWX modes) |
 
 ## Install & Preparataion
 On Debian/Ubuntu environment, run commands below.
