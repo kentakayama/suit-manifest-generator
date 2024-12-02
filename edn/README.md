@@ -8,7 +8,7 @@ based on the internet drafts below.
 * [Encrypted Payloads in SUIT Manifests](https://datatracker.ietf.org/doc/html/draft-ietf-suit-firmware-encryption)
 
 The sample materials use CBOR diagnostic notation with `e''` and `ref''` representations defined in [External References to Values in CBOR Diagnostic Notation (EDN)](https://datatracker.ietf.org/doc/html/draft-ietf-cbor-edn-e-ref) for better readability and modifiability.
-Note that this tool generates CBOR binaries with canonical encoding which is required in the [Section 8.1 of draft-ietf-suit-manifest](https://datatracker.ietf.org/doc/html/draft-ietf-suit-manifest#section-8.1).
+Note that this tool DOES NOT guarantee to generate CBOR binaries with canonical encoding which is required in the [Section 8.1 of draft-ietf-suit-manifest](https://datatracker.ietf.org/doc/html/draft-ietf-suit-manifest#section-8.1) because many CBOR maps are byte string wrapped and they are not deterministically reordered with cbor-diag tool. You, `*.rediag` file writers MUST care it.
 
 ## Samples
 | Sample | Used features |
