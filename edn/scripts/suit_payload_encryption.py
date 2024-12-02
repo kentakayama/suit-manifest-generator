@@ -17,7 +17,8 @@ def encrypt_content(plaintext: bytes, cek_jwk: dict, recipients: List[Recipient]
         plaintext,
         key=cek,
         unprotected=u,
-        recipients=recipients
+        recipients=recipients,
+        enable_non_aead=True,
     )
 
     if detached_payload:
