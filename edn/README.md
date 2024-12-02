@@ -17,7 +17,7 @@ Note that this tool generates CBOR binaries with canonical encoding which is req
 | [Encrypted Payload with AES-KW + AES-CTR](./aeskw) | uri-fetch, integrated payload, encryption info (symmetric AES-KW) |
 | [Encrypted Payload with ECDH-ES+AES-KW + AES-CTR](./esdh) | uri-fetch, integrated payload, encryption info (asymmetric ECDH-ES+AES-KW) |
 | [Update Management](./update) | uri-fetch, minimum-battery, update-priority, wait-info |
-| [Component Metadata](./component-metadata) | uri-fetch, seevred element, component metadata (RWX modes) |
+| [Component Metadata](./component-metadata) | uri-fetch, severed element, component metadata (RWX modes) |
 
 ## Install & Preparataion
 On Debian/Ubuntu environment, run commands below.
