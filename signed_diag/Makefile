@@ -72,7 +72,7 @@ suit_manifest_aes_kw.diag suit_manifest_aes_kw_slot.diag suit_manifest_aes_kw_co
 
 # do not use delegation chain
 %.diag: ../suit/%.suit
-	sed -e "s?/ AUTHENTICATION-WRAPPER /?/ authentication-wrapper / 2: << [\n    << [\n      / digest-algorithm-id: / -16 / SHA256 /,\n      / digest-bytes: / h'$(shell xxd -p -u -c 32 -s 13 -l 32 $<)'\n    ] >>,\n    << / COSE_Sign1_Tagged / 18\([\n      / protected: / << {\n        / algorithm-id / 1: -7 / ES256 /\n      } >>,\n      / unprotected: / {},\n      / payload: / null,\n      / signature: / h'$(shell xxd -p -u -c 64 -s 57 -l 64 $<)'\n    ]\) >>\n  ] >>,?" ../diag/$@ > $@
+	sed -e "s?/ AUTHENTICATION-WRAPPER /?/ authentication-wrapper / 2: << [\n    << [\n      / digest-algorithm-id: / -16 / SHA256 /,\n      / digest-bytes: / h'$(shell xxd -p -u -c 32 -s 13 -l 32 $<)'\n    ] >>,\n    << / COSE_Sign1_Tagged / 18\([\n      / protected: / << {\n        / algorithm-id / 1: -9 / ESP256 /\n      } >>,\n      / unprotected: / {},\n      / payload: / null,\n      / signature: / h'$(shell xxd -p -u -c 64 -s 57 -l 64 $<)'\n    ]\) >>\n  ] >>,?" ../diag/$@ > $@
 
 .PHONY: install
 install: install_manifest install_multiple install_encryption install_update
@@ -142,7 +142,7 @@ install_manifest: suit_manifest_exp0.diag suit_manifest_exp1.diag suit_manifest_
 	cp ../suit/$(SOURCE).suit $(LIBCSUIT_DIR)/testfiles/$(TARGET).cbor
 
 .PHONY: install_multiple
-install_multiple: suit_manifest_expS0.diag suit_manifest_expS2.diag suit_manifest_expS3.diag suit_manifest_expS4.diag
+install_multiple: suit_manifest_expS0.diag suit_manifest_expS2.diag suit_manifest_expS3.diag
 	@echo Simple Example
 	$(eval SOURCE := suit_manifest_expS0)
 	$(eval TARGET := suit_manifest_expS0)
