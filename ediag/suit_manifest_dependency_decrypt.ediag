@@ -12,7 +12,8 @@
         / directive-override-parameters / 20, {
           / parameter-image-digest / 3: << [
             / algorithm-id / -16 / SHA256 /,
-            / digest-bytes / h'{{FILE-SHA-256 ../libcsuit/testfiles/raw_image.bin}}'
+            / digest-bytes /
+              h'{{FILE-SHA-256 ../libcsuit/testfiles/raw_image.bin}}'
           ] >>,
           / parameter-image-size / 14: {{FILE-SIZE ../libcsuit/testfiles/raw_image.bin}}
         }

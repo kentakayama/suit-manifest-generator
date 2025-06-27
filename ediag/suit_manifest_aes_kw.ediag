@@ -14,7 +14,8 @@
       / directive-set-component-index / 12, 1 / ['encrypted-firmware'] /,
       / directive-override-parameters / 20, {
         / parameter-image-size / 14: {{FILE-SIZE ../libcsuit/testfiles/encrypted_image_aes.bin}},
-        / parameter-uri / 21: "https://example.com/encrypted-firmware"
+        / parameter-uri / 21:
+          "coaps://example.com/encrypted-firmware"
       },
       / directive-fetch / 21, 15,
 
@@ -28,7 +29,7 @@
           / unprotected: / {
             / IV / 5: {{FILE-CQ-[1][5] ../libcsuit/testfiles/encryption_info_aes.cose}}
           },
-          / payload: / null / detached ciphertext /,
+          / ciphertext: / null / detached ciphertext /,
           / recipients: / [
             [
               / protected: / h'',
@@ -36,7 +37,9 @@
                 / alg / 1: -3 / A128KW /,
                 / kid / 4: 'kid-1'
               },
-              / payload: / {{FILE-CQ-[3][0][2] ../libcsuit/testfiles/encryption_info_aes.cose}} / CEK encrypted with KEK /
+              / ciphertext: /
+                {{FILE-CQ-[3][0][2] ../libcsuit/testfiles/encryption_info_aes.cose}}
+                / CEK encrypted with KEK /
             ]
           ]
         ]) >>,

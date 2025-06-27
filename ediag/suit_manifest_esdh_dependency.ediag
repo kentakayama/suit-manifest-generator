@@ -22,7 +22,8 @@
       / NOTE: set SUIT_Encryption_Info /
       / directive-set-component-index / 12, 0 / ['decrypted-firmware'] /,
       / directive-override-parameters / 20, {
-        / parameter-content / 18: h'{{FILE-HEX ../libcsuit/testfiles/encrypted_image_esdh.bin}}',
+        / parameter-content / 18:
+          h'{{FILE-HEX ../libcsuit/testfiles/encrypted_image_esdh.bin}}',
         / parameter-encryption-info / 19: << 96([
           / protected: / << {
             / alg / 1: 1 / A128GCM /

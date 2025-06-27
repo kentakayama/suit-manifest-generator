@@ -9,9 +9,11 @@
       ]
     } >>,
     / install / 20: << [
-      / directive-set-component-index / 12, 0 / ['plaintext-firmware'] /,
+      / directive-set-component-index / 12,
+        0 / ['plaintext-firmware'] /,
       / directive-override-parameters / 20, {
-        / parameter-content / 18: h'{{FILE-HEX ../libcsuit/testfiles/encrypted_image_esdh.bin}}',
+        / parameter-content / 18:
+          h'{{FILE-HEX ../libcsuit/testfiles/encrypted_image_esdh.bin}}',
         / parameter-encryption-info / 19: << 96([
           / protected: / << {
             / alg / 1: 1 / A128GCM /
@@ -19,7 +21,7 @@
           / unprotected: / {
             / IV / 5: {{FILE-CQ-[1][5] ../libcsuit/testfiles/encryption_info_esdh.cose}}
           },
-          / payload: / null / detached ciphertext /,
+          / ciphertext: / null / detached ciphertext /,
           / recipients: / [
             [
               / protected: / << {
@@ -34,13 +36,15 @@
                 },
                 / kid / 4: 'kid-2'
               },
-              / payload: / {{FILE-CQ-[3][0][2] ../libcsuit/testfiles/encryption_info_esdh.cose}}
+              / ciphertext: /
+                {{FILE-CQ-[3][0][2] ../libcsuit/testfiles/encryption_info_esdh.cose}}
                 / CEK encrypted with KEK /
             ]
           ]
         ]) >>
       },
-      / directive-write / 18, 15 / consumes the SUIT_Encryption_Info above /
+      / directive-write / 18,
+        15 / consumes the SUIT_Encryption_Info above /
     ] >>
   } >>
 })
