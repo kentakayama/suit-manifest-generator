@@ -20,13 +20,6 @@ TEEP_ERROR_MESSAGES := \
 QUERY_RESPONSE_MESSAGES := \
 	query_response.teep
 
-TEEP_IETF116_HACKATHON := \
-	teep_update_helloworld.teep
-
-ifeq ($(teep-ietf116),1)
-TEEP_UPDATE_MESSAGES += $(TEEP_IETF116_HACKATHON)
-endif
-
 .PHONY: all
 all: $(TEEP_UPDATE_MESSAGES) $(TEEP_ERROR_MESSAGES) $(QUERY_RESPONSE_MESSAGES)
 
@@ -63,4 +56,4 @@ teep_error_agent_attestation.teep: ../cbor/teep_error_agent_attestation.cbor
 
 .PHONY: clean
 clean:
-	$(RM) $(TEEP_UPDATE_MESSAGES) $(TEEP_ERROR_MESSAGES) $(TEEP_IETF116_HACKATHON) $(SUIT_DELEGATIONS)
+	$(RM) $(TEEP_UPDATE_MESSAGES) $(TEEP_ERROR_MESSAGES) $(QUERY_RESPONSE_MESSAGES)

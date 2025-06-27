@@ -20,7 +20,7 @@ suit_manifest_aes_kw_content.diag: ../libcsuit/testfiles/encrypted_image_aes.bin
 suit_manifest_aes_kw_config.diag: ../libcsuit/testfiles/encrypted_config_aes.bin ../libcsuit/testfiles/encryption_info_config_aes.cose
 suit_manifest_esdh_content.diag: ../libcsuit/testfiles/encrypted_image_esdh.bin ../libcsuit/testfiles/encryption_info_esdh.cose
 suit_manifest_esdh_config.diag: ../ciphertext/encryption_info_config_esdh_ctr.cose ../ciphertext/encrypted_config_esdh_ctr.bin
-suit_manifest_esdh_dependency.diag: ../suit/suit_manifest_dependency_decrypt.suit ../teep/suit_delegation.cwt ../signed_diag/suit_manifest_dependency_decrypt.diag
+suit_manifest_esdh_dependency.diag: ../suit/suit_manifest_dependency_decrypt.suit ../signed_diag/suit_manifest_dependency_decrypt.diag
 suit_manifest_dependency_decrypt.diag: ../libcsuit/testfiles/raw_image.bin
 
 %.diag: ../ediag/%.ediag
@@ -48,7 +48,6 @@ suit_manifest_dependency_decrypt.diag: ../libcsuit/testfiles/raw_image.bin
 FIXED_DIAGS := \
 	suit_uri.diag \
 	suit_integrated.diag \
-	suit_delegation.diag \
 	suit_manifest_expS0.diag \
 	suit_manifest_run_sequence.diag \
 	suit_manifest_raw.diag \

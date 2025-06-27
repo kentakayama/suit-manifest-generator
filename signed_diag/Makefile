@@ -58,7 +58,7 @@ all: $(UNTAGGED_DIAGS)
 
 
 # track dependency files
-suit_manifest_esdh_dependency.diag: ../ediag/${@:.diag=.ediag} ../teep/suit_delegation.cwt ../libcsuit/testfiles/encrypted_image_esdh.bin ../libcsuit/testfiles/encryption_info_esdh.cose ../ediag/suit_manifest_dependency_decrypt.ediag ../ediag/suit_manifest_dependency_decrypt.ediag
+suit_manifest_esdh_dependency.diag: ../ediag/${@:.diag=.ediag} ../libcsuit/testfiles/encrypted_image_esdh.bin ../libcsuit/testfiles/encryption_info_esdh.cose ../ediag/suit_manifest_dependency_decrypt.ediag ../ediag/suit_manifest_dependency_decrypt.ediag
 
 # use COSE_Mac0
 suit_manifest_aes_kw_content.diag: ../suit/suit_manifest_aes_kw_content.suit
@@ -173,19 +173,9 @@ install_multiple: suit_manifest_expS0.diag suit_manifest_expS2.diag suit_manifes
 	xxd -u -p ../suit/$(SOURCE).suit >> $(MD)
 	echo "~~~~" >> $(MD)
 	cp ../suit/$(SOURCE).suit $(LIBCSUIT_DIR)/testfiles/$(TARGET).cbor
-	@echo Integrated Dependency Example
-	$(eval SOURCE := suit_manifest_expS4)
-	$(eval TARGET := suit_manifest_expS4)
-	$(eval MD := $(LIBCSUIT_DIR)/testfiles/$(TARGET).md)
-	echo "<!--\n Copyright (c) 2020-2023 SECOM CO., LTD. All Rights reserved.\n\n SPDX-License-Identifier: BSD-2-Clause\n-->\n\n## Example 4: Is Dependency Example\n{: numbered='no'}\n\n### CBOR Diagnostic Notation of SUIT Manifest\n{: numbered='no'}\n\n~~~~" > $(MD)
-	cat $(SOURCE).diag >> $(MD)
-	echo "~~~~\n\n\n### CBOR Binary in Hex\n{: numbered='no'}\n\n~~~~" >> $(MD)
-	xxd -u -p ../suit/$(SOURCE).suit >> $(MD)
-	echo "~~~~" >> $(MD)
-	cp ../suit/$(SOURCE).suit $(LIBCSUIT_DIR)/testfiles/$(TARGET).cbor
 
 .PHONY: install_encryption
-install_encryption: suit_manifest_aes_kw_content.diag suit_manifest_aes_kw.diag suit_manifest_aes_kw_slot.diag suit_manifest_esdh_content.diag suit_manifest_esdh_dependency.diag suit_manifest_dependency_decrypt.diag
+install_encryption: suit_manifest_aes_kw_content.diag suit_manifest_aes_kw.diag suit_manifest_aes_kw_slot.diag suit_manifest_esdh_content.diag suit_manifest_esdh_dependency.diag
 	@echo AES-KW content Example
 	$(eval SOURCE := suit_manifest_aes_kw_content)
 	$(eval TARGET := suit-manifest-aes-kw-content)
