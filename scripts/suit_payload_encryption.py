@@ -81,6 +81,7 @@ def encrypt_esdh_hkdf(plaintext: bytes, kek_alg: str, cek_alg: str, encryption_i
         protected={"alg": cek_alg},
         unprotected={"iv": cek.generate_nonce()},
         recipients=[r],
+        enable_non_aead=True,
     )
     save_to_files(encoded, encryption_info, encrypted_payload)
 
@@ -114,7 +115,18 @@ def encrypt_esdh_aeskw(plaintext: bytes, kek_alg: str, cek_alg: str, encryption_
         print(f"Unknown KEK alg: {kek_alg}")
         sys.exit(1)
 
-    inner_protected_header = {"alg": kek_alg} # {1 : kek_alg_id} # {"alg": kek_alg}
+    cek = COSEKey.from_symmetric_key(alg=cek_alg)
+    is_aead = cek_alg in ("A128GCM", "A192GCM", "A256GCM")
+
+    if is_aead:
+        outer_protected_header = {"alg": cek_alg}
+        outer_unprotected_header = {"iv": cek.generate_nonce()}
+    else:
+        outer_protected_header = {}
+        outer_unprotected_header = {"alg": cek_alg, "iv": cek.generate_nonce()}
+
+    inner_protected_header = {"alg": kek_alg}
+    inner_unprotected_header = {} # ephemeral key will be added
 
     context = {
         "alg": kw_alg, # e.g. A128KW
@@ -125,21 +137,20 @@ def encrypt_esdh_aeskw(plaintext: bytes, kek_alg: str, cek_alg: str, encryption_
         }
     }
 
+    # should we need to remove the side-effect on
+    # python-cwt/cwt/utils.py
+    #
+    # comment out?
+    # if recipient_alg:
+    #     protected[1] = recipient_alg
+    #     supp_pub[1] = cbor2.dumps(protected)
     r = Recipient.new(
         protected=inner_protected_header,
+        unprotected=inner_unprotected_header,
         sender_key=COSEKey.from_jwk(sender_private_key_jwk),
         recipient_key=COSEKey.from_jwk(receiver_public_key_jwk),
         context=context
     )
-
-    is_aead = cek_alg in ("A128GCM", "A192GCM", "A256GCM")
-    cek = COSEKey.from_symmetric_key(alg=cek_alg)
-    if is_aead:
-        outer_protected_header = {"alg": cek_alg}
-        outer_unprotected_header = {"iv": cek.generate_nonce()}
-    else:
-        outer_protected_header = {}
-        outer_unprotected_header = {"alg": cek_alg, "iv": cek.generate_nonce()}
 
     sender = COSE.new()
     encoded = sender.encode(
@@ -148,6 +159,7 @@ def encrypt_esdh_aeskw(plaintext: bytes, kek_alg: str, cek_alg: str, encryption_
         protected=outer_protected_header,
         unprotected=outer_unprotected_header,
         recipients=[r],
+        enable_non_aead=True,
     )
     save_to_files(encoded, encryption_info, encrypted_payload)
 
