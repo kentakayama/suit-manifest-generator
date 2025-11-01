@@ -26,8 +26,8 @@ suit_manifest_dependency_decrypt.diag: ../libcsuit/testfiles/raw_image.bin
 %.diag: ../ediag/%.ediag
 	$(PYTHON3) ../scripts/ediag-to-diag.py $< > $@
 
-../ciphertext/%.cose:
-	$(MAKE) -C ../ciphertext $(notdir $@)
+#../ciphertext/%.cose:
+#	$(MAKE) -C ../ciphertext $(notdir $@)
 
 .PRECIOUS: ../untagged_suit/%.suit
 ../untagged_suit/%.suit:
